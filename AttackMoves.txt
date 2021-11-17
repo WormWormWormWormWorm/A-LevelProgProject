@@ -8,7 +8,7 @@ recoil percent
 priority
 special effect
 special trigger percent
-0000131
+0###131
 Fire Fang
 75
 Fire
@@ -129,7 +129,8 @@ Sleep Powder
 Grass
 75
 Sleep
-1###945
+0
+1###948
 Energy Ball
 90
 Grass
@@ -137,7 +138,7 @@ Special
 100
 0
 0
-0###998
+0##1001
 Rock Slide
 75
 Rock
@@ -147,7 +148,23 @@ Physical
 0
 Flinch
 30
-00000007
+1##1065
+Leaf Blade
+80
+Grass
+Physical
+100
+0
+0
+1##1118
+X-Scissor
+80
+Bug
+Physical
+100
+0
+0
+0##1168
 Solar Blade
 120
 Grass
@@ -157,7 +174,15 @@ Physical
 0
 Stun!
 100
-00000008
+1##1235
+Energy Ball
+90
+Grass
+Special
+100
+0
+0
+0##1288
 Apple Acid
 60
 Grass
@@ -165,9 +190,17 @@ Special
 100
 0
 0
-14Special Defense Drop
+14SpD Drop
 100
-00000009
+1##1357
+Dragon Pulse
+80
+Dragon
+Special
+100
+0
+0
+0##1412
 Body Slam
 85
 Normal
@@ -177,7 +210,13 @@ Physical
 0
 Paralyzed
 30
-00000010
+2##1480
+Leech Seed
+Grass
+100
+Drain
+0
+0##1523
 Thunderbolt
 95
 Electric
@@ -187,7 +226,45 @@ Special
 0
 Paralyzed
 30
-00000011
+1##1594
+Mach Punch
+40
+Fighting
+Physical
+100
+0
+1
+1##1650
+Sky Uppercut
+95
+Fighting
+Physical
+100
+10
+0
+1##1709
+Seed Bomb
+80
+Grass
+Physical
+100
+0
+0
+2##1761
+Thunder Wave
+Electric
+100
+Paralyzed
+0
+1##1813
+Explosion
+500
+Normal
+Physical
+100
+1000
+0
+0##1870
 Electro Web
 60
 Electric
@@ -195,9 +272,39 @@ Special
 100
 0
 0
-15Speed Drop
+15Spe Drop
 100
-00000012
+2##1943
+Mirror Coat
+Steel
+100
+Mirror Coat
+3
+1##1993
+Bug Buzz
+80
+Bug
+Special
+100
+0
+0
+1##2041
+Thunder
+150
+Electric
+Special
+70
+0
+0
+1##2093
+Sucker Punch
+70
+Dark
+Physical
+100
+0
+2
+0##2147
 Wild Charge
 120
 Electric
@@ -207,7 +314,7 @@ Physical
 0
 Paralyzed
 30
-00000013
+0##2221
 Thunder Fang
 75
 Electric
@@ -217,7 +324,15 @@ Physical
 0
 Paralyzed
 30
-00000014
+1##2294
+Psychic Fangs
+80
+Psychic
+Physical
+100
+0
+0
+0##2352
 Scald
 80
 Water
@@ -227,7 +342,7 @@ Special
 0
 Burn
 30
-00000015
+0##2409
 Fake Out
 40
 Normal
@@ -237,7 +352,23 @@ Physical
 2
 Flinch
 100
-00000016
+1000012
+Hydro Pump
+130
+Water
+Special
+80
+0
+0
+1000013
+Flash Cannon
+80
+Steel
+Special
+100
+0
+0
+0000016
 Waterfall
 80
 Water
@@ -247,7 +378,23 @@ Physical
 0
 Flinch
 10
-00000017
+1000014
+Drain Punch
+80
+Fighting
+Physical
+100
+0
+0
+1000015
+Surf
+90
+Water
+Special
+100
+0
+0
+0000017
 Ice Beam
 90
 Ice
@@ -257,7 +404,7 @@ Special
 0
 Freeze
 10
-00000018
+0000018
 Icy Wind
 60
 Ice
@@ -265,9 +412,9 @@ Special
 100
 0
 0
-15Speed Drop
+15Spe Drop
 100
-00000019
+0000019
 Blizzard
 120
 Ice
@@ -277,7 +424,23 @@ Special
 0
 Freeze
 50
-00000020
+1000016
+Ice Shard
+40
+Ice
+Physical
+100
+0
+1
+1000017
+Earthquake
+100
+Ground
+Physical
+100
+0
+0
+0000020
 Poison Jab
 80
 Poison
@@ -287,7 +450,7 @@ Physical
 0
 Poison
 30
-00000021
+0000021
 Bulldoze
 60
 Ground
@@ -295,9 +458,36 @@ Physical
 100
 0
 0
-15Speed Drop
+15Spe Drop
 100
-00000022
+1000018
+Megahorn
+125
+Bug
+Physical
+85
+Bug
+Physical
+100
+0
+0
+1000019
+Magnitude
+80
+Ground
+Physical
+100
+0
+0
+1000020
+Head Smash
+150
+Rock
+Physical
+100
+33
+0
+0000022
 Rock Tomb
 60
 Rock
@@ -305,9 +495,17 @@ Physical
 100
 0
 0
-15Speed Drop
+15Spe Drop
 100
-00000023
+1000021
+Stone Edge
+120
+Rock
+Physical
+80
+0
+0
+0000023
 Lava Plume
 80
 Fire
@@ -317,7 +515,7 @@ Special
 0
 Burn
 40
-00000024
+0000024
 Heat Wave
 120
 Fire
@@ -327,4 +525,18 @@ Special
 0
 Burn
 10
-00000025
+2##3595
+Yawn
+Normal
+100
+Sleep
+0
+0##3633
+Flamethrower
+90
+Fire
+Special
+100
+0
+0
+Burn
