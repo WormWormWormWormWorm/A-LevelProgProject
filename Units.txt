@@ -1,0 +1,266 @@
+TemplateID
+name
+type1
+type2
+BaseHP
+BaseAtk
+BaseDef
+BaseSpA
+BaseSpD
+BaseSpe
+ability
+move1
+move2
+move3
+RandomMove1
+RandomMove2
+RandomMove3
+###154
+Blaziken
+Fire
+Fighting
+80
+120
+70
+110
+70
+80
+Blaze
+0###131
+1###257
+0###192
+!1###314
+!0###372
+!###
+###274
+Feraligater
+Water
+Dark
+85
+105
+100
+75
+85
+80
+Intimidate
+1###446
+0###498
+1###566
+!1###314
+!1###613
+!###
+###399
+Venusaur
+Grass
+Poison
+80
+85
+85
+100
+100
+80
+Battle Armour
+0###665
+1###731
+1###785
+!2###903
+!1###944
+!0###842
+###530
+Leavanny
+Grass
+Bug
+75
+105
+80
+70
+80
+90
+Sturdy
+Leaf Blade
+X-Scissor
+Rock slide
+!Bulldoze
+!solar Blade
+!###
+00698
+Appletun
+Grass
+Dragon
+110
+85
+80
+100
+80
+30
+Thick Fat
+Energy ball
+Apple acid
+Dragon pulse
+!Body slam
+!Solar Beam
+!###
+00837
+Breloom
+Grass
+Fighting
+60
+130
+80
+60
+60
+70
+Technician
+Mach Punch
+Sky Uppercut
+Seed Bomb
+!Rock slide
+!superpower
+!###
+007
+Electrode
+Electric
+###
+60
+50
+70
+80
+80
+150
+Sturdy
+Thunder wave
+Thunderbolt
+Self-Destruct
+!Mirror coat
+!Counter
+!###
+008
+Galvantula
+Electric
+Bug
+70
+80
+60
+100
+60
+110
+Swarm
+Bug Buzz
+Thunder Bolt
+Sucker Punch
+!Thunder
+!Electro web
+!###
+009
+Manectric
+Electric
+###
+70
+75
+60
+105
+60
+105
+Lightning Rod
+Thunder Fang
+Fire Fang
+Wild Charge
+!Crunch
+!Psychic fangs
+!###
+010
+Blastoise
+Water
+###
+80
+85
+100
+85
+105
+80
+fake out
+Scald
+Hydro pump
+!Dragon pulse
+!Flash cannon
+!Brick break
+011
+Poliwrath
+Water
+Fighting
+90
+95
+95
+70
+90
+70
+Water Absorb
+Waterfall
+Mach Punch
+!Drain Punch
+!Superpower
+!###
+012
+Dewgong
+Water
+Ice
+90
+70
+80
+95
+95
+70
+Thick Fat
+Ice Beam
+Surf
+Icy Wind
+!Blizzard
+!Ice Shard
+!###
+013
+Nidoking
+Poison
+Ground
+80
+105
+80
+85
+75
+85
+Poison Point
+Earthquake
+Poison Jab
+Sucker Punch
+!Bulldoze
+!Megahorn
+!###
+014
+Donphan
+Ground
+###
+90
+120
+120
+60
+60
+50
+Battle Armour
+Magnitude
+Rock Slide
+Head Smash
+!Body Slam
+!Thunder Fang
+!###
+015
+Kabutops
+Rock
+Water
+70
+115
+105
+65
+70
+80
+Weak Armour
+
+
