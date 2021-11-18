@@ -605,3 +605,142 @@ Special
 0
 Stun!
 100
+1000106
+Brave Bird
+120
+Flying
+Physical
+100
+33
+0
+1000107
+Quick Attack
+50
+Normal
+Physical
+0000108
+Giga Impact
+150
+Normal
+Physical
+100
+33
+0
+Stun!
+100
+0000109
+Sacred Sword
+100
+Fighting
+Physical
+100
+0
+0
+31Atk Up!
+10
+0000110
+Discharge
+80
+Electric
+Special
+100
+0
+0
+Paralyzed
+30
+0000111
+Bubblebeam
+75
+Water
+Special
+100
+0
+0
+15Spe Drop
+10
+0000112
+Meteor Beam
+120
+Rock
+Special
+100
+0
+0
+Stun!
+100
+0000113
+Avalanche
+120
+Ice
+Physical
+100
+0
+0
+Freeze
+10
+1000114
+Psycho Cut
+80
+Psychic
+Physical
+100
+0
+0
+0000115
+Rolling Kick
+70
+Fighting
+Physical
+100
+0
+0
+Flinch
+30
+0000116
+Dark Pulse
+80
+Dark
+Special
+100
+0
+0
+Flinch
+10
+0000117
+Fire Blast
+125
+Fire
+Special
+75
+0
+0
+Burn
+10
+1000118
+Leaf Storm
+130
+Grass
+Physical
+80
+0
+0
+0000119
+Steamroller
+70
+Bug
+Physical
+100
+0
+0
+Flinch
+30
+0000120
+Cross Poison
+70
+Poison
+Physical
+100
+0
+0
+Poison
+30
