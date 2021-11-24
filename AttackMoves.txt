@@ -70,7 +70,7 @@ Physical
 100
 0
 0
-12Def Drop
+11Def Drop
 10
 1###566
 Aqua Jet
@@ -190,7 +190,7 @@ Special
 100
 0
 0
-14SpD Drop
+13SpD Drop
 100
 1##1357
 Dragon Pulse
@@ -272,7 +272,7 @@ Special
 100
 0
 0
-15Spe Drop
+14Spe Drop
 100
 2##1943
 Mirror Coat
@@ -412,7 +412,7 @@ Special
 100
 0
 0
-15Spe Drop
+14Spe Drop
 100
 0000019
 Blizzard
@@ -458,7 +458,7 @@ Physical
 100
 0
 0
-15Spe Drop
+14Spe Drop
 100
 1000018
 Megahorn
@@ -495,7 +495,7 @@ Physical
 100
 0
 0
-15Spe Drop
+14Spe Drop
 100
 1000021
 Stone Edge
@@ -636,7 +636,7 @@ Physical
 100
 0
 0
-31Atk Up!
+30Atk Up!
 10
 0000110
 Discharge
@@ -656,7 +656,7 @@ Special
 100
 0
 0
-15Spe Drop
+14Spe Drop
 10
 0000112
 Meteor Beam
@@ -804,7 +804,7 @@ Physical
 100
 0
 0
-12Def Drop
+11Def Drop
 10
 0000128
 Gamble
@@ -815,4 +815,100 @@ Physical
 0
 1
 Flinch
+100
+1000129
+Double Edge
+120
+Normal
+Physical
+100
+33
+0
+1000130
+Silver Wind
+120
+Bug
+Special
+100
+33
+0
+1000131
+Water Spout
+120
+Water
+Special
+100
+0
+0
+0000132
+Hyper Voice
+90
+Normal
+Special
+100
+0
+0
+13SpD Drop
+10
+0000133
+Tempest
+130
+Electric
+Special
+100
+10
+0
+Paralyzed
+20
+1000134
+Hammer Arm
+100
+Fighting
+100
+0
+0
+0000135
+Meteor Mash
+100
+Steel
+Physical
+100
+0
+0
+30Atk Up!
+1000136
+Rock Wrecker
+120
+Rock
+Physical
+100
+0
+0
+11Def Drop
+50
+1000137
+Draco Meteor
+120
+Dragon
+Special
+100
+33
+0
+1000138
+Aura Sphere
+130
+Fighting
+Special
+95
+0
+0
+0000139
+Outrage
+120
+Dragon
+Physical
+100
+0
+0
+Outrage!
 100
