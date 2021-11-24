@@ -262,5 +262,345 @@ Water
 70
 80
 Weak Armour
+Aqua Jet
+Waterfall
+Rock Slide
+!Rock Tomb
+!Stone Edge
+!###
+016
+Camerupt
+Fire
+Ground
+70
+100
+70
+105
+75
+40
+Clear Body
+Earthquake
+Lava Plume
+Heat Wave
+!Stone Edge
+!Yawn
+!###
+017
+Torkoal
+Fire
+###
+70
+85
+140
+85
+70
+20
+Battle Armour
+Flamethrower
+Heat Wave
+Body Slam
+!Earth Power
+!Explosion
+!###
+018
+Drapion
+Poison
+Dark
+70
+90
+110
+60
+75
+95
+Sniper
+Poison Jab
+X-Scissor
+Crunch
+!Ice Fang
+!Thunder Fang
+!Fire Fang
+019
+Muk
+Poison
+###
+105
+105
+75
+65
+100
+50
+Poison Point
+Sludge Bomb
+Gunk Shot
+Fire Fang
+!Hyper Beam
+!Explosion
+!###
+020
+Yanmega
+Bug
+Flying
+86
+76
+86
+116
+56
+95
+Speed Boost
+Bug Buzz
+Air Slash
+Hurricane
+!Psychic
+!Solar Beam
+!###
+021
+Talonflame
+Fire
+Flying
+78
+81
+71
+74
+70
+126
+Flame Body
+Flare Blitz
+Brave Bird
+Quick Attack
+!Wild Charge
+!Giga Impact
+!###
+022
+Relicanth
+Water
+Rock
+100
+90
+130
+45
+65
+55
+Rock Head
+Head Smash
+Aqua Tail
+Rock Tomb
+!Yawn
+!Ice Fang
+!###
+023
+Samurott
+95
+100
+85
+108
+70
+80
+Battle Armour
+Sacred Sword
+Aqua Tail
+Aqua Jet
+!hydro Pump
+!Superpower
+!###
+024
+Tentacruel
+Water
+Poison
+80
+70
+65
+80
+120
+100
+Clear Mind
+Sludge Bomb
+Surf
+Hydro Pump
+!Ice Beam
+!Blizzard
+!###
+025
+Whiscash
+Water
+Ground
+110
+80
+75
+75
+70
+60
+Oblivious
+Surf
+Earthquake
+Bulldoze
+!Blizzard
+!Tsunami
+!###
+026
+Lanturn
+Water
+Electric
+125
+60
+60
+76
+76
+67
+Volt Absorb
+Discharge
+Bubble Beam
+Wild Charge
+!Ice Beam
+!Thunder
+!###
+027
+Golem
+Rock
+Ground
+80
+120
+130
+55
+65
+45
+Rock Head
+Earthquake
+Head Smash
+Brick Break
+!Rock Slide
+!Explosion
+!###
+028
+Cradily
+Rock
+Grass
+90
+80
+100
+80
+110
+43
+Battle Armour
+Energy Ball
+Meteor Beam
+Rock Slide
+!Solar Beam
+!Rock Tomb
+!###
+029
+Coalossal
+Fire
+Rock
+110
+80
+120
+80
+90
+40
+Steam Engine
+Rock Slide
+Flare Blitz
+Earthquake
+!Stone Edeg
+!Brick Break
+!###
+030
+Krokodile
+Ground
+Dark
+95
+117
+80
+65
+70
+92
+Intimidate
+Magnitude
+Crunch
+Superpower
+!Rockslide
+!Bulldoze
+!###
+031
+Mamoswine
+Ice
+Ground
+110
+130
+80
+70
+60
+80
+Oblivious
+Earthquake
+Avalanche
+Ice Shard
+!Giga Impact
+!Icy Wind
+!###
+032
+Hariyama
+Fighting
+###
+150
+120
+70
+40
+70
+50
+Thick Fat
+Fake Out
+Brick Break
+Superpower
+!Magnitude
+!Rock Slide
+!###
+033
+Gallade
+Psychic
+Fighting
+70
+125
+65
+65
+115
+80
+Oblivious
+Drain Punch
+Superpower
+Psycho Blade
+!X-Scissor
+!Mach Punch
+!###
+034
+Hitmontop
+Fighting
+###
+50
+95
+95
+35
+110
+70
+Intimidate
+Mach Punch
+Rolling Kick
+Superpower
+!Magnitude
+!Rock Slide
+!###
+035
+Charizard
+Fire
+Flying
+80
+85
+80
+110
+85
+100
+Rage
+
+
 
 
