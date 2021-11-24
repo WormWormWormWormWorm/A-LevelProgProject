@@ -744,3 +744,75 @@ Physical
 0
 Poison
 30
+0000121
+Iron Head
+80
+Steel
+Physical
+100
+0
+0
+Flinch
+30
+1000122
+Power Gem
+80
+Rock
+Special
+100
+0
+0
+0000123
+Final Gambit
+140
+Fighting
+Physical
+100
+0
+0
+Sacrifice!
+100
+1000124
+Tornado
+90
+Flying
+Special
+100
+0
+0
+1000125
+Extreme Speed
+80
+Normal
+Physical
+100
+0
+1
+1000126
+Bullet Punch
+50
+Steel
+Physical
+100
+0
+1
+0000127
+Dragon Claw
+80
+Dragon
+Physical
+100
+0
+0
+12Def Drop
+10
+0000128
+Gamble
+80
+Fighting
+Physical
+50
+0
+1
+Flinch
+100
