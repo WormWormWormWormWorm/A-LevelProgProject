@@ -600,7 +600,113 @@ Flying
 85
 100
 Rage
-
-
-
+Flamethrower
+Air Slash
+Heat Wave
+!Hurricane
+!Dragon Pulse
+!###
+036
+Houndoom
+Fire
+Dark
+75
+90
+50
+110
+80
+95
+Blaze
+Flamethrower
+Dark Pulse
+Sucker Punch
+!Fire Blast
+!###
+!###
+037
+Sceptile
+Grass
+###
+70
+85
+65
+105
+85
+120
+Overgrow
+Leaf Blade
+X-Scissor
+Rock Slide
+!Leaf Storm
+!Solar Blade
+!###
+038
+Scoliopede
+Bug
+Poison
+70
+100
+100
+55
+100
+110
+Wreckage
+Steam roller
+Megahorn
+Rock Slide
+Cross poison
+!###
+!###
+039
+Meganium
+Grass
+###
+80
+85
+100
+85
+100
+80
+Sap Sipper
+Body Slam
+Giga Drain
+Solar Beam
+!Sleep Powder
+!Energy Ball
+!Leech Seed
+040
+Aggron
+Steel
+Rock
+70
+100
+180
+60
+60
+50
+Sturdy
+Iron Head
+Rock Tomb
+Ice Fang
+Head Smash
+!###
+!###
+041
+Starmie
+Water
+Psychic
+60
+75
+85
+100
+85
+115
+Natural Cure
+Psychic
+surf
+Hydro Pump
+!Power Gem
+!Hyper Beam
+!###
+042
 
