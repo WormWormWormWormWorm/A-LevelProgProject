@@ -709,4 +709,560 @@ Hydro Pump
 !Hyper Beam
 !###
 042
-
+Staraptor
+Flying
+Fighting
+85
+120
+70
+50
+60
+100
+Oblivious
+Air Slash
+Brave Bird
+Superpower
+!Hurricane
+!Final Gambit
+!###
+043
+Sigilyph
+Psychic
+Flying
+72
+60
+90
+103
+100
+97
+Clear Body
+Psychic
+Thunderbolt
+Tornado
+!Hyper Beam
+!Hurricane
+!Dark Pulse
+044
+Gyarados
+Water
+Flying
+95
+125
+80
+60
+100
+80
+Intimidate
+Waterfall
+Crunch
+Tsunami
+!Giga Impact
+!Ice Fang
+!###
+045
+Arcanine
+Fire
+###
+90
+110
+80
+100
+80
+95
+Intimidate
+Flamethrower
+Extreme Speed
+Flare Blitz
+!Thunder Fang
+!Crunch
+!###
+046
+Armaldo
+Rock
+Bug
+75
+125
+100
+70
+80
+45
+Battle Armour
+X-Scissor
+Rock Slide
+Superpower
+!Brick Break
+!Rock Tomb
+!###
+047
+Scizor
+Bug
+Steel
+70
+130
+100
+55
+80
+65
+Battle Armour
+Bullet Punch
+X-Scissor
+Iron Head
+!Brick Break
+!Megahorn
+!###
+048
+Excadrill
+Ground
+Steel
+110
+135
+60
+50
+65
+88
+Sandstorm
+Earthquake
+Iron Head
+Rock Slide
+!Rock Tomb
+!Stone Edge
+!###
+049
+Flygon
+Ground
+Dragon
+80
+100
+80
+80
+80
+100
+Intimidate
+Earthquake
+Dragon Claw
+Rock Slide
+!Flamethrower
+!Thunderbolt
+!Ice Beam
+050
+Gardevoir
+Psychic
+###
+70
+65
+65
+125
+115
+80
+Trace
+Psychic
+Thunderbolt
+Flamethrower
+Ice Beam
+!###
+!###
+051
+Electavire
+Electric
+Fighting
+75
+125
+67
+95
+85
+95
+Heatproof
+Wild Charge
+Brick Break
+Thunder Punch
+!Thunder
+!Superpower
+!###
+052
+Ninetales
+Fire
+###
+75
+80
+75
+90
+100
+100
+Flash Fire
+Flamethrower
+Fire Blast
+Dark Pulse
+!Psychic
+!Dark Pulse
+!###
+053
+Hippowdon
+Ground
+###
+108
+112
+120
+70
+72
+47
+Sandstorm
+Earthquake
+Superpower
+Rock Slide
+!Stone Edge
+!Yawn
+!###
+054
+Machamp
+Fighting
+###
+90
+130
+80
+65
+85
+55
+Clear Body
+Brick Break
+Gamble
+Mach Punch
+Superpower
+!###
+!###
+055
+Kangaskhan
+Normal
+###
+105
+95
+80
+40
+80
+90
+Oblivious
+Fake Out
+Double Edge
+Brick Break
+!Body Slam
+!Giga Impact
+!###
+056
+Glailie
+Ice
+###
+80
+100
+80
+100
+80
+100
+Intimidate
+Rock Slide
+Avalanche
+Ice Fang
+!Stone Edge
+!Explosion
+!###
+057
+Magmortar
+Fire
+###
+75
+95
+67
+125
+95
+83
+Flame Body
+Flamethrower
+Overheat
+Magnitude
+!Psychic
+!Dark Pulse
+!###
+058
+Volcarona
+Fire
+Bug
+85
+60
+65
+135
+105
+100
+Wreckage
+Flamethrower
+Bug Buzz
+Heat Wave
+Silver Wind
+!###
+!###
+059
+Wailord
+Water
+###
+100
+100
+90
+150
+140
+0
+Oblivious
+Water Spout
+Ice Beam
+Hyper Voice
+!Thunder
+!Avalanche
+!###
+060
+Exeggutor
+Grass
+Psychic
+95
+95
+85
+125
+75
+55
+Rage
+Psychic
+Giga Drain
+Solarbeam
+!Ice Beam
+!Earth Power
+!###
+061
+Ludicolo
+Water
+Grass
+80
+70
+80
+90
+100
+70
+Swift Swim
+Giga Drain
+Surf
+Fake Out
+!Hydro Pump
+!Leaf Storm
+!###
+062
+Jotleon
+Electric
+###
+65
+65
+60
+110
+95
+130
+Sturdy
+Thunderbolt
+Tempest
+Flamethrower
+!Mirror Coat
+!Explosion
+!###
+063
+Kingdra
+Water
+Dragon
+75
+95
+95
+95
+95
+85
+Regeneratioon
+Surf
+Draco Meteor
+Ice Beam
+!Hydro Pump
+!Dragon Pulse
+!###
+064
+Swampert
+Water
+Ground
+100
+110
+90
+85
+90
+60
+Thick Fat
+Aqua Tail
+Earthquake
+Avalanche
+!Rock Slide
+!Stone Edge
+!###
+065
+Tauros
+Normal
+###
+75
+100
+95
+40
+80
+110
+Intimidate
+Return
+Earth Power
+Head Crash
+!Giga Impact
+!Brick Break
+!###
+066
+Conkeldurr
+Fighting
+###
+105
+140
+95
+55
+60
+45
+Clear Body
+Brick Break
+Earthquake
+Rock Slide
+!Bulldoze
+!Stone Edge
+!###
+067
+Lucario
+Fighting
+Steel
+70
+110
+70
+115
+70
+90
+Oblivious
+Brick Break
+Mach Punch
+Meteor Mash
+!Superpower
+!Aura Sphere
+!###
+068
+Rhyperior
+Rock
+Ground
+115
+140
+130
+55
+55
+40
+Multiscale
+Earthquake
+Rock Slide
+Brick Break
+Rock Wrecker
+!###
+!###
+069
+Salamence
+Dragon
+Flying
+95
+135
+80
+110
+80
+100
+Intimidate
+Air Slash
+Dragon Claw
+Flamethrower
+Hurricane
+!###
+!###
+070
+Dragonite
+Dragon
+Flying
+90
+134
+95
+100
+100
+Regeneration
+Outrage
+Superpower
+Ice Fang
+Extreme Speed
+!###
+!###
+071
+Hydreigon
+Dark
+Dragon
+90
+105
+90
+125
+90
+80
+Rage
+Dark Pulse
+Dragon Pulse
+Flamethrower
+Draco Meteor
+072
+Garchomp
+Dragon
+Ground
+100
+130
+95
+80
+85
+100
+Clear Body
+Earthquake
+Dragon Claw
+Rock Slide
+Double Edge
+!###
+!###
+073
+Metagross
+Steel
+Psychic
+80
+135
+130
+95
+90
+70
+Temple
+Meteor Mash
+Psycho Blade
+Earthquake
+Explosion
+!###
+!###
+074
+Tyranitar
+Rock
+Dark
+100
+134
+110
+95
+100
+60
+Intimidate
+Crunch
+Rock Slide
+Earthquake
+Superpower
+!###
+!###
