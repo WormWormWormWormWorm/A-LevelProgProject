@@ -63,8 +63,8 @@ Battle Armour
 0###665
 1###731
 1###785
-!2###903
-!1###944
+!2###904
+!1###948
 !0###842
 ###530
 Leavanny
@@ -77,13 +77,13 @@ Bug
 80
 90
 Sturdy
-Leaf Blade
-X-Scissor
-Rock slide
-!Bulldoze
-!solar Blade
+1##1065
+1##1118
+0##1001
+!0##3105
+!0##1168
 !###
-00698
+###646
 Appletun
 Grass
 Dragon
@@ -94,13 +94,13 @@ Dragon
 80
 30
 Thick Fat
-Energy ball
-Apple acid
-Dragon pulse
-!Body slam
-!Solar Beam
-!###
-00837
+1##1235
+0##1288
+1##1357
+!0##1412
+!0###843
+!2##1480
+###773
 Breloom
 Grass
 Fighting
@@ -111,13 +111,13 @@ Fighting
 60
 70
 Technician
-Mach Punch
-Sky Uppercut
-Seed Bomb
-!Rock slide
-!superpower
+1##1594
+1##1650
+1##1709
+!0##3330
+!1###314
 !###
-007
+###897
 Electrode
 Electric
 ###
@@ -128,13 +128,13 @@ Electric
 80
 150
 Sturdy
-Thunder wave
-Thunderbolt
-Self-Destruct
-!Mirror coat
-!Counter
+2##1761
+0##1523
+1##1813
+!2##1943
+!0##1870
 !###
-008
+##1017
 Galvantula
 Electric
 Bug
@@ -145,13 +145,13 @@ Bug
 60
 110
 Swarm
-Bug Buzz
-Thunder Bolt
-Sucker Punch
-!Thunder
-!Electro web
+1##1993
+0##1523
+1##2093
+!1##2041
+!0##1870
 !###
-009
+##1138
 Manectric
 Electric
 ###
@@ -162,13 +162,13 @@ Electric
 60
 105
 Lightning Rod
-Thunder Fang
-Fire Fang
-Wild Charge
-!Crunch
-!Psychic fangs
+0###372
+0###131
+0##2147
+!0###498
+!1##2294
 !###
-010
+##1266
 Blastoise
 Water
 ###
@@ -178,13 +178,14 @@ Water
 85
 105
 80
-fake out
-Scald
-Hydro pump
-!Dragon pulse
-!Flash cannon
-!Brick break
-011
+Torrent
+0##2409
+0##2352
+1##2476
+!1##1357
+!1##2528
+!1###257
+##1389
 Poliwrath
 Water
 Fighting
@@ -195,12 +196,13 @@ Fighting
 90
 70
 Water Absorb
-Waterfall
-Mach Punch
-!Drain Punch
-!Superpower
+0##2582
+1###257
+1##1594
+!1##2646
+!1###314
 !###
-012
+##1516
 Dewgong
 Water
 Ice
@@ -211,13 +213,13 @@ Ice
 95
 70
 Thick Fat
-Ice Beam
-Surf
-Icy Wind
-!Blizzard
-!Ice Shard
+0##2749
+1##2703
+0##2809
+!0##2874
+!1##2934
 !###
-013
+##1633
 Nidoking
 Poison
 Ground
@@ -228,13 +230,13 @@ Ground
 75
 85
 Poison Point
-Earthquake
-Poison Jab
-Sucker Punch
-!Bulldoze
-!Megahorn
+1##2984
+0##3039
+1##2093
+!0##3105
+!1##3174
 !###
-014
+##1759
 Donphan
 Ground
 ###
@@ -245,13 +247,13 @@ Ground
 60
 50
 Battle Armour
-Magnitude
-Rock Slide
-Head Smash
-!Body Slam
-!Thunder Fang
+1##3223
+0##1001
+1##3276
+!0##1412
+!0###372
 !###
-015
+##1883
 Kabutops
 Rock
 Water
@@ -262,13 +264,13 @@ Water
 70
 80
 Weak Armour
-Aqua Jet
-Waterfall
-Rock Slide
-!Rock Tomb
-!Stone Edge
+1###566
+0##2582
+0##1001
+!0##3330
+!1##3398
 !###
-016
+##2006
 Camerupt
 Fire
 Ground
@@ -279,13 +281,13 @@ Ground
 75
 40
 Clear Body
-Earthquake
-Lava Plume
-Heat Wave
-!Stone Edge
-!Yawn
+1##2984
+0##3450
+0##3511
+!1##3398
+!2##3575
 !###
-017
+##2129
 Torkoal
 Fire
 ###
@@ -296,13 +298,13 @@ Fire
 70
 20
 Battle Armour
-Flamethrower
-Heat Wave
-Body Slam
-!Earth Power
-!Explosion
+0##3613
+0##3511
+0##1412
+!1###785
+!1##1813
 !###
-018
+##2250
 Drapion
 Poison
 Dark
@@ -313,13 +315,13 @@ Dark
 75
 95
 Sniper
-Poison Jab
-X-Scissor
-Crunch
-!Ice Fang
-!Thunder Fang
-!Fire Fang
-019
+0##3039
+1##1118
+0###498
+!1##3674
+!0###372
+!0###131
+##2371
 Muk
 Poison
 ###
@@ -330,13 +332,13 @@ Poison
 100
 50
 Poison Point
-Sludge Bomb
-Gunk Shot
-Fire Fang
-!Hyper Beam
-!Explosion
+0###665
+0##3723
+0###131
+!0##3789
+!1##1813
 !###
-020
+##2491
 Yanmega
 Bug
 Flying
@@ -347,13 +349,13 @@ Flying
 56
 95
 Speed Boost
-Bug Buzz
-Air Slash
-Hurricane
-!Psychic
-!Solar Beam
+1##1993
+0##3855
+1##3920
+!0##3973
+!0###843
 !###
-021
+##2612
 Talonflame
 Fire
 Flying
@@ -364,13 +366,13 @@ Flying
 70
 126
 Flame Body
-Flare Blitz
-Brave Bird
-Quick Attack
-!Wild Charge
-!Giga Impact
+0###192
+1##4036
+1##4092
+!0##2147
+!0##4148
 !###
-022
+##2736
 Relicanth
 Water
 Rock
@@ -381,14 +383,16 @@ Rock
 65
 55
 Rock Head
-Head Smash
-Aqua Tail
-Rock Tomb
-!Yawn
-!Ice Fang
+1##3276
+1###446
+0##3330
+!2##3575
+!1##3674
 !###
-023
+##2858
 Samurott
+Water
+###
 95
 100
 85
@@ -396,13 +400,13 @@ Samurott
 70
 80
 Battle Armour
-Sacred Sword
-Aqua Tail
-Aqua Jet
-!hydro Pump
-!Superpower
+0##4217
+1###446
+1###566
+!1##2476
+!1###314
 !###
-024
+##2982
 Tentacruel
 Water
 Poison
@@ -413,13 +417,13 @@ Poison
 120
 100
 Clear Mind
-Sludge Bomb
-Surf
-Hydro Pump
-!Ice Beam
-!Blizzard
+0###665
+1##2703
+1##2476
+!0##2749
+!0##2874
 !###
-025
+##3108
 Whiscash
 Water
 Ground
@@ -430,13 +434,13 @@ Ground
 70
 60
 Oblivious
-Surf
-Earthquake
-Bulldoze
-!Blizzard
-!Tsunami
+1##2703
+1##2984
+0##3105
+!0##2874
+!1###613
 !###
-026
+##3230
 Lanturn
 Water
 Electric
@@ -447,13 +451,13 @@ Electric
 76
 67
 Volt Absorb
-Discharge
-Bubble Beam
-Wild Charge
-!Ice Beam
-!Thunder
+0##4291
+0##4360
+0##2147
+!0##2749
+!1##2041
 !###
-027
+##3355
 Golem
 Rock
 Ground
@@ -464,11 +468,28 @@ Ground
 65
 45
 Rock Head
-Earthquake
-Head Smash
-Brick Break
-!Rock Slide
-!Explosion
+1##2984
+1##3276
+1###257
+!0##1001
+!1##1813
+!###
+##3474
+Shiftry
+Grass
+Dark
+90
+100
+60
+90
+60
+70
+Chlorophyll
+1###731
+0###498
+1##1065
+1##1118
+!###
 !###
 028
 Cradily
@@ -481,11 +502,11 @@ Grass
 110
 43
 Battle Armour
-Energy Ball
+1##1235
 Meteor Beam
-Rock Slide
-!Solar Beam
-!Rock Tomb
+0##1001
+!0###843
+!0##3330
 !###
 029
 Coalossal
@@ -498,11 +519,11 @@ Rock
 90
 40
 Steam Engine
-Rock Slide
-Flare Blitz
-Earthquake
+0##1001
+0###192
+1##2984
 !Stone Edeg
-!Brick Break
+!1###257
 !###
 030
 Krokodile
@@ -515,11 +536,11 @@ Dark
 70
 92
 Intimidate
-Magnitude
-Crunch
-Superpower
+1##3223
+0###498
+1###314
 !Rockslide
-!Bulldoze
+!0##3105
 !###
 031
 Mamoswine
@@ -532,11 +553,11 @@ Ground
 60
 80
 Oblivious
-Earthquake
+1##2984
 Avalanche
-Ice Shard
-!Giga Impact
-!Icy Wind
+1##2934
+!0##4148
+!0##2809
 !###
 032
 Hariyama
@@ -549,11 +570,11 @@ Fighting
 70
 50
 Thick Fat
-Fake Out
-Brick Break
-Superpower
-!Magnitude
-!Rock Slide
+0##2409
+1###257
+1###314
+!1##3223
+!0##1001
 !###
 033
 Gallade
@@ -566,11 +587,11 @@ Fighting
 115
 80
 Oblivious
-Drain Punch
-Superpower
+1##2646
+1###314
 Psycho Blade
-!X-Scissor
-!Mach Punch
+!1##1118
+!1##1594
 !###
 034
 Hitmontop
@@ -583,11 +604,11 @@ Fighting
 110
 70
 Intimidate
-Mach Punch
+1##1594
 Rolling Kick
-Superpower
-!Magnitude
-!Rock Slide
+1###314
+!1##3223
+!0##1001
 !###
 035
 Charizard
@@ -600,11 +621,11 @@ Flying
 85
 100
 Rage
-Flamethrower
-Air Slash
-Heat Wave
-!Hurricane
-!Dragon Pulse
+0##3613
+0##3855
+0##3511
+!1##3920
+!1##1357
 !###
 036
 Houndoom
@@ -617,9 +638,9 @@ Dark
 80
 95
 Blaze
-Flamethrower
+0##3613
 Dark Pulse
-Sucker Punch
+1##2093
 !Fire Blast
 !###
 !###
@@ -634,11 +655,11 @@ Grass
 85
 120
 Overgrow
-Leaf Blade
-X-Scissor
-Rock Slide
+1##1065
+1##1118
+0##1001
 !Leaf Storm
-!Solar Blade
+!0##1168
 !###
 038
 Scoliopede
@@ -652,8 +673,8 @@ Poison
 110
 Wreckage
 Steam roller
-Megahorn
-Rock Slide
+1##3174
+0##1001
 Cross poison
 !###
 !###
@@ -668,11 +689,11 @@ Grass
 100
 80
 Sap Sipper
-Body Slam
+0##1412
 Giga Drain
-Solar Beam
+0###843
 !Sleep Powder
-!Energy Ball
+!1##1235
 !Leech Seed
 040
 Aggron
@@ -686,9 +707,9 @@ Rock
 50
 Sturdy
 Iron Head
-Rock Tomb
-Ice Fang
-Head Smash
+0##3330
+1##3674
+1##3276
 !###
 !###
 041
@@ -702,11 +723,11 @@ Psychic
 85
 115
 Natural Cure
-Psychic
-surf
-Hydro Pump
+0##3973
+1##2703
+1##2476
 !Power Gem
-!Hyper Beam
+!0##3789
 !###
 042
 Staraptor
@@ -719,10 +740,10 @@ Fighting
 60
 100
 Oblivious
-Air Slash
-Brave Bird
-Superpower
-!Hurricane
+0##3855
+1##4036
+1###314
+!1##3920
 !Final Gambit
 !###
 043
@@ -736,11 +757,11 @@ Flying
 100
 97
 Clear Body
-Psychic
-Thunderbolt
+0##3973
+0##1523
 Tornado
-!Hyper Beam
-!Hurricane
+!0##3789
+!1##3920
 !Dark Pulse
 044
 Gyarados
@@ -753,11 +774,11 @@ Flying
 100
 80
 Intimidate
-Waterfall
-Crunch
-Tsunami
-!Giga Impact
-!Ice Fang
+0##2582
+0###498
+1###613
+!0##4148
+!1##3674
 !###
 045
 Arcanine
@@ -770,11 +791,11 @@ Fire
 80
 95
 Intimidate
-Flamethrower
+0##3613
 Extreme Speed
-Flare Blitz
-!Thunder Fang
-!Crunch
+0###192
+!0###372
+!0###498
 !###
 046
 Armaldo
@@ -787,11 +808,11 @@ Bug
 80
 45
 Battle Armour
-X-Scissor
-Rock Slide
-Superpower
-!Brick Break
-!Rock Tomb
+1##1118
+0##1001
+1###314
+!1###257
+!0##3330
 !###
 047
 Scizor
@@ -805,10 +826,10 @@ Steel
 65
 Battle Armour
 Bullet Punch
-X-Scissor
+1##1118
 Iron Head
-!Brick Break
-!Megahorn
+!1###257
+!1##3174
 !###
 048
 Excadrill
@@ -821,11 +842,11 @@ Steel
 65
 88
 Sandstorm
-Earthquake
+1##2984
 Iron Head
-Rock Slide
-!Rock Tomb
-!Stone Edge
+0##1001
+!0##3330
+!1##3398
 !###
 049
 Flygon
@@ -838,12 +859,12 @@ Dragon
 80
 100
 Intimidate
-Earthquake
+1##2984
 Dragon Claw
-Rock Slide
-!Flamethrower
-!Thunderbolt
-!Ice Beam
+0##1001
+!0##3613
+!0##1523
+!0##2749
 050
 Gardevoir
 Psychic
@@ -855,10 +876,10 @@ Psychic
 115
 80
 Trace
-Psychic
-Thunderbolt
-Flamethrower
-Ice Beam
+0##3973
+0##1523
+0##3613
+0##2749
 !###
 !###
 051
@@ -872,11 +893,11 @@ Fighting
 85
 95
 Heatproof
-Wild Charge
-Brick Break
-Thunder Punch
-!Thunder
-!Superpower
+0##2147
+1###257
+1##2041 Punch
+!1##2041
+!1###314
 !###
 052
 Ninetales
@@ -889,10 +910,10 @@ Fire
 100
 100
 Flash Fire
-Flamethrower
+0##3613
 Fire Blast
 Dark Pulse
-!Psychic
+!0##3973
 !Dark Pulse
 !###
 053
@@ -906,11 +927,11 @@ Ground
 72
 47
 Sandstorm
-Earthquake
-Superpower
-Rock Slide
-!Stone Edge
-!Yawn
+1##2984
+1###314
+0##1001
+!1##3398
+!2##3575
 !###
 054
 Machamp
@@ -923,10 +944,10 @@ Fighting
 85
 55
 Clear Body
-Brick Break
+1###257
 Gamble
-Mach Punch
-Superpower
+1##1594
+1###314
 !###
 !###
 055
@@ -940,11 +961,11 @@ Normal
 80
 90
 Oblivious
-Fake Out
+0##2409
 Double Edge
-Brick Break
-!Body Slam
-!Giga Impact
+1###257
+!0##1412
+!0##4148
 !###
 056
 Glailie
@@ -957,11 +978,11 @@ Ice
 80
 100
 Intimidate
-Rock Slide
+0##1001
 Avalanche
-Ice Fang
-!Stone Edge
-!Explosion
+1##3674
+!1##3398
+!1##1813
 !###
 057
 Magmortar
@@ -974,10 +995,10 @@ Fire
 95
 83
 Flame Body
-Flamethrower
+0##3613
 Overheat
-Magnitude
-!Psychic
+1##3223
+!0##3973
 !Dark Pulse
 !###
 058
@@ -991,9 +1012,9 @@ Bug
 105
 100
 Wreckage
-Flamethrower
-Bug Buzz
-Heat Wave
+0##3613
+1##1993
+0##3511
 Silver Wind
 !###
 !###
@@ -1009,9 +1030,9 @@ Water
 0
 Oblivious
 Water Spout
-Ice Beam
+0##2749
 Hyper Voice
-!Thunder
+!1##2041
 !Avalanche
 !###
 060
@@ -1025,11 +1046,11 @@ Psychic
 75
 55
 Rage
-Psychic
+0##3973
 Giga Drain
 Solarbeam
-!Ice Beam
-!Earth Power
+!0##2749
+!1###785
 !###
 061
 Ludicolo
@@ -1043,9 +1064,9 @@ Grass
 70
 Swift Swim
 Giga Drain
-Surf
-Fake Out
-!Hydro Pump
+1##2703
+0##2409
+!1##2476
 !Leaf Storm
 !###
 062
@@ -1059,11 +1080,11 @@ Electric
 95
 130
 Sturdy
-Thunderbolt
+0##1523
 Tempest
-Flamethrower
-!Mirror Coat
-!Explosion
+0##3613
+!2##1943
+!1##1813
 !###
 063
 Kingdra
@@ -1076,11 +1097,11 @@ Dragon
 95
 85
 Regeneratioon
-Surf
+1##2703
 Draco Meteor
-Ice Beam
-!Hydro Pump
-!Dragon Pulse
+0##2749
+!1##2476
+!1##1357
 !###
 064
 Swampert
@@ -1093,11 +1114,11 @@ Ground
 90
 60
 Thick Fat
-Aqua Tail
-Earthquake
+1###446
+1##2984
 Avalanche
-!Rock Slide
-!Stone Edge
+!0##1001
+!1##3398
 !###
 065
 Tauros
@@ -1111,10 +1132,10 @@ Normal
 110
 Intimidate
 Return
-Earth Power
+1###785
 Head Crash
-!Giga Impact
-!Brick Break
+!0##4148
+!1###257
 !###
 066
 Conkeldurr
@@ -1127,11 +1148,11 @@ Fighting
 60
 45
 Clear Body
-Brick Break
-Earthquake
-Rock Slide
-!Bulldoze
-!Stone Edge
+1###257
+1##2984
+0##1001
+!0##3105
+!1##3398
 !###
 067
 Lucario
@@ -1144,10 +1165,10 @@ Steel
 70
 90
 Oblivious
-Brick Break
-Mach Punch
+1###257
+1##1594
 Meteor Mash
-!Superpower
+!1###314
 !Aura Sphere
 !###
 068
@@ -1161,9 +1182,9 @@ Ground
 55
 40
 Multiscale
-Earthquake
-Rock Slide
-Brick Break
+1##2984
+0##1001
+1###257
 Rock Wrecker
 !###
 !###
@@ -1178,10 +1199,10 @@ Flying
 80
 100
 Intimidate
-Air Slash
+0##3855
 Dragon Claw
-Flamethrower
-Hurricane
+0##3613
+1##3920
 !###
 !###
 070
@@ -1195,8 +1216,8 @@ Flying
 100
 Regeneration
 Outrage
-Superpower
-Ice Fang
+1###314
+1##3674
 Extreme Speed
 !###
 !###
@@ -1212,8 +1233,8 @@ Dragon
 80
 Rage
 Dark Pulse
-Dragon Pulse
-Flamethrower
+1##1357
+0##3613
 Draco Meteor
 072
 Garchomp
@@ -1226,9 +1247,9 @@ Ground
 85
 100
 Clear Body
-Earthquake
+1##2984
 Dragon Claw
-Rock Slide
+0##1001
 Double Edge
 !###
 !###
@@ -1245,8 +1266,8 @@ Psychic
 Temple
 Meteor Mash
 Psycho Blade
-Earthquake
-Explosion
+1##2984
+1##1813
 !###
 !###
 074
@@ -1260,9 +1281,9 @@ Dark
 100
 60
 Intimidate
-Crunch
-Rock Slide
-Earthquake
-Superpower
+0###498
+0##1001
+1##2984
+1###314
 !###
 !###
