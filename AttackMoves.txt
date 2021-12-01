@@ -290,7 +290,7 @@ Special
 0
 1##2041
 Thunder
-150
+130
 Electric
 Special
 70
@@ -350,9 +350,9 @@ Physical
 100
 0
 2
-Flinch
+Surprise
 100
-1000012
+1##2476
 Hydro Pump
 130
 Water
@@ -360,7 +360,7 @@ Special
 80
 0
 0
-1000013
+1##2528
 Flash Cannon
 80
 Steel
@@ -368,7 +368,7 @@ Special
 100
 0
 0
-0000016
+0##2582
 Waterfall
 80
 Water
@@ -378,7 +378,7 @@ Physical
 0
 Flinch
 10
-1000014
+1##2646
 Drain Punch
 80
 Fighting
@@ -386,7 +386,7 @@ Physical
 100
 0
 0
-1000015
+1##2703
 Surf
 90
 Water
@@ -394,7 +394,7 @@ Special
 100
 0
 0
-0000017
+0##2749
 Ice Beam
 90
 Ice
@@ -404,7 +404,7 @@ Special
 0
 Freeze
 10
-0000018
+0##2809
 Icy Wind
 60
 Ice
@@ -414,7 +414,7 @@ Special
 0
 14Spe Drop
 100
-0000019
+0##2874
 Blizzard
 120
 Ice
@@ -424,7 +424,7 @@ Special
 0
 Freeze
 50
-1000016
+1##2934
 Ice Shard
 40
 Ice
@@ -432,7 +432,7 @@ Physical
 100
 0
 1
-1000017
+1##2984
 Earthquake
 100
 Ground
@@ -440,7 +440,7 @@ Physical
 100
 0
 0
-0000020
+0##3039
 Poison Jab
 80
 Poison
@@ -450,7 +450,7 @@ Physical
 0
 Poison
 30
-0000021
+0##3105
 Bulldoze
 60
 Ground
@@ -460,18 +460,15 @@ Physical
 0
 14Spe Drop
 100
-1000018
+1##3174
 Megahorn
 125
 Bug
 Physical
 85
-Bug
-Physical
-100
 0
 0
-1000019
+1##3223
 Magnitude
 80
 Ground
@@ -479,7 +476,7 @@ Physical
 100
 0
 0
-1000020
+1##3276
 Head Smash
 150
 Rock
@@ -487,7 +484,7 @@ Physical
 100
 33
 0
-0000022
+0##3330
 Rock Tomb
 60
 Rock
@@ -497,7 +494,7 @@ Physical
 0
 14Spe Drop
 100
-1000021
+1##3398
 Stone Edge
 120
 Rock
@@ -505,7 +502,7 @@ Physical
 80
 0
 0
-0000023
+0##3450
 Lava Plume
 80
 Fire
@@ -515,7 +512,7 @@ Special
 0
 Burn
 40
-0000024
+0##3511
 Heat Wave
 120
 Fire
@@ -525,13 +522,13 @@ Special
 0
 Burn
 10
-2##3595
+2##3575
 Yawn
 Normal
 100
 Sleep
 0
-0##3633
+0##3613
 Flamethrower
 90
 Fire
@@ -540,7 +537,8 @@ Special
 0
 0
 Burn
-100100
+10
+1##3674
 Ice Fang
 75
 Ice
@@ -548,7 +546,7 @@ Physical
 100
 0
 0
-0000100
+0##3723
 Gunk Shot
 120
 Poison
@@ -558,7 +556,7 @@ Special
 0
 Poison
 10
-0000101
+0##3789
 Hyper Beam
 120
 Normal
@@ -568,7 +566,7 @@ Special
 0
 Stun!
 100
-0000102
+0##3855
 Air Slash
 70
 Flying
@@ -578,7 +576,7 @@ Physical
 0
 Flinch
 30
-1000103
+1##3920
 Hurricane
 130
 Flying
@@ -586,26 +584,17 @@ Physical
 70
 0
 0
-0000104
+0##3973
 Psychic
 90
 Psychic
+Special
 100
 0
 0
 Flinch
 10
-0000105
-Solar Beam
-120
-Grass
-Special
-100
-0
-0
-Stun!
-100
-1000106
+1##4036
 Brave Bird
 120
 Flying
@@ -613,12 +602,15 @@ Physical
 100
 33
 0
-1000107
+1##4092
 Quick Attack
 50
 Normal
 Physical
-0000108
+100
+0
+1
+0##4148
 Giga Impact
 150
 Normal
@@ -628,7 +620,7 @@ Physical
 0
 Stun!
 100
-0000109
+0##4217
 Sacred Sword
 100
 Fighting
@@ -638,7 +630,7 @@ Physical
 0
 30Atk Up!
 10
-0000110
+0##4291
 Discharge
 80
 Electric
@@ -648,7 +640,7 @@ Special
 0
 Paralyzed
 30
-0000111
+0##4360
 Bubblebeam
 75
 Water
