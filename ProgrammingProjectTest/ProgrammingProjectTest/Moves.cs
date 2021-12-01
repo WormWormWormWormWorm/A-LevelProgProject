@@ -19,6 +19,10 @@ namespace ProgrammingProjectTest
 
         public abstract void Use(Unit Target,Unit User);
 
+        public abstract string ShortPrint();
+
+        public abstract void LongPrint(int startX,int startY);
+
         public void PrepareStream(Stream stream, string TemplateID)
         {
             int byteCount;
@@ -37,11 +41,29 @@ namespace ProgrammingProjectTest
             moveType = type;
         }
 
+        public string GetSpaceBlock(int numOfSpaces)//returns string made up of spaces the the length of numOfSpaces
+        {
+            string toReturn = "";
+            for (int i = 0; i < numOfSpaces; i++)
+            {
+                toReturn += " ";
+            }
+            return toReturn;
+        }
+
         public UnitType MoveType
         {
             get
             {
                 return moveType;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return moveName;
             }
         }
 
@@ -90,6 +112,26 @@ namespace ProgrammingProjectTest
             throw new NotImplementedException();
         }
 
+        public override string ShortPrint()
+        {
+            return (moveName + GetSpaceBlock(14 - moveName.Length) + "| power " + GetSpaceBlock(4 - Convert.ToString(basePower).Length) + basePower +  " | ");
+
+        }
+
+        public override void LongPrint(int startX,int startY)
+        {
+            Console.SetCursorPosition(startX, startY);
+            Console.Write(moveName);
+            Console.SetCursorPosition(startX+ 13, startY);
+            Console.ForegroundColor = moveType.DisplayColor;
+            Console.Write(moveType.Name);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.SetCursorPosition(startX, startY + 1);
+            Console.Write("Power: " + basePower + " hit: " + moveAccuracy + "%");
+            Console.SetCursorPosition(startX, startY + 2);
+            Console.Write("Recoil: " + GetSpaceBlock(4 - Convert.ToInt32(basePower)) + " Priority " + priorityLevel);
+        }
+
         public override string ToString()
         {
             return ("Name " + moveName + " type " + moveType.Name + " Accuracy " + moveAccuracy + " bp " + basePower + " category " + damageCategory + " recPerc " + recoilPercent + " priority " + priorityLevel);
@@ -128,6 +170,13 @@ namespace ProgrammingProjectTest
             base.Use(Target, User);
         }
 
+        public override void LongPrint(int startX, int startY)
+        {
+            base.LongPrint(startX, startY);
+            Console.SetCursorPosition(startX, startY + 3);
+            Console.WriteLine("Effect: " + Effect + " " + triggerPercentage + "%");
+        }
+
         public override string ToString()
         {
             return (base.ToString() + " effect " + Effect + " trigPerc " + triggerPercentage) ;
@@ -159,6 +208,25 @@ namespace ProgrammingProjectTest
         public override void Use(Unit Target,Unit User)
         {
             throw new NotImplementedException();
+        }
+
+        public override string ShortPrint()
+        {
+            return (moveName + GetSpaceBlock(14 - moveName.Length) + "| " + status + GetSpaceBlock(10 - status.Length) + " | ");
+        }
+
+        public override void LongPrint(int startX, int startY)
+        {
+            Console.SetCursorPosition(startX, startY);
+            Console.Write(moveName);
+            Console.SetCursorPosition(startX + 13, startY);
+            Console.ForegroundColor = moveType.DisplayColor;
+            Console.Write(moveType.Name);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.SetCursorPosition(startX, startY+1);
+            Console.Write(status);
+            Console.SetCursorPosition(startX, startY + 2);
+            Console.Write("hit: " + moveAccuracy + "%");
         }
 
         public override string ToString()

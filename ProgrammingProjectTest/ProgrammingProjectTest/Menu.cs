@@ -26,11 +26,15 @@ namespace ProgrammingProjectTest
             {
                 for(int j = 0;j < displayText.GetLength(0); j++)
                 {
-                    if (displayText[j,i] != null)
-                    {
-                        Console.SetCursorPosition(CoOrdinates[j, i, 0], CoOrdinates[j, i, 1]);
+                    Console.SetCursorPosition(CoOrdinates[j, i, 0], CoOrdinates[j, i, 1]);
 
+                    if (displayText[j,i] != null)
+                    {   
                         Console.Write(displayText[j, i]);
+                    }
+                    else
+                    {
+                        Console.Write("--------");
                     }
                 }
             }
@@ -51,7 +55,7 @@ namespace ProgrammingProjectTest
                     case ConsoleKey.RightArrow: PointerX += 1;break;
                     case ConsoleKey.UpArrow: PointerY -= 1;break;
                     case ConsoleKey.DownArrow: PointerY += 1;break;
-                    case ConsoleKey.Enter: optionSelected = pointerX * 100 + pointerY;break;
+                    case ConsoleKey.Enter: optionSelected = pointerX+1 * 100 + pointerY;break;
                     default: inputGot = false;break;
                 }
             } while (inputGot == false);
@@ -89,16 +93,58 @@ namespace ProgrammingProjectTest
             }
             set
             {
-                if(value > -1 && value < displayText.GetLength(0))
+                //if(value > -1 && value < displayText.GetLength(0))
+                //{
+                //    if (displayText[value,pointerY] != null)
+                //    {
+                //        Deselect();
+                //        pointerX = value;
+                //        Highlight();
+                //    }
+                //}
+                value = PlaceInBoundsX(value);
+                if(displayText[value,pointerY] == null)
                 {
-                    if (displayText[value,pointerY] != null)
+                    if(value > pointerX)
                     {
-                        Deselect();
-                        pointerX = value;
-                        Highlight();
+                        while(displayText[value, pointerY] == null)
+                        {
+                            value = PlaceInBoundsX(value + 1);
+                        }
+                    }
+                    else
+                    {
+                        while(displayText[value,pointerY] == null)
+                        {
+                            value = PlaceInBoundsX(value - 1);
+                        }
                     }
                 }
+                Deselect();
+                pointerX = value;
+                Highlight();
             }
+        }
+
+        public int PlaceInBoundsX(int value)
+        {
+            if (value < 0)
+            {
+                value = displayText.GetLength(0) - 1;
+                while (displayText[value, pointerY] == null)
+                {
+                    value--;
+                }
+            }
+            else if (value > displayText.GetLength(0) - 1)
+            {
+                value = 0;
+                while (displayText[value, pointerY] == null)
+                {
+                    value++;
+                }
+            }
+            return value;
         }
 
         public int PointerY
@@ -109,16 +155,59 @@ namespace ProgrammingProjectTest
             }
             set
             {
-                if (value > -1 && value < displayText.GetLength(1))
+                //if (value > -1 && value < displayText.GetLength(1))
+                //{
+                //    if (displayText[pointerX, value] != null)
+                //    {
+                //        Deselect();
+                //        pointerY = value;
+                //        Highlight();
+                //    }
+                //}
+
+                value = PlaceInBoundsY(value);
+                if (displayText[pointerX,value] == null)
                 {
-                    if (displayText[pointerX, value] != null)
+                    if (value > pointerY)
                     {
-                        Deselect();
-                        pointerY = value;
-                        Highlight();
+                        while (displayText[pointerX, value] == null)
+                        {
+                            value = PlaceInBoundsY(value + 1);
+                        }
+                    }
+                    else
+                    {
+                        while (displayText[pointerX, value] == null)
+                        {
+                            value = PlaceInBoundsY(value - 1);
+                        }
                     }
                 }
+                Deselect();
+                pointerY = value;
+                Highlight();
             }
+        }
+
+        public int PlaceInBoundsY(int value)
+        {
+            if (value < 0)
+            {
+                value = displayText.GetLength(1) - 1;
+                while (displayText[pointerX,value] == null)
+                {
+                    value--;
+                }
+            }
+            else if (value > displayText.GetLength(1) - 1)
+            {
+                value = 0;
+                while (displayText[pointerX, value] == null)
+                {
+                    value++;
+                }
+            }
+            return value;
         }
 
         public int OptionSelected
@@ -130,6 +219,16 @@ namespace ProgrammingProjectTest
             set
             {
                 optionSelected = value;
+            }
+        }
+
+        public int OptionSelectedReset
+        {
+            get
+            {
+                int num = optionSelected;
+                optionSelected = -1;
+                return num;
             }
         }
     }

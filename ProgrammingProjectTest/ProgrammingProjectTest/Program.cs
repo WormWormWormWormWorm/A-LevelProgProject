@@ -38,7 +38,7 @@ namespace ProgrammingProjectTest
             //    menuTest.GetInput();
             //}
 
-            Game game = new Game();
+            StartUp game = new StartUp();
 
 
         }

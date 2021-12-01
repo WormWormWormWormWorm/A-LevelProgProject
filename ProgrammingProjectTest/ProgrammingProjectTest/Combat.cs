@@ -9,9 +9,7 @@ namespace ProgrammingProjectTest
     class Combat
     {
 
-
-
-        public Combat()
+        public Combat(Unit[] playerTeam, Unit[] enemyTeam)
         {
             //gets player team
             //gets enemy team
@@ -21,6 +19,8 @@ namespace ProgrammingProjectTest
 
             //1
             ////pulls all friendly units from player class 
+            
+            
         }
 
     }
