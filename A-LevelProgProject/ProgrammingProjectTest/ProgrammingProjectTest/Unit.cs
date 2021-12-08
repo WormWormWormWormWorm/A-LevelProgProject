@@ -7,29 +7,44 @@ using System.IO;
 
 namespace ProgrammingProjectTest
 {
-    class Unit
+    class TemplateUnit
+    {
+        protected int[] baseStats;
+        protected string templateID;
+        protected string name;
+        protected string ability;
+        protected UnitType type1;
+        protected UnitType type2;
+        private string[] moveIDs;
+
+        public TemplateUnit(int[] baseStats,string templateID,string name,string ability,UnitType type1,UnitType type2,string[] moveIDs)
+        {
+            this.baseStats = baseStats;
+            this.templateID = templateID;
+            this.name = name;
+            this.ability = ability;
+            this.type1 = type1;
+            this.type2 = type2;
+            this.moveIDs = moveIDs;
+        }
+    }
+
+    class Unit : TemplateUnit
     {
         private static Random random = new Random();
 
         protected int plusNature;
         protected int minusNature;
         protected int[] Stats = new int[5];
-        protected int[] baseStats = new int[6];
         protected int[] IVS = new int[6];
         protected double[] Modifiers = new double[5];
         
-        protected string templateID;
-        private string name;
-        private string abilitiy;
-        private UnitType type1;
-        private UnitType type2;
         private string status;
 
         private int HP;
         private int CurrentHP;
 
         private Moves[] moves = new Moves[4];
-
 
         public Unit(string templateID)
         {
@@ -114,7 +129,7 @@ namespace ProgrammingProjectTest
             {
                 baseStats[i] = Convert.ToInt32(sr.ReadLine());
             }
-            abilitiy = sr.ReadLine();
+            Ability = sr.ReadLine();
 
             //determines which moves will always be on the unit and then determines which of the random ones will be in the movepool
             //ids that do not begin with '!' are always on the unit
@@ -209,7 +224,7 @@ namespace ProgrammingProjectTest
                 PrintColoredString(moves[i].MoveType.Name, moves[i].MoveType.DisplayColor);
             }
             Console.SetCursorPosition(startX , startY + 2);
-            Console.Write("Ability: " + abilitiy);
+            Console.Write("Ability: " + Ability);
         }
 
         public void InspectPrint(int startX,int startY)
@@ -332,11 +347,11 @@ namespace ProgrammingProjectTest
         {
             get
             {
-                return abilitiy;
+                return Ability;
             }
             set
             {
-                abilitiy = value;
+                Ability = value;
             }
         }
 

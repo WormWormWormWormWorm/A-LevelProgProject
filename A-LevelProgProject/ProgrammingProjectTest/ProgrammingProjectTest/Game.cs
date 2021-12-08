@@ -153,7 +153,7 @@ namespace ProgrammingProjectTest
                 menu.GetInput();
                 switch (menu.OptionSelected)
                 {
-                    case 100: Console.Clear(); break;
+                    case 100: ChangeTeam(); break;
                     case 101: Inspect(true) ;
                         Console.Clear();
                         PrintTeam(1, 2, "Player", PlayerUnits);
@@ -193,8 +193,15 @@ namespace ProgrammingProjectTest
 
         public void Inspect(bool inFight)
         {
-            Menu menu = CreatefullInspectMenu();
+            Menu menu;
             Console.Clear();
+
+            Console.SetCursorPosition(15, 1);
+            Console.Write("Player Units:");
+            Console.SetCursorPosition(15, 15);
+            Console.Write("Enemy Units:");
+
+            menu = CreatefullInspectMenu();
             menu.Draw();
             menu.SetPointer(0, 0);
 
@@ -218,6 +225,33 @@ namespace ProgrammingProjectTest
 
         public void ChangeTeam()
         {
+            Menu menu;
+            Menu subMenu;
+            
+
+            Console.Clear();
+            Console.SetCursorPosition(15, 1);
+            Console.Write("Current Team:");
+            Console.SetCursorPosition(15,9);
+            Console.Write("Other Available Units:");
+
+            menu = CreateTeamSwapMenu();
+
+            {
+                int Y = 3;
+                string[,] display = new string[3,2];
+                int[,,] coOrds = new int[3,2, 2];
+                MenuCoOrds3x3(coOrds,ref Y,15,0,6);
+                FillDisplayFromUnitArray(PlayerUnits,0,6,display,0);
+                subMenu = new Menu(display,coOrds);
+            }
+
+            menu.Draw();
+            while(subMenu.OptionSelected != 900)
+            {
+                subMenu.GetInput();
+
+            }
 
         }
 
@@ -265,58 +299,38 @@ namespace ProgrammingProjectTest
         public Menu CreatefullInspectMenu()
         {
             Menu menu;
-            Unit[] arrayUsed;
 
             string[,] display = new string[3,9];
             int[,,] coOrds = new int[3,9, 2];
-            int Y = 3;
-            Console.SetCursorPosition(15, Y);
-            Console.Write("Player Units:");
-            arrayUsed = PlayerUnits;
+            int Y;
+            Y = 3;
             MenuCoOrds3x3(coOrds, ref Y, 15,0,18);
-            Console.SetCursorPosition(15, Y);
-            Console.Write("Enemy Units:");
             Y += 2;
             MenuCoOrds3x3(coOrds, ref Y, 15,18,27 );
-            for(int i = 0; i < 18; i++)
-            {
-                if(arrayUsed[i] != null)
-                {
-                    display[0, i/3] = arrayUsed[i].Name;
-                }
-                i++;
-                if (arrayUsed[i] != null)
-                {
-                    display[1,i/3] = arrayUsed[i].Name;
-                }
-                i++;
-                if (arrayUsed[i] != null)
-                {
-                    display[2,i/3] = arrayUsed[i].Name;
-                }
-                Y += 2;
-            }
-            arrayUsed = enemyTeam;
-            for(int i = 0;i < 6; i ++)
-            {
-                if (arrayUsed[i] != null)
-                {
-                    display[0,(i + 18) / 3] = arrayUsed[i].Name;
-                }
-                i++;
-                if (arrayUsed[i] != null)
-                {
-                    display[1,(i+18) / 3] = arrayUsed[i].Name;
-                }
-                i++;
-                if (arrayUsed[i] != null)
-                {
-                    display[2,(i+18) / 3] = arrayUsed[i].Name;
-                }
-            } 
+            FillDisplayFromUnitArray(PlayerUnits,0,18,display,0);
+            FillDisplayFromUnitArray(enemyTeam,0,6,display,18); 
             display[0,8] = "BACK";
             menu = new Menu(display, coOrds);
 
+            return menu;
+        }
+
+        public Menu CreateTeamSwapMenu()//should return menu
+        {
+            Menu menu;
+            int Y = 3;
+
+            string[,] display = new string[3,7];
+            int[,,] coOrds = new int[3,7, 2];
+
+            MenuCoOrds3x3(coOrds,ref Y,15,0,6);
+            Y += 4;
+            MenuCoOrds3x3(coOrds,ref Y,15,6,21);
+
+            FillDisplayFromUnitArray(PlayerUnits,0,18,display,0);
+            display[0,6] = "BACK";
+
+            menu = new Menu(display,coOrds);
             return menu;
         }
 
@@ -334,6 +348,27 @@ namespace ProgrammingProjectTest
                 coOrds[2, k / 3, 0] = startX + 28;
                 coOrds[2, k / 3, 1] = Y;
                 Y += 2;
+            }
+        }
+
+        public void FillDisplayFromUnitArray(Unit[] arrayUsed,int startPoint, int endPoint, string[,] display, int iDisplacement )
+        {
+            for(int i = startPoint; i < endPoint; i++)
+            {
+                if(arrayUsed[i] != null)
+                {
+                    display[0, (i+iDisplacement)/3] = arrayUsed[i].Name;
+                }
+                i++;
+                if (arrayUsed[i] != null)
+                {
+                    display[1,(i+iDisplacement)/3] = arrayUsed[i].Name;
+                }
+                i++;
+                if (arrayUsed[i] != null)
+                {
+                    display[2,(i+iDisplacement)/3] = arrayUsed[i].Name;
+                }
             }
         }
 

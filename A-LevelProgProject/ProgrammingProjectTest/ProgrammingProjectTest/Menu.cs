@@ -231,5 +231,21 @@ namespace ProgrammingProjectTest
                 return num;
             }
         }
+
+        public string[,] Display
+        {
+            get
+            {
+                return displayText;
+            }
+        }
+
+        public int[,,] CoOrds
+        {
+            get
+            {
+                return CoOrdinates;
+            }
+        }
     }
 }
