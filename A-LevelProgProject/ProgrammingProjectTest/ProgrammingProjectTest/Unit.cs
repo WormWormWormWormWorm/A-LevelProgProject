@@ -10,22 +10,73 @@ namespace ProgrammingProjectTest
     class TemplateUnit
     {
         protected int[] baseStats;
-        protected string templateID;
         protected string name;
         protected string ability;
         protected UnitType type1;
         protected UnitType type2;
         private string[] moveIDs;
 
-        public TemplateUnit(int[] baseStats,string templateID,string name,string ability,UnitType type1,UnitType type2,string[] moveIDs)
+        public TemplateUnit()
+        {
+
+        }
+
+        public TemplateUnit(int[] baseStats, string name, string ability, UnitType type1, UnitType type2, string[] moveIDs)
         {
             this.baseStats = baseStats;
-            this.templateID = templateID;
             this.name = name;
             this.ability = ability;
             this.type1 = type1;
             this.type2 = type2;
             this.moveIDs = moveIDs;
+        }
+
+        public int[] BaseStats
+        {
+            get
+            {
+                return baseStats;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        public string Ability
+        {
+            get
+            {
+                return ability;
+            }
+        }
+
+        public UnitType Type1
+        {
+            get
+            {
+                return type1;
+            }
+        }
+
+        public UnitType Type2
+        {
+            get
+            {
+                return type2;
+            }
+        }
+
+        public string[] MoveIDs
+        {
+            get
+            {
+                return moveIDs;
+            }
         }
     }
 
@@ -46,6 +97,25 @@ namespace ProgrammingProjectTest
 
         private Moves[] moves = new Moves[4];
 
+        public Unit()
+        {
+
+        }
+
+        public Unit(TemplateUnit template)
+        {
+            plusNature = random.Next(0, 6);
+            minusNature = random.Next(0, 6);
+
+            for (int i = 0; i < 6; i++)
+            {
+                IVS[i] = random.Next(0, 32);
+            }
+
+            CreateUnit(template); 
+
+        }
+
         public Unit(string templateID)
         {
 
@@ -56,20 +126,6 @@ namespace ProgrammingProjectTest
             {
                 IVS[i] = random.Next(0, 32);
             }
-
-            CreateUnit(templateID);
-
-            //using (Stream stream = File.Open("C:\\TextFiles\\AlevelProgProject\\Units.txt", FileMode.Open))
-            //{
-            //    PrepareStream(stream, templateID);
-
-            //    using (StreamReader sr = new StreamReader(stream))
-            //    {
-            //        FillBaseValues(sr);                    
-            //    }
-            //}
-
-            //DetermineStats();
         }
 
         public Unit(string templateID,int forcedIV)
@@ -82,22 +138,54 @@ namespace ProgrammingProjectTest
                 IVS[i] = forcedIV;
             }
 
-            CreateUnit(templateID);
         }
 
-        public void CreateUnit(string templateID)
+        public void CreateUnit(TemplateUnit template)
         {
-            using (Stream stream = File.Open("Units.txt", FileMode.Open))
-            {
-                PrepareStream(stream, templateID);
+            int randomNum = 0;
+            int numOfRandmoves = 0;
+            int moveSlotsRemaining = 4;
+            string moveTempHolder;
+            string[] randomMoveHolder = new string[6];
 
-                using (StreamReader sr = new StreamReader(stream))
+
+            name = template.Name;
+            baseStats = template.BaseStats;
+            type1 = template.Type1;
+            type2 = template.Type2;
+            ability = template.Ability;
+
+            //determines which moves will always be on the unit and then determines which of the random ones will be in the movepool
+            //ids that do not begin with '!' are always on the unit
+            for (int j = 0; j < 6; j++)
+            {
+                moveTempHolder = template.MoveIDs[j];
+                if (!moveTempHolder.EndsWith("#"))
                 {
-                    FillBaseValues(sr);
+                    if (moveTempHolder[0] == '!')
+                    {
+                        randomMoveHolder[numOfRandmoves] = moveTempHolder;
+                        numOfRandmoves++;
+                    }
+                    else
+                    {
+                        DetermineMoveCategory(moveTempHolder, 4 - moveSlotsRemaining);
+                        moveSlotsRemaining--;
+                    }
                 }
             }
-
-            DetermineStats();
+            while (moveSlotsRemaining != 0)
+            {
+                //randomly decides which move to put in available move slot
+                //after this reorganises randomMoveHolder to swap the move chosen with the Move with the highest slot in the array in use and then removes chosen move and decides again if necessary
+                randomNum = random.Next(0, numOfRandmoves);
+                moveTempHolder = randomMoveHolder[numOfRandmoves - 1];
+                randomMoveHolder[numOfRandmoves - 1] = randomMoveHolder[randomNum];
+                randomMoveHolder[randomNum] = moveTempHolder;
+                DetermineMoveCategory(randomMoveHolder[numOfRandmoves - 1].Substring(1), 4 - moveSlotsRemaining);
+                moveSlotsRemaining--;
+                numOfRandmoves--;
+            }
         }
 
         public void PrepareStream(Stream stream, string TemplateID)

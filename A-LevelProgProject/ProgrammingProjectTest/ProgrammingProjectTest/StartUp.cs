@@ -12,7 +12,8 @@ namespace ProgrammingProjectTest
         public StartUp()
         {
             UnitType arrayAnitialiser = new UnitType(""); //initialises static unitType array
-            InitiateGame();
+            UnitTemplateList unitTemplateList = new UnitTemplateList();
+            //InitiateGame();
             Console.ReadLine();
 
         }

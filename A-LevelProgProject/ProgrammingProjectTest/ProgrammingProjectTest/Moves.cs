@@ -81,6 +81,18 @@ namespace ProgrammingProjectTest
 
         }
 
+        public DamageMoves(string moveID, string moveName,UnitType moveType, int moveAccuracy, int basePower,string damageCategory,int recoilPercent,int priorityLevel)
+        {
+            this.moveID = moveID;
+            this.moveName = moveName;
+            this.moveType = moveType;
+            this.moveAccuracy = moveAccuracy;
+            this.basePower = basePower;
+            this.damageCategory = damageCategory;
+            this.recoilPercent = recoilPercent;
+            this.priorityLevel = priorityLevel;
+        }
+
         public DamageMoves(string moveID)
         {
             //100's of instances of stream and streamreader left behind if not disposed
@@ -141,13 +153,26 @@ namespace ProgrammingProjectTest
 
     class TriggerMoves : DamageMoves
     {
-        string Effect;
-        string EffectName;
-        int triggerPercentage;
+        private string Effect;
+        private int triggerPercentage;
 
         public TriggerMoves()
         {
 
+        }
+
+        public TriggerMoves(string moveID, string moveName, UnitType moveType, int moveAccuracy, int basePower, string damageCategory, int recoilPercent, int priorityLevel,string effect,int triggerPercentage)
+        {
+            this.moveID = moveID;
+            this.moveName = moveName;
+            this.moveType = moveType;
+            this.moveAccuracy = moveAccuracy;
+            this.basePower = basePower;
+            this.damageCategory = damageCategory;
+            this.recoilPercent = recoilPercent;
+            this.priorityLevel = priorityLevel;
+            this.Effect = effect;
+            this.triggerPercentage = triggerPercentage;
         }
 
         public TriggerMoves(string moveID)

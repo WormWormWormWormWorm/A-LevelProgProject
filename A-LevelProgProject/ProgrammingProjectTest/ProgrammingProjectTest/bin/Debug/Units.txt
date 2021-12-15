@@ -15,7 +15,7 @@ move3
 RandomMove1
 RandomMove2
 RandomMove3
-###154
+01
 Blaziken
 Fire
 Fighting
@@ -32,7 +32,7 @@ Blaze
 !1###314
 !0###372
 !###
-###274
+02
 Feraligater
 Water
 Dark
@@ -49,7 +49,7 @@ Intimidate
 !1###314
 !1###613
 !###
-###399
+03
 Venusaur
 Grass
 Poison
@@ -66,7 +66,7 @@ Battle Armour
 !2###904
 !1###948
 !0###842
-###530
+04
 Leavanny
 Grass
 Bug
@@ -83,7 +83,7 @@ Sturdy
 !0##3105
 !0##1168
 !###
-###646
+05
 Appletun
 Grass
 Dragon
@@ -100,7 +100,7 @@ Thick Fat
 !0##1412
 !0###843
 !2##1480
-###773
+06
 Breloom
 Grass
 Fighting
@@ -117,7 +117,7 @@ Technician
 !0##3330
 !1###314
 !###
-###897
+07
 Electrode
 Electric
 ###
@@ -134,7 +134,7 @@ Sturdy
 !2##1943
 !0##1870
 !###
-##1017
+08
 Galvantula
 Electric
 Bug
@@ -151,7 +151,7 @@ Swarm
 !1##2041
 !0##1870
 !###
-##1138
+09
 Manectric
 Electric
 ###
@@ -168,7 +168,7 @@ Lightning Rod
 !0###498
 !1##2294
 !###
-##1266
+10
 Blastoise
 Water
 ###
@@ -185,7 +185,7 @@ Torrent
 !1##1357
 !1##2528
 !1###257
-##1389
+11
 Poliwrath
 Water
 Fighting
@@ -202,7 +202,7 @@ Water Absorb
 !1##2646
 !1###314
 !###
-##1516
+12
 Dewgong
 Water
 Ice
@@ -219,7 +219,7 @@ Thick Fat
 !0##2874
 !1##2934
 !###
-##1633
+13
 Nidoking
 Poison
 Ground
@@ -236,7 +236,7 @@ Poison Point
 !0##3105
 !1##3174
 !###
-##1759
+14
 Donphan
 Ground
 ###
@@ -253,7 +253,7 @@ Battle Armour
 !0##1412
 !0###372
 !###
-##1883
+15
 Kabutops
 Rock
 Water
@@ -270,7 +270,7 @@ Weak Armour
 !0##3330
 !1##3398
 !###
-##2006
+16
 Camerupt
 Fire
 Ground
@@ -287,7 +287,7 @@ Clear Body
 !1##3398
 !2##3575
 !###
-##2129
+17
 Torkoal
 Fire
 ###
@@ -304,7 +304,7 @@ Battle Armour
 !1###785
 !1##1813
 !###
-##2250
+18
 Drapion
 Poison
 Dark
@@ -321,7 +321,7 @@ Sniper
 !1##3674
 !0###372
 !0###131
-##2371
+19
 Muk
 Poison
 ###
@@ -338,7 +338,7 @@ Poison Point
 !0##3789
 !1##1813
 !###
-##2491
+20
 Yanmega
 Bug
 Flying
@@ -355,7 +355,7 @@ Speed Boost
 !0##3973
 !0###843
 !###
-##2612
+21
 Talonflame
 Fire
 Flying
@@ -372,7 +372,7 @@ Flame Body
 !0##2147
 !0##4148
 !###
-##2736
+22
 Relicanth
 Water
 Rock
@@ -389,7 +389,7 @@ Rock Head
 !2##3575
 !1##3674
 !###
-##2858
+23
 Samurott
 Water
 ###
@@ -406,7 +406,7 @@ Battle Armour
 !1##2476
 !1###314
 !###
-##2982
+24
 Tentacruel
 Water
 Poison
@@ -423,7 +423,7 @@ Clear Mind
 !0##2749
 !0##2874
 !###
-##3108
+25
 Whiscash
 Water
 Ground
@@ -440,7 +440,7 @@ Oblivious
 !0##2874
 !1###613
 !###
-##3230
+26
 Lanturn
 Water
 Electric
@@ -457,7 +457,7 @@ Volt Absorb
 !0##2749
 !1##2041
 !###
-##3355
+27
 Golem
 Rock
 Ground
@@ -474,7 +474,7 @@ Rock Head
 !0##1001
 !1##1813
 !###
-##3474
+28
 Shiftry
 Grass
 Dark
@@ -491,7 +491,7 @@ Chlorophyll
 1##1118
 !###
 !###
-028
+29
 Cradily
 Rock
 Grass
@@ -508,7 +508,7 @@ Meteor Beam
 !0###843
 !0##3330
 !###
-029
+30
 Coalossal
 Fire
 Rock
@@ -525,7 +525,7 @@ Steam Engine
 !Stone Edeg
 !1###257
 !###
-030
+31
 Krokodile
 Ground
 Dark
@@ -542,7 +542,7 @@ Intimidate
 !Rockslide
 !0##3105
 !###
-031
+32
 Mamoswine
 Ice
 Ground
@@ -559,7 +559,7 @@ Avalanche
 !0##4148
 !0##2809
 !###
-032
+33
 Hariyama
 Fighting
 ###
@@ -576,7 +576,7 @@ Thick Fat
 !1##3223
 !0##1001
 !###
-033
+34
 Gallade
 Psychic
 Fighting
@@ -593,7 +593,7 @@ Psycho Blade
 !1##1118
 !1##1594
 !###
-034
+35
 Hitmontop
 Fighting
 ###
@@ -610,7 +610,7 @@ Rolling Kick
 !1##3223
 !0##1001
 !###
-035
+36
 Charizard
 Fire
 Flying
@@ -627,7 +627,7 @@ Rage
 !1##3920
 !1##1357
 !###
-036
+37
 Houndoom
 Fire
 Dark
@@ -644,7 +644,7 @@ Dark Pulse
 !Fire Blast
 !###
 !###
-037
+38
 Sceptile
 Grass
 ###
@@ -661,7 +661,7 @@ Overgrow
 !Leaf Storm
 !0##1168
 !###
-038
+39
 Scoliopede
 Bug
 Poison
@@ -678,7 +678,7 @@ Steam roller
 Cross poison
 !###
 !###
-039
+40
 Meganium
 Grass
 ###
@@ -695,7 +695,7 @@ Giga Drain
 !Sleep Powder
 !1##1235
 !Leech Seed
-040
+41
 Aggron
 Steel
 Rock
@@ -712,7 +712,7 @@ Iron Head
 1##3276
 !###
 !###
-041
+42
 Starmie
 Water
 Psychic
@@ -729,7 +729,7 @@ Natural Cure
 !Power Gem
 !0##3789
 !###
-042
+43
 Staraptor
 Flying
 Fighting
@@ -746,7 +746,7 @@ Oblivious
 !1##3920
 !Final Gambit
 !###
-043
+44
 Sigilyph
 Psychic
 Flying
@@ -763,7 +763,7 @@ Tornado
 !0##3789
 !1##3920
 !Dark Pulse
-044
+45
 Gyarados
 Water
 Flying
@@ -780,7 +780,7 @@ Intimidate
 !0##4148
 !1##3674
 !###
-045
+46
 Arcanine
 Fire
 ###
@@ -797,7 +797,7 @@ Extreme Speed
 !0###372
 !0###498
 !###
-046
+47
 Armaldo
 Rock
 Bug
@@ -814,7 +814,7 @@ Battle Armour
 !1###257
 !0##3330
 !###
-047
+48
 Scizor
 Bug
 Steel
@@ -831,7 +831,7 @@ Iron Head
 !1###257
 !1##3174
 !###
-048
+49
 Excadrill
 Ground
 Steel
@@ -848,7 +848,7 @@ Iron Head
 !0##3330
 !1##3398
 !###
-049
+50
 Flygon
 Ground
 Dragon
@@ -865,7 +865,7 @@ Dragon Claw
 !0##3613
 !0##1523
 !0##2749
-050
+51
 Gardevoir
 Psychic
 ###
@@ -882,7 +882,7 @@ Trace
 0##2749
 !###
 !###
-051
+52
 Electavire
 Electric
 Fighting
@@ -899,7 +899,7 @@ Heatproof
 !1##2041
 !1###314
 !###
-052
+53
 Ninetales
 Fire
 ###
@@ -916,7 +916,7 @@ Dark Pulse
 !0##3973
 !Dark Pulse
 !###
-053
+54
 Hippowdon
 Ground
 ###
@@ -933,7 +933,7 @@ Sandstorm
 !1##3398
 !2##3575
 !###
-054
+55
 Machamp
 Fighting
 ###
@@ -950,7 +950,7 @@ Gamble
 1###314
 !###
 !###
-055
+56
 Kangaskhan
 Normal
 ###
@@ -967,7 +967,7 @@ Double Edge
 !0##1412
 !0##4148
 !###
-056
+57
 Glailie
 Ice
 ###
@@ -984,7 +984,7 @@ Avalanche
 !1##3398
 !1##1813
 !###
-057
+58
 Magmortar
 Fire
 ###
@@ -1001,7 +1001,7 @@ Overheat
 !0##3973
 !Dark Pulse
 !###
-058
+59
 Volcarona
 Fire
 Bug
@@ -1018,7 +1018,7 @@ Wreckage
 Silver Wind
 !###
 !###
-059
+60
 Wailord
 Water
 ###
@@ -1214,6 +1214,7 @@ Flying
 95
 100
 100
+80
 Regeneration
 Outrage
 1###314
@@ -1236,6 +1237,8 @@ Dark Pulse
 1##1357
 0##3613
 Draco Meteor
+!###
+!###
 072
 Garchomp
 Dragon
