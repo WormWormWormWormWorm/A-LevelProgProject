@@ -8,10 +8,14 @@ namespace ProgrammingProjectTest
 {
     class StartUp
     {
+        UnitTemplateList unitTemplateList;
+        MoveList moveList;
 
         public StartUp()
         {
-            UnitType arrayAnitialiser = new UnitType(""); //initialises static unitType array
+            UnitType arrayInitialiser = new UnitType(""); //initialises static unitType array
+            unitTemplateList = new UnitTemplateList();
+            moveList = new MoveList();
             InitiateGame();
             Console.ReadLine();
 
@@ -64,13 +68,11 @@ namespace ProgrammingProjectTest
 
         public void StarterSelection(Unit[] playerUnits)
         {
-
-
             Console.Clear();
             Menu menu = CreateStarterChoiceMenu();
-            Unit option1 = new Unit("###154");
-            Unit option2 = new Unit("###274");
-            Unit option3 = new Unit("###399");
+            Unit option1 = new Unit(unitTemplateList.Templates[0], moveList);
+            Unit option2 = new Unit(unitTemplateList.Templates[1], moveList);
+            Unit option3 = new Unit(unitTemplateList.Templates[2], moveList);
 
             menu.Draw();
             Console.SetCursorPosition(45, 0);
@@ -90,16 +92,16 @@ namespace ProgrammingProjectTest
             {
                 playerUnits[0] = option1;
             }
-            else if(menu.OptionSelected == 101)
+            else if(menu.OptionSelected == 200)
             {
                 playerUnits[0] = option2;
             }
-            else if (menu.OptionSelected == 102)
+            else if (menu.OptionSelected == 300)
             {
                 playerUnits[0] = option3;
             }
 
-            Game game = new Game(playerUnits,Convert.ToString(menu.OptionSelected));
+            Game game = new Game(playerUnits,menu.OptionSelected-100,unitTemplateList,moveList);
         }
 
         public Menu CreateStarterChoiceMenu()

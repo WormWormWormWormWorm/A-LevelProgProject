@@ -58,48 +58,36 @@ namespace ProgrammingProjectTest
             return indexPos;
         }
 
-        public int TypeMultiplier(string userType,string targetType1,string targetType2)
+        public int EffectivenessCheck(int currentMultiplier, UnitType damageType)
         {
-            //to avoid using doubles multipliers will multiply by the (second digit value)/10 then divide by the first digit value
-            int multiplier = 22;
+            int loopSkip = 0;
 
-            if(targetType1 == immune || targetType2 == immune)
+            if(immune == damageType.Name)
             {
-                return 0;
+                currentMultiplier = 0;
             }
-
-            if(userType == name || userType == name)
+            else
             {
-                multiplier = 32;
-            }
-
-            multiplier = EffectivenessCheck(multiplier, targetType1);
-            multiplier = EffectivenessCheck(multiplier, targetType2);
-            return multiplier;
-
-        }
-
-        public int EffectivenessCheck(int multiplier, string targetType)
-        {
-            int checkForSkip = 0;
-            for (int i = 0; i < effectiveAgainst.Length; i++)
-            {
-                if (targetType == effectiveAgainst[i])
+                for (int i = 0; i < effectiveAgainst.Length;i++)
                 {
-                    multiplier += multiplier - multiplier % 10;
-                    i = effectiveAgainst.Length;
-                    checkForSkip = ineffectiveAgainst.Length;
+                    if(effectiveAgainst[i] == damageType.Name)
+                    {
+                        currentMultiplier *= 2;
+                        i = effectiveAgainst.Length;
+                        loopSkip = ineffectiveAgainst.Length;
+                    }
+                }
+                for(int j = loopSkip; j < ineffectiveAgainst.Length; j++)
+                {
+                    if (ineffectiveAgainst[j] == damageType.Name)
+                    {
+                        currentMultiplier /= 2;
+                        j = ineffectiveAgainst.Length;
+                    }
                 }
             }
-            for (int j = checkForSkip; j < ineffectiveAgainst.Length; j++)
-            {
-                if (targetType == ineffectiveAgainst[j])
-                {
-                    multiplier += multiplier % 10;
-                    j = ineffectiveAgainst.Length;
-                }
-            }
-            return multiplier;
+
+            return currentMultiplier;
         }
 
         public UnitType[] UnitTypes
@@ -132,7 +120,6 @@ namespace ProgrammingProjectTest
 
         public UnitType(string useless)
         {
-            
             //There is a single static array of UnitTypes initialised at the start of the program, all other instances of UnitType will reference back to one of these
 
             //This constructor initialises the static UnitTypes Array

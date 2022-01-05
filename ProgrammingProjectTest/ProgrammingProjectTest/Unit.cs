@@ -7,22 +7,89 @@ using System.IO;
 
 namespace ProgrammingProjectTest
 {
-    class Unit
+    class TemplateUnit
+    {
+        protected int[] baseStats;
+        protected string name;
+        protected string ability;
+        protected UnitType type1;
+        protected UnitType type2;
+        private string[] moveIDs;
+
+        public TemplateUnit()
+        {
+
+        }
+
+        public TemplateUnit(int[] baseStats, string name, string ability, UnitType type1, UnitType type2, string[] moveIDs)
+        {
+            this.baseStats = baseStats;
+            this.name = name;
+            this.ability = ability;
+            this.type1 = type1;
+            this.type2 = type2;
+            this.moveIDs = moveIDs;
+        }
+
+        public int[] BaseStats
+        {
+            get
+            {
+                return baseStats;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        public string Ability
+        {
+            get
+            {
+                return ability;
+            }
+        }
+
+        public UnitType Type1
+        {
+            get
+            {
+                return type1;
+            }
+        }
+
+        public UnitType Type2
+        {
+            get
+            {
+                return type2;
+            }
+        }
+
+        public string[] MoveIDs
+        {
+            get
+            {
+                return moveIDs;
+            }
+        }
+    }
+
+    class Unit : TemplateUnit
     {
         private static Random random = new Random();
 
         protected int plusNature;
         protected int minusNature;
-        protected int[] Stats = new int[5];
-        protected int[] baseStats = new int[6];
+        protected int[] stats = new int[5];
         protected int[] IVS = new int[6];
         protected double[] Modifiers = new double[5];
         
-        protected string templateID;
-        private string name;
-        private string abilitiy;
-        private UnitType type1;
-        private UnitType type2;
         private string status;
 
         private int HP;
@@ -30,34 +97,26 @@ namespace ProgrammingProjectTest
 
         private Moves[] moves = new Moves[4];
 
-
-        public Unit(string templateID)
+        public Unit()
         {
 
+        }
+
+        public Unit(TemplateUnit template, MoveList moveList)
+        {
             plusNature = random.Next(0, 6);
             minusNature = random.Next(0, 6);
 
-            for(int i = 0;i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 IVS[i] = random.Next(0, 32);
             }
 
-            CreateUnit(templateID);
+            CreateUnit(template,moveList); 
 
-            //using (Stream stream = File.Open("C:\\TextFiles\\AlevelProgProject\\Units.txt", FileMode.Open))
-            //{
-            //    PrepareStream(stream, templateID);
-
-            //    using (StreamReader sr = new StreamReader(stream))
-            //    {
-            //        FillBaseValues(sr);                    
-            //    }
-            //}
-
-            //DetermineStats();
         }
 
-        public Unit(string templateID,int forcedIV)
+        public Unit(TemplateUnit template,MoveList moveList,int forcedIV)
         {
             plusNature = 0;
             minusNature = 0;
@@ -67,86 +126,52 @@ namespace ProgrammingProjectTest
                 IVS[i] = forcedIV;
             }
 
-            CreateUnit(templateID);
+            CreateUnit(template, moveList);
+
         }
 
-        public void CreateUnit(string templateID)
-        {
-            using (Stream stream = File.Open("C:\\TextFiles\\AlevelProgProject\\Units.txt", FileMode.Open))
-            {
-                PrepareStream(stream, templateID);
-
-                using (StreamReader sr = new StreamReader(stream))
-                {
-                    FillBaseValues(sr);
-                }
-            }
-
-            DetermineStats();
-        }
-
-        public void PrepareStream(Stream stream, string TemplateID)
-        {
-            int byteCount;
-            int cutoff;
-
-            cutoff = TemplateID.LastIndexOf('#');
-            byteCount = Convert.ToInt32(TemplateID.Substring(cutoff + 1));
-
-            stream.Seek(byteCount, SeekOrigin.Begin);
-        }
-
-        public void FillBaseValues(StreamReader sr)
+        public void CreateUnit(TemplateUnit template,MoveList moveList)
         {
             int randomNum = 0;
             int numOfRandmoves = 0;
-            int moveSlotsRemaining = 4;
-            string moveTempHolder;
-            string[] randomMoveHolder = new string[6];
+            int CurrentAvailableMoveSlot = 0;
+            string CurrentMoveID;
+            string[] bonusMoveIDs = new string[3];
 
 
-            sr.ReadLine();
-            name = sr.ReadLine();
-            type1 = GetType(sr.ReadLine());
-            type2 = GetType(sr.ReadLine());
-            baseStats[5] = Convert.ToInt32(sr.ReadLine()); //HP
-            for (int i = 0; i < 5; i++) //Atk,Def,SpA,SpD,Spe
-            {
-                baseStats[i] = Convert.ToInt32(sr.ReadLine());
-            }
-            abilitiy = sr.ReadLine();
+            name = template.Name;
+            baseStats = template.BaseStats;
+            type1 = template.Type1;
+            type2 = template.Type2;
+            ability = template.Ability;
+
+            DetermineStats();
 
             //determines which moves will always be on the unit and then determines which of the random ones will be in the movepool
-            //ids that do not begin with '!' are always on the unit
+            //ids that do not begin with '!' are always in the unit
             for (int j = 0; j < 6; j++)
             {
-                moveTempHolder = sr.ReadLine();
-                if (!moveTempHolder.EndsWith("#"))
+                CurrentMoveID = template.MoveIDs[j];
+                if (!CurrentMoveID.EndsWith("#"))
                 {
-                    if (moveTempHolder[0] == '!')
+                    if (CurrentMoveID[0] == '!')
                     {
-                        randomMoveHolder[numOfRandmoves] = moveTempHolder;
+                        bonusMoveIDs[numOfRandmoves] = CurrentMoveID;
                         numOfRandmoves++;
                     }
                     else
                     {
-                        DetermineMoveCategory(moveTempHolder,4 - moveSlotsRemaining);
-                        moveSlotsRemaining--;
+                        moves[CurrentAvailableMoveSlot] = moveList.AllMoves[Convert.ToInt32(CurrentMoveID)];
+                        CurrentAvailableMoveSlot++;
                     }
                 }
             }
-            while (moveSlotsRemaining != 0)
+            if(CurrentAvailableMoveSlot == 3)//fills last slot with a random one of the bonus moves if it's empty
             {
-                //randomly decides which move to put in available move slot
-                //after this reorganises randomMoveHolder to swap the move chosen with the Move with the highest slot in the array in use and then removes chosen move and decides again if necessary
                 randomNum = random.Next(0, numOfRandmoves);
-                moveTempHolder = randomMoveHolder[numOfRandmoves - 1];
-                randomMoveHolder[numOfRandmoves - 1] = randomMoveHolder[randomNum];
-                randomMoveHolder[randomNum] = moveTempHolder;
-                DetermineMoveCategory(randomMoveHolder[numOfRandmoves - 1].Substring(1), 4-moveSlotsRemaining);
-                moveSlotsRemaining--;
-                numOfRandmoves--;
+                moves[CurrentAvailableMoveSlot] = moveList.AllMoves[Convert.ToInt32(bonusMoveIDs[randomNum].Substring(1))];
             }
+            
         }
 
         public UnitType GetType(string typeName)
@@ -154,17 +179,6 @@ namespace ProgrammingProjectTest
             UnitType type = new UnitType();
             type = type.UnitTypes[type.DetermineType(typeName)];
             return type;
-        }
-
-        public void DetermineMoveCategory(string moveID, int slot) //subclass of moves dependant on first char of ID
-        {
-           
-            switch (moveID[0])
-            {
-                case '0': moves[slot] = new TriggerMoves(moveID);break;
-                case '1': moves[slot] = new DamageMoves(moveID); break;
-                case '2': moves[slot] = new StatusMoves(moveID); break;
-            }
         }
 
         public void DetermineStats()
@@ -185,21 +199,34 @@ namespace ProgrammingProjectTest
                 {
                     numTomultiplyBy -= 1;
                 }
-                Stats[i] = ((((2 * baseStats[i] + IVS[i]) / 2) + 5) * numTomultiplyBy) / 10;
+                stats[i] = ((((2 * baseStats[i] + IVS[i]) / 2) + 5) * numTomultiplyBy) / 10;
                 numTomultiplyBy = 10;
 
             }
-            HP = ((2 * baseStats[5] * IVS[5]) / 2) + 60;
+            HP = ((2 * baseStats[5] + IVS[5]) / 2) + 60;
+        }
+
+        public void ChangeMove(int slot,Moves move)
+        {
+            moves[slot] = move;
         }
 
         public void ShortPrint(int startX,int startY)
         {
             //this writes out a large amount of info, most code here is to format it in the way I want
 
-            //nameColor getter sets the foreground color to type display color then returns the type name, colorbreak getter changes the color back to default and returns an empty string
-            //manual cursor moving allows this to be printed at a non-zero column and format correctly
             InitialFormat(startX,startY);
-            startY += 5;
+
+            startY += 2;
+            Console.SetCursorPosition(startX + 3, startY);
+            Console.Write("HP " + baseStats[5] + GetSpaceBlock(6 - Convert.ToString(baseStats[5]).Length) + "|  ATK " + baseStats[0] + GetSpaceBlock(6 - Convert.ToString(baseStats[0]).Length) + "|  Def " + baseStats[1]);
+            startY += 1;
+            Console.SetCursorPosition(startX + 1, startY);
+            Console.Write("Speed " + baseStats[4] + GetSpaceBlock(5 - Convert.ToString(baseStats[4]).Length) + "| Sp Atk " + baseStats[2] + GetSpaceBlock(4 - Convert.ToString(baseStats[2]).Length) + "| Sp Def " + baseStats[3]);
+            startY += 2;
+            Console.SetCursorPosition(startX, startY);
+            Console.Write("Moves:");
+
             startX += 1;
             for(int i = 0; i < 4; i++)
             {
@@ -209,15 +236,26 @@ namespace ProgrammingProjectTest
                 PrintColoredString(moves[i].MoveType.Name, moves[i].MoveType.DisplayColor);
             }
             Console.SetCursorPosition(startX , startY + 2);
-            Console.Write("Ability: " + abilitiy);
+            Console.Write("Ability: " + Ability);
         }
 
         public void InspectPrint(int startX,int startY)
         {
             InitialFormat(startX, startY);
-            Console.SetCursorPosition(startX, startY + 5);
+
+            startY += 2;
+            Console.SetCursorPosition(startX + 3, startY);
+            Console.Write("HP " + HP + GetSpaceBlock(6 - Convert.ToString(HP).Length) + "|  ATK " + stats[0] + GetSpaceBlock(6 - Convert.ToString(stats[0]).Length) + "|  Def " + stats[1]);
+            startY += 1;
+            Console.SetCursorPosition(startX + 1, startY);
+            Console.Write("Speed " + stats[4] + GetSpaceBlock(5 - Convert.ToString(stats[4]).Length) + "| Sp Atk " + stats[2] + GetSpaceBlock(4 - Convert.ToString(stats[2]).Length) + "| Sp Def " + stats[3]);
+            startY += 2;
+            Console.SetCursorPosition(startX, startY);
+            Console.Write("Moves:");
+
+            Console.SetCursorPosition(startX, startY);
             startX += 1;
-            startY += 6;
+            startY += 1;
             for(int i = 0;i < 4; i++)
             {
                 moves[i].LongPrint(startX, startY);
@@ -232,17 +270,19 @@ namespace ProgrammingProjectTest
             PrintColoredString(type1.Name, type1.DisplayColor);
             Console.Write("/");
             PrintColoredString(type2.Name, type2.DisplayColor);
-            startY += 2;
-            Console.SetCursorPosition(startX + 3, startY);
-            Console.Write("HP " + baseStats[5] + GetSpaceBlock(6 - Convert.ToString(baseStats[5]).Length) + "|  ATK " + baseStats[1] + GetSpaceBlock(6 - Convert.ToString(baseStats[1]).Length) + "|  Def " + baseStats[2]);
-            startY += 1;
-            Console.SetCursorPosition(startX + 1, startY);
-            Console.Write("Speed " + baseStats[4] + GetSpaceBlock(5 - Convert.ToString(baseStats[4]).Length) + "| Sp Atk " + baseStats[2] + GetSpaceBlock(4 - Convert.ToString(baseStats[2]).Length) + "| Sp Def " + baseStats[3]);
-            startY += 2;
-            Console.SetCursorPosition(startX, startY);
-            Console.Write("Moves:");
-            startX += 1;
+            //startY += 2;
+            //Console.SetCursorPosition(startX + 3, startY);
+            //Console.Write("HP " + baseStats[5] + GetSpaceBlock(6 - Convert.ToString(baseStats[5]).Length) + "|  ATK " + baseStats[1] + GetSpaceBlock(6 - Convert.ToString(baseStats[1]).Length) + "|  Def " + baseStats[2]);
+            //startY += 1;
+            //Console.SetCursorPosition(startX + 1, startY);
+            //Console.Write("Speed " + baseStats[4] + GetSpaceBlock(5 - Convert.ToString(baseStats[4]).Length) + "| Sp Atk " + baseStats[2] + GetSpaceBlock(4 - Convert.ToString(baseStats[2]).Length) + "| Sp Def " + baseStats[3]);
+            //startY += 2;
+            //Console.SetCursorPosition(startX, startY);
+            //Console.Write("Moves:");
+            //startX += 1;
         }
+
+
 
         public string GetSpaceBlock(int numOfSpaces)//returns string made up of spaces the the length of numOfSpaces
         {
@@ -332,11 +372,19 @@ namespace ProgrammingProjectTest
         {
             get
             {
-                return abilitiy;
+                return ability;
             }
             set
             {
-                abilitiy = value;
+                ability = value;
+            }
+        }
+
+        public int[] Stats
+        {
+            get
+            {
+                return stats;
             }
         }
 

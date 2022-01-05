@@ -11,125 +11,69 @@ namespace ProgrammingProjectTest
     {
         private Unit[] PlayerUnits;
         private int numOfUnitsOwned = 0;
-        private string currentFight;
+        private int currentFight;
         private Unit[] enemyTeam;
+        UnitTemplateList unitTemplateList;
+        MoveList moveList;
+        ProgressionInfo progressionInfo;
 
-        public Game(Unit[] playerUnits, string currentFight)
+        public Game(Unit[] playerUnits, int currentFight,UnitTemplateList unitTemplateList,MoveList moveList)
         {
 
             this.PlayerUnits = playerUnits;
             this.currentFight = currentFight;
+            this.unitTemplateList = unitTemplateList;
+            this.moveList = moveList;
+            progressionInfo = new ProgressionInfo(unitTemplateList, moveList);
             numOfUnitsOwned = 1;
 
             GameLoop(false);
 
         }
 
-        public Game(Unit[] PlayerUnits,int numOfUnitsOwned, string currentFight)
+        public Game(Unit[] PlayerUnits,int numOfUnitsOwned, int currentFight,UnitTemplateList unitTemplateList, MoveList moveList)
         {
             this.PlayerUnits = PlayerUnits;
             this.numOfUnitsOwned = numOfUnitsOwned;
             this.currentFight = currentFight;
+            this.unitTemplateList = unitTemplateList;
+            this.moveList = moveList;
+            progressionInfo = new ProgressionInfo(unitTemplateList, moveList);
 
             GameLoop(true);
         }
 
         public void GameLoop(bool encounterCollected)
         {
-            string[] encounterPool;
 
-
-            using (StreamReader sr = new StreamReader("C:\\TextFiles\\AlevelProgProject\\CurrentProgression.txt"))
+            if (encounterCollected == false)
             {
-                encounterPool = FindEncounterInfo(encounterCollected, sr);
-                if(encounterCollected == false)
-                {
-                    GetNextUnit(encounterPool);
-                }
-                enemyTeam = GetEnemyTeam(sr);
-                Console.Clear();
+                GetNextUnit();
             }
-            Prefight();
-
-        }
-
-        public string[] FindEncounterInfo(bool EncounterCollected, StreamReader sr)
-        {
-
-            //this searches CurrentProgression.txt for CurrentFight then and pulls the encounterPool size then does sr.readline for that many times entering the result into encounter pool if EncounterCollected false
-
-            //EncounterCollected True is used to go straight to enemyTeam info without gathering an encounter pool in the case of a save being loaded and the encounter has already been collected
-            string[] encounterPool;
-            int encounterPoolSize;
-            SrFind(currentFight, sr);
-            encounterPoolSize = Convert.ToInt32(sr.ReadLine());
-            encounterPool = new string[encounterPoolSize];
-            if (EncounterCollected == false)
-            {
-                for (int i = 0; i < encounterPoolSize; i++)
-                {
-                    encounterPool[i] = sr.ReadLine();
-                }
-            }
-            else
-            {
-                for (int i = 0; i < encounterPoolSize; i++)
-                {
-                    sr.ReadLine();
-                }
-            }
-            return encounterPool;
-        }
-
-        public void GetNextUnit(string[] encounterPool)
-        {
+            enemyTeam = progressionInfo.GetEnemyTeam(currentFight);
             Console.Clear();
+            Prefight();
+        }
+
+        public void GetNextUnit()
+        {
+            TemplateUnit[] encounterPool = progressionInfo.GetEncounterPools(currentFight);
+            int[] encounterChance = progressionInfo.GetEncounterPercentages(currentFight);
+
             Random randInt = new Random();
             int choice = randInt.Next(1, 101);
             int aboveCheck = 100;
-            int ChanceOfEncounter;
             for(int i = 0;i < encounterPool.Length; i++)
             {
-                ChanceOfEncounter = Convert.ToInt32(encounterPool[i].Substring(0,2));
-                aboveCheck -= ChanceOfEncounter;
+                aboveCheck -= encounterChance[i];
                 if(choice > aboveCheck)
                 {
-                    PlayerUnits[numOfUnitsOwned] = new Unit(encounterPool[i]);
+                    PlayerUnits[numOfUnitsOwned] = new Unit(encounterPool[i],moveList);
                     i = encounterPool.Length;                    
                 }
             }
             PlayerUnits[numOfUnitsOwned].ShortPrint(0, 0);
             numOfUnitsOwned += 1;
-        }
-
-        public Unit[] GetEnemyTeam(StreamReader sr)
-        {
-            int enemyIVS;
-            string pulledInfoStore;
-            Unit[] enemyTeam = new Unit[6];
-            int unitsInTeam = Convert.ToInt32(sr.ReadLine());
-
-            for (int i = 0; i < unitsInTeam; i++)
-            {
-                enemyIVS = Convert.ToInt32(sr.ReadLine());
-                enemyTeam[i] = new Unit(sr.ReadLine(), enemyIVS);//this pulls enemy unitIDs from CurrentProgression.txt and fill the enemyTeam array with them
-
-                for (int k = 0; k < 4; k++)//this determines if any moves need to be swapped from the default set of this unit
-                {
-                    pulledInfoStore = sr.ReadLine();
-                    if (pulledInfoStore != "#")
-                    {
-                        enemyTeam[i].DetermineMoveCategory(pulledInfoStore, k);
-                    }
-                }
-                pulledInfoStore = sr.ReadLine();
-                if(pulledInfoStore != "#")//this determines whether ability needs to be replaced
-                {
-                    enemyTeam[i].Ability = pulledInfoStore;
-                }
-            }
-
-            return enemyTeam;
         }
 
         public void SrFind(string toFind, StreamReader sr)
@@ -140,24 +84,42 @@ namespace ProgrammingProjectTest
         public void Prefight()
         {
             Menu menu;
-            PlayerUnits[2] = new Unit("##1017");
-            PlayerUnits[3] = new Unit("##1017");
-            PlayerUnits[4] = new Unit("##1017");
-            PlayerUnits[5] = new Unit("###897");
+            PlayerUnits[2] = new Unit(unitTemplateList.Templates[3], moveList);
+            PlayerUnits[3] = new Unit(unitTemplateList.Templates[4], moveList);
+            PlayerUnits[4] = new Unit(unitTemplateList.Templates[5], moveList);
+            PlayerUnits[5] = new Unit(unitTemplateList.Templates[6], moveList);
+            PlayerUnits[6] = new Unit(unitTemplateList.Templates[6], moveList);
             PrintTeam(1, 2, "Player", PlayerUnits);
             PrintTeam(61, 2, "Enemy", enemyTeam);
 
             menu = CreatePrefightMenu();
             menu.Draw();
             menu.SetPointer(0, 0);
-            while (menu.OptionSelected != 104)
+            while (menu.OptionSelected != 500)
             {
                 menu.GetInput();
                 switch (menu.OptionSelected)
                 {
-                    case 100: Console.Clear(); break;
-                    case 101: Inspect(true) ;break;
+                    case 100: ChangeTeam();
+                        Console.Clear();
+                        PrintTeam(1, 2, "Player", PlayerUnits);
+                        PrintTeam(61, 2, "Enemy", enemyTeam);
+                        menu.Draw();
+                        menu.Highlight();
+                        break;
+
+                    case 200: Inspect(true) ;
+                        Console.Clear();
+                        PrintTeam(1, 2, "Player", PlayerUnits);
+                        PrintTeam(61, 2, "Enemy", enemyTeam);
+                        menu.Draw();
+                        menu.Highlight();
+                        break;
+
+                    case 300: InspectMatchup();
+                        break;
                 }
+                menu.OptionSelected = -1;
             }
 
         }
@@ -167,8 +129,8 @@ namespace ProgrammingProjectTest
             Console.SetCursorPosition(X+15, Y);
             Console.Write(ownerName + "'s Team:");
             Console.SetCursorPosition(X, Y + 1);
-            Console.Write("----------------------------------------------------------");
-            Y+=2;
+            Console.Write("==========================================================");
+            Y +=2;
             for(int i = 0;i < 6; i++)
             {
                 if(team[i] != null)
@@ -183,15 +145,194 @@ namespace ProgrammingProjectTest
                 Y += 4;
             }
             Console.SetCursorPosition(X, Y-1);
-            Console.Write("----------------------------------------------------------");
+            Console.Write("==========================================================");
         }
 
         public void Inspect(bool inFight)
         {
-            Menu menu = CreatefullInspectMenu();
+            Menu menu;
             Console.Clear();
 
+            Console.SetCursorPosition(15, 1);
+            Console.Write("Player Units:");
+            Console.SetCursorPosition(15, 15);
+            Console.Write("Enemy Units:");
+
+            menu = CreatefullInspectMenu();
             menu.Draw();
+            menu.SetPointer(0, 0);
+
+            while(menu.OptionSelected != 108)
+            {
+                if(menu.PointerY != 8)
+                {
+                    if(menu.PointerY > 5)
+                    {
+                        enemyTeam[menu.PointerX + (menu.PointerY-6)*3].InspectPrint(70,3);
+                    }
+                    else
+                    {
+                        PlayerUnits[menu.PointerX + (menu.PointerY) * 3].InspectPrint(70, 3);
+                    }
+                }
+                menu.GetInput();
+                ClearScreenArea(70, 3, 37, 25);
+            }
+        }
+
+        public void ChangeTeam()
+        {
+            Menu menu;
+            Menu subMenu;
+
+            Unit temporaryStorage;
+            int xPointer;
+            int yPointer;
+            int swapUnitIndex1;
+            int swapUnitIndex2;
+            bool fixHighlight = false;
+
+            Console.Clear();
+            TeamChangeHeaders();
+
+            menu = CreateTeamSwapMenu();
+
+            //creates sub menu from first 6 members of playerUnits
+            int Y = 5;
+            string[,] display = new string[4, 2];
+            int[,,] coOrds = new int[4, 2, 2];
+            MenuCoOrds3Wide(coOrds, ref Y, 15, 0, 6);
+            FillDisplayFromUnitArray(PlayerUnits, 0, 6, display, 0);
+            
+            display[3, 0] = "BACK";
+            display[3, 1] = "-";
+            coOrds[3, 0, 0] = 6;
+            coOrds[3, 0, 1] = 5;
+            subMenu = new Menu(display, coOrds);
+            //
+
+            menu.Draw();
+            subMenu.SetPointer(0, 0);
+            while(subMenu.OptionSelected != 400)
+            {
+                if (subMenu.PointerX != 4)
+                {
+                    PlayerUnits[subMenu.PointerX + (subMenu.PointerY) * 3].InspectPrint(70, 3);
+                }
+                subMenu.GetInput();
+
+                if(subMenu.OptionSelected != 400 && subMenu.OptionSelected != -1)
+                {
+                    
+                    xPointer = subMenu.PointerX;
+                    yPointer = subMenu.PointerY;
+
+                    //highlights team member to swap in red, this is to distinguish it from the cursor
+                    Highlight(display[xPointer, yPointer], coOrds[xPointer, yPointer, 0], coOrds[xPointer, yPointer, 1]);
+
+                    //stores unit to swap
+                    swapUnitIndex1 = ((yPointer) * 3) + xPointer;
+                    temporaryStorage = PlayerUnits[swapUnitIndex1];
+
+                    ClearScreenArea(70, 3, 37, 25);
+                    Console.SetCursorPosition(15, 1);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("Select the unit you want to swap it with              ");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+
+                    menu.SetPointer(3, 0);
+                    while(menu.OptionSelected == -1)
+                    {
+                        //prints unit info of unit at pointer
+                        if (menu.PointerX != 4)
+                        {
+                            PlayerUnits[menu.PointerX + (menu.PointerY) * 3].InspectPrint(70, 3);
+                        }
+
+                        //checks if cursor is on unit to swap
+                        if (menu.PointerX == xPointer && menu.PointerY == yPointer)
+                        {
+                            fixHighlight = true;
+                        }
+
+                        menu.GetInput();
+
+                        //re-highlights unit to swap when cursor is move off of it
+                        if(menu.OptionSelected == -1 && fixHighlight)
+                        {
+                            Highlight(display[xPointer, yPointer], coOrds[xPointer, yPointer, 0], coOrds[xPointer, yPointer, 1]);
+                            fixHighlight = false;
+                        }
+
+                        ClearScreenArea(70, 3, 37, 25);
+
+                    }
+
+                    if(menu.OptionSelected != 400)
+                    {
+                        //takes the index of the 2nd unit to swap the swaps their positions in the playerUnit array
+                        swapUnitIndex2 = (menu.PointerY * 3) + menu.PointerX;
+                        PlayerUnits[swapUnitIndex1] = PlayerUnits[swapUnitIndex2];
+                        PlayerUnits[swapUnitIndex2] = temporaryStorage;
+
+                        //swaps the display strings to match with the swapped units and then updates the subMenu to match
+                        menu.Display[xPointer, yPointer] = menu.Display[menu.PointerX, menu.PointerY];
+                        menu.Display[menu.PointerX, menu.PointerY] = subMenu.Display[xPointer, yPointer];
+                        subMenu.Display[xPointer, yPointer] = menu.Display[xPointer, yPointer];
+                        if(swapUnitIndex2 <= 5)
+                        {
+                            subMenu.Display[menu.PointerX, menu.PointerY] = menu.Display[menu.PointerX, menu.PointerY];
+                        }
+                    }
+
+                    //draws updated GUI
+                    Console.Clear();
+                    TeamChangeHeaders();
+                    menu.Draw();
+                    subMenu.Highlight();
+
+
+                    menu.OptionSelected = -1;
+                    subMenu.OptionSelected = -1;
+                }
+                ClearScreenArea(70, 3, 37, 25);
+            }
+
+        }
+
+        public void InspectMatchup()
+        {
+            Menu teamMenu = new Menu();
+            Menu enemyMenu = new Menu();
+
+            Console.Clear();
+
+            CreateMatchupInspectMenu(ref teamMenu,ref enemyMenu);
+
+            teamMenu.Draw();
+            enemyMenu.Draw();
+
+            while(1 == 1)
+            {
+                teamMenu.GetInput();
+            }
+
+        }
+
+        public void ClearScreenArea(int startX,int startY,int sizeX,int sizeY)
+        {
+            string spaceBlock = "";
+            for (int k = 0; k < sizeX; k++)
+            {
+                spaceBlock += " ";
+            }
+            //this is a console.clear() limited to a certain area to fix harsh flashing visuals of refreshing entire screen repeatedly
+            for (int i = 0;i < sizeY; i++)
+            {
+                Console.SetCursorPosition(startX, startY);
+                Console.Write(spaceBlock);
+                startY++;
+            }
 
         }
 
@@ -222,37 +363,138 @@ namespace ProgrammingProjectTest
         public Menu CreatefullInspectMenu()
         {
             Menu menu;
-            string[,] display = new string[8, 3];
-            int[,,] coOrds = new int[8, 3, 2];
-            int Y = 3;
-            for(int i = 0; i < 18; i += 1)
-            {
-                if(PlayerUnits[i] != null)
-                {
-                    display[i / 3, 0] = PlayerUnits[i].Name;
-                }
-                coOrds[i / 3, 0, 0] = 1;
-                coOrds[i / 3, 0, 1] = Y;
-                i++;
-                if (PlayerUnits[i] != null)
-                {
-                    display[i / 3, 1] = PlayerUnits[i].Name;
-                }
-                coOrds[i / 3, 1, 0] = 14;
-                coOrds[i / 3, 1, 1] = Y;
-                i++;
-                if (PlayerUnits[i] != null)
-                {
-                    display[i / 3, 2] = PlayerUnits[i].Name;
-                }
-                coOrds[i / 3, 2, 0] = 27;
-                coOrds[i / 3, 2, 1] = Y;
-                Y += 2;
-            }
 
+            string[,] display = new string[3,9];
+            int[,,] coOrds = new int[3,9, 2];
+            int Y;
+            Y = 3;
+            MenuCoOrds3Wide(coOrds, ref Y, 15,0,18);
+            Y += 2;
+            MenuCoOrds3Wide(coOrds, ref Y, 15,18,27 );
+            FillDisplayFromUnitArray(PlayerUnits,0,18,display,0);
+            FillDisplayFromUnitArray(enemyTeam,0,6,display,18); 
+            display[0,8] = "BACK";
+            display[1, 8] = "-";
+            display[2, 8] = "-";
             menu = new Menu(display, coOrds);
 
             return menu;
+        }
+
+        public Menu CreateTeamSwapMenu()//should return menu
+        {
+            Menu menu;
+            int Y = 5;
+
+            string[,] display = new string[4,6];
+            int[,,] coOrds = new int[4,6, 2];
+
+            MenuCoOrds3Wide(coOrds,ref Y,15,0,6);
+            Y += 4;
+            MenuCoOrds3Wide(coOrds,ref Y,15,6,18);
+
+            FillDisplayFromUnitArray(PlayerUnits,0,18,display,0);
+            display[3, 0] = "BACK";
+            coOrds[3, 0, 0] = 6;
+            coOrds[3, 0, 1] = 5;
+            for(int i = 1;i < coOrds.GetLength(1); i++)
+            {
+                display[3, i] = "-";
+            }
+
+            menu = new Menu(display,coOrds);
+            return menu;
+        }
+
+        public void CreateMatchupInspectMenu(ref Menu teamMenu,ref Menu enemyMenu)
+        {
+            int y;
+
+            int[,,] teamCoOrds = new int[4, 2, 2];
+            string[,] teamDisplay = new string[4, 2];
+            int[,,] enemyCoOrds = new int[4, 2, 2];
+            string[,] enemyDisplay = new string[4, 2];
+
+            y = 26;
+            MenuCoOrds3Wide(teamCoOrds,ref y, 13, 0, 6);
+            y = 26;
+            MenuCoOrds3Wide(enemyCoOrds, ref y, 64, 0, 6);
+
+            FillDisplayFromUnitArray(PlayerUnits, 0, 6, teamDisplay, 0);
+            FillDisplayFromUnitArray(enemyTeam, 0, 6, enemyDisplay, 0);
+            teamDisplay[3, 0] = "BACK";
+            teamCoOrds[3, 0, 0] = 55;
+            teamCoOrds[3, 0, 1] = 26;
+            enemyDisplay[3, 0] = "BACK";
+            enemyCoOrds[3, 0, 0] = 55;
+            enemyCoOrds[3, 0, 1] = 26;
+
+            teamDisplay[3, 1] = "-";
+            enemyDisplay[3, 1] = "-";
+
+            teamMenu = new Menu(teamDisplay, teamCoOrds);
+            enemyMenu = new Menu(enemyDisplay, enemyCoOrds);
+        }
+
+        public void MenuCoOrds3Wide(int[,,] coOrds,ref int Y,int startX,int start, int end)
+        {
+
+            for(int k = start;k < end; k++)
+            {
+                coOrds[0, k / 3, 0] = startX;
+                coOrds[0, k / 3, 1] = Y;
+                k++;
+                coOrds[1, k / 3, 0] = startX + 14;
+                coOrds[1, k / 3, 1] = Y;
+                k++;
+                coOrds[2, k / 3, 0] = startX + 28;
+                coOrds[2, k / 3, 1] = Y;
+                Y += 2;
+            }
+        }
+
+        public void FillDisplayFromUnitArray(Unit[] arrayUsed,int startPoint, int endPoint, string[,] display, int iDisplacement )
+        {
+            for(int i = startPoint; i < endPoint; i++)
+            {
+                if(arrayUsed[i] != null)
+                {
+                    display[0, (i+iDisplacement)/3] = arrayUsed[i].Name;
+                }
+                i++;
+                if (arrayUsed[i] != null)
+                {
+                    display[1,(i+iDisplacement)/3] = arrayUsed[i].Name;
+                }
+                i++;
+                if (arrayUsed[i] != null)
+                {
+                    display[2,(i+iDisplacement)/3] = arrayUsed[i].Name;
+                }
+            }
+        }
+
+        public void TeamChangeHeaders()
+        {
+            Console.SetCursorPosition(15, 1);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Select which member of the team you would like to swap");
+            Console.SetCursorPosition(15, 3);
+            Console.Write("Current Team:");
+            Console.SetCursorPosition(15, 9);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("Other Available Units:");
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        public void Highlight(string displayString, int xCoOrd, int yCoOrd)
+        {
+            Console.SetCursorPosition(xCoOrd,yCoOrd);
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write(displayString);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
     }
