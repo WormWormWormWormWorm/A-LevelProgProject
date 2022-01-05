@@ -315,6 +315,8 @@ namespace ProgrammingProjectTest
             while(1 == 1)
             {
                 teamMenu.GetInput();
+                PlayerUnits[0].MatchupInspectPrint(0,0,enemyTeam[0]);
+                enemyTeam[0].MatchupInspectPrint(60, 0, PlayerUnits[0]);
             }
 
         }

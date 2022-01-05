@@ -32,6 +32,8 @@ namespace ProgrammingProjectTest
                 {
                     while (!sr.EndOfStream)
                     {
+                        baseStats = new int[6];
+
                         sr.ReadLine();
                         name = sr.ReadLine();
                         type1 = type1.UnitTypes[type1.DetermineType(sr.ReadLine())];//type1 is being used to access the

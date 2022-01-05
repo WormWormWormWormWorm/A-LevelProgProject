@@ -58,7 +58,7 @@ namespace ProgrammingProjectTest
             return indexPos;
         }
 
-        public int EffectivenessCheck(int currentMultiplier, UnitType damageType)
+        public double EffectivenessCheck(double currentMultiplier, UnitType damageType)
         {
             int loopSkip = 0;
 

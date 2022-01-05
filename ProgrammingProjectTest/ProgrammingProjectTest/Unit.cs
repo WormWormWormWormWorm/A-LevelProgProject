@@ -92,7 +92,7 @@ namespace ProgrammingProjectTest
         
         private string status;
 
-        private int HP;
+        private int hp;
         private int CurrentHP;
 
         private Moves[] moves = new Moves[4];
@@ -203,7 +203,7 @@ namespace ProgrammingProjectTest
                 numTomultiplyBy = 10;
 
             }
-            HP = ((2 * baseStats[5] + IVS[5]) / 2) + 60;
+            hp = ((2 * baseStats[5] + IVS[5]) / 2) + 60;
         }
 
         public void ChangeMove(int slot,Moves move)
@@ -245,7 +245,7 @@ namespace ProgrammingProjectTest
 
             startY += 2;
             Console.SetCursorPosition(startX + 3, startY);
-            Console.Write("HP " + HP + GetSpaceBlock(6 - Convert.ToString(HP).Length) + "|  ATK " + stats[0] + GetSpaceBlock(6 - Convert.ToString(stats[0]).Length) + "|  Def " + stats[1]);
+            Console.Write("HP " + hp + GetSpaceBlock(6 - Convert.ToString(hp).Length) + "|  ATK " + stats[0] + GetSpaceBlock(6 - Convert.ToString(stats[0]).Length) + "|  Def " + stats[1]);
             startY += 1;
             Console.SetCursorPosition(startX + 1, startY);
             Console.Write("Speed " + stats[4] + GetSpaceBlock(5 - Convert.ToString(stats[4]).Length) + "| Sp Atk " + stats[2] + GetSpaceBlock(4 - Convert.ToString(stats[2]).Length) + "| Sp Def " + stats[3]);
@@ -314,6 +314,27 @@ namespace ProgrammingProjectTest
 
             Console.SetCursorPosition(X + 14, Y + 2);
             PrintColoredString(moves[3].Name, moves[3].MoveType.DisplayColor);
+        }
+
+        public void MatchupInspectPrint(int startX,int startY,Unit target)
+        {
+            InitialFormat(startX, startY);
+
+            startY += 1;
+            Console.SetCursorPosition(startX + 3, startY);
+            Console.Write("HP " + hp + GetSpaceBlock(6 - Convert.ToString(hp).Length) + "|  ATK " + stats[0] + GetSpaceBlock(6 - Convert.ToString(stats[0]).Length) + "|  Def " + stats[1]);
+            startY += 1;
+            Console.SetCursorPosition(startX + 1, startY);
+            Console.Write("Speed " + stats[4] + GetSpaceBlock(5 - Convert.ToString(stats[4]).Length) + "| Sp Atk " + stats[2] + GetSpaceBlock(4 - Convert.ToString(stats[2]).Length) + "| Sp Def " + stats[3]);
+            startY += 1;
+            Console.SetCursorPosition(startX, startY);
+            Console.Write("Moves:");
+            startY += 1;
+            moves[0].MatchupPrint(startX, startY, this, target);
+            moves[1].MatchupPrint(startX, startY + 5, this, target);
+            moves[2].MatchupPrint(startX, startY + 10, this, target);
+            moves[3].MatchupPrint(startX, startY + 15, this, target);
+
         }
 
         public void PrintColoredString(string stringWrite,ConsoleColor color)
@@ -385,6 +406,14 @@ namespace ProgrammingProjectTest
             get
             {
                 return stats;
+            }
+        }
+
+        public int Hp
+        {
+            get
+            {
+                return hp;
             }
         }
 

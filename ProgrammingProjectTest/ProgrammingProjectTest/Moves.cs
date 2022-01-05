@@ -24,7 +24,7 @@ namespace ProgrammingProjectTest
 
         public abstract void LongPrint(int startX,int startY);
 
-        public abstract void MatchupPrint(); 
+        public abstract void MatchupPrint(int startX,int startY,Unit user,Unit target); 
 
         public void PrepareStream(Stream stream, string TemplateID)
         {
@@ -121,15 +121,18 @@ namespace ProgrammingProjectTest
             priorityLevel = Convert.ToInt32(sr.ReadLine());
         }
 
-        public int DamageCalculation(Unit user,Unit target,int randomMultiplier)
+        public int DamageCalculation(Unit user,Unit target,double randomMultiplier)
         {
-            int damage;
-            int typeMultiplier = 4;
+            int finalDamage;
+            double tempDamage;
+            double typeMultiplier = 1;
+            //currently written to crash program if damage category is not phys or spec
             int defenseUsed = 0;
             int attackUsed = 1;
-            int sameTypeAttackBonus = 2;
+            double sameTypeAttackBonus = 1;
 
-
+            //gets attack of user and defense of target
+            //detemines damage category then uses attack/def for physical and special attac/def for special
             if(damageCategory == "Physical")
             {
                 defenseUsed = target.Stats[1];
@@ -142,21 +145,44 @@ namespace ProgrammingProjectTest
             }
 
             //checks both of the targets unitTypes and returns effectiveness
-            typeMultiplier = target.Type1.EffectivenessCheck(typeMultiplier, moveType);
+            typeMultiplier = moveType.EffectivenessCheck(typeMultiplier, target.Type1);
             if(typeMultiplier != 0)
             {
-                typeMultiplier = target.Type2.EffectivenessCheck(typeMultiplier, MoveType);
+                typeMultiplier = moveType.EffectivenessCheck(typeMultiplier, target.Type2);
             }
 
+            //checks if attack unitType matches the user unitType, then gives roughly a 1.5 
             if(moveType == user.Type1 || moveType == user.Type2)
             {
-                sameTypeAttackBonus = 3;
+                sameTypeAttackBonus = 1.5;
             }
             
+            //damage calculation
+            tempDamage = (((22 * basePower * attackUsed / defenseUsed) / 50 + 2) *typeMultiplier) * sameTypeAttackBonus * randomMultiplier;
 
-            damage = (((22 * basePower * attackUsed / defenseUsed) / 50 + 2) / 4 * typeMultiplier) * sameTypeAttackBonus /2;
+            //damage will almost never reach 1000 but would break ui formatting
+            if(tempDamage > 999)
+            {
+                tempDamage = 999;
+            }
 
-            return damage;
+            finalDamage = Convert.ToInt32(tempDamage);
+
+            return finalDamage;
+        }
+
+        public double DamagePercent(int damage,Unit target)
+        {
+            double damagePercentage;
+            double remainder;
+
+            damagePercentage = (damage / target.Hp)*100;
+
+            //truncates num to 1d.p
+            remainder = damagePercentage % 0.1;
+            damagePercentage -= remainder;
+
+            return damagePercentage;
         }
 
         public override void Use(Unit Target,Unit User)
@@ -191,9 +217,24 @@ namespace ProgrammingProjectTest
             return ("Name " + moveName + " type " + moveType.Name + " Accuracy " + moveAccuracy + " bp " + basePower + " category " + damageCategory + " recPerc " + recoilPercent + " priority " + priorityLevel);
         }
 
-        public override void MatchupPrint()
+        public override void MatchupPrint(int startX,int startY,Unit user,Unit target)
         {
-            
+            int maxDamage = DamageCalculation(user, target, 1);
+            int minDamage = DamageCalculation(user, target, 0.85);
+
+            double maxDamagePercentage = DamagePercent(maxDamage,target);
+            double minDamagePercentage = DamagePercent(minDamage, target);
+
+            Console.SetCursorPosition(startX, startY);
+            Console.Write(moveName + " ");
+            Console.ForegroundColor = moveType.DisplayColor;
+            Console.Write(moveType.Name);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(" accuracy " + moveAccuracy + "%");
+            Console.SetCursorPosition(startX, startY + 1);
+            Console.Write("Damage: num(" + minDamage + "-" + maxDamage + "), Perc(" + minDamagePercentage + "%-" + maxDamagePercentage + "%)");
+            Console.SetCursorPosition(startX, startY + 2);
+            Console.Write("Recoil: " + recoilPercent + "% Priority level: " + priorityLevel);
         }
 
     }
@@ -254,6 +295,8 @@ namespace ProgrammingProjectTest
             return (base.ToString() + " effect " + Effect + " trigPerc " + triggerPercentage) ;
         }
 
+        
+
     }
 
     class StatusMoves : Moves
@@ -309,6 +352,11 @@ namespace ProgrammingProjectTest
             Console.Write(status);
             Console.SetCursorPosition(startX, startY + 2);
             Console.Write("hit: " + moveAccuracy + "%");
+        }
+
+        public override void MatchupPrint(int startX,int startY,Unit user,Unit target)
+        {
+            LongPrint(startX, startY);
         }
 
         public override string ToString()
