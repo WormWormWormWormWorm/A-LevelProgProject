@@ -79,6 +79,12 @@ namespace ProgrammingProjectTest
             Highlight();
         }
 
+        public void SetPointerNoHighlight(int x,int y)
+        {
+            pointerX = x;
+            pointerY = y;
+        }
+
         public void Highlight()
         {
             //goes to coOrds that corresponfd with current pointers and re-writes its display string with inverted colours to give highlighting effect

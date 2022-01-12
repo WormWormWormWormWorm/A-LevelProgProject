@@ -157,8 +157,8 @@ namespace ProgrammingProjectTest
 
             unitTypes[5] = new UnitType("Fight", effectiveAgainstCurrent, inEffectiveAgainstCurrent, ConsoleColor.Red);
 
-            effectiveAgainstCurrent = new string[] { "Grass", "Water" };
-            inEffectiveAgainstCurrent = new string[] { "Bug", "Poison", "Rock" };
+            effectiveAgainstCurrent = new string[] { "Grass"};
+            inEffectiveAgainstCurrent = new string[] { "Bug", "Poison", "Rock","Ground" };
 
             unitTypes[6] = new UnitType("Poison", effectiveAgainstCurrent, inEffectiveAgainstCurrent, ConsoleColor.DarkMagenta, "Steel");
 
@@ -177,8 +177,8 @@ namespace ProgrammingProjectTest
 
             unitTypes[9] = new UnitType("Psychic", effectiveAgainstCurrent, inEffectiveAgainstCurrent, ConsoleColor.Magenta, "Dark");
 
-            effectiveAgainstCurrent = new string[] { "Water", "Ground", "Rock" };
-            inEffectiveAgainstCurrent = new string[] { "Fire", "Flying", "Steel", "Poison", "Poison" };
+            effectiveAgainstCurrent = new string[] { "Grass", "Dark", "Psychic" };
+            inEffectiveAgainstCurrent = new string[] { "Fire", "Flying", "Steel", "Poison"};
 
             unitTypes[10] = new UnitType("Bug", effectiveAgainstCurrent, inEffectiveAgainstCurrent, ConsoleColor.Green);
 
@@ -193,7 +193,7 @@ namespace ProgrammingProjectTest
             unitTypes[12] = new UnitType("Dragon", effectiveAgainstCurrent, inEffectiveAgainstCurrent, ConsoleColor.DarkBlue);
 
             effectiveAgainstCurrent = new string[] { "Psychic", "Dragon" };
-            inEffectiveAgainstCurrent = new string[] { "Dark", "Steel" };
+            inEffectiveAgainstCurrent = new string[] { "Dark", "Steel" , "Fight" };
 
             unitTypes[13] = new UnitType("Dark", effectiveAgainstCurrent, inEffectiveAgainstCurrent, ConsoleColor.White);
 

@@ -140,8 +140,8 @@ namespace ProgrammingProjectTest
             }
             else if(damageCategory == "Special")
             {
-                defenseUsed = target.Stats[1];
-                attackUsed = user.Stats[0];
+                defenseUsed = target.Stats[2];
+                attackUsed = user.Stats[3];
             }
 
             //checks both of the targets unitTypes and returns effectiveness
@@ -158,7 +158,7 @@ namespace ProgrammingProjectTest
             }
             
             //damage calculation
-            tempDamage = (((22 * basePower * attackUsed / defenseUsed) / 50 + 2) *typeMultiplier) * sameTypeAttackBonus * randomMultiplier;
+            tempDamage = ((((22 * basePower * attackUsed / defenseUsed) / 50) + 2) *typeMultiplier) * sameTypeAttackBonus * randomMultiplier;
 
             //damage will almost never reach 1000 but would break ui formatting
             if(tempDamage > 999)
@@ -166,21 +166,20 @@ namespace ProgrammingProjectTest
                 tempDamage = 999;
             }
 
-            finalDamage = Convert.ToInt32(tempDamage);
+            finalDamage = Convert.ToInt32(Math.Truncate(tempDamage));
 
             return finalDamage;
         }
 
-        public double DamagePercent(int damage,Unit target)
+        public double DamagePercent(int dmg,Unit target)
         {
             double damagePercentage;
             double remainder;
+            double damage = dmg;
+            double health = target.Hp;
 
-            damagePercentage = (damage / target.Hp)*100;
-
-            //truncates num to 1d.p
-            remainder = damagePercentage % 0.1;
-            damagePercentage -= remainder;
+            damagePercentage = (damage/health);
+            damagePercentage = damagePercentage*100;
 
             return damagePercentage;
         }
@@ -232,7 +231,7 @@ namespace ProgrammingProjectTest
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write(" accuracy " + moveAccuracy + "%");
             Console.SetCursorPosition(startX, startY + 1);
-            Console.Write("Damage: num(" + minDamage + "-" + maxDamage + "), Perc(" + minDamagePercentage + "%-" + maxDamagePercentage + "%)");
+            Console.Write("Damage: num({0} - {1}), Perc({2:#.#}%-{3:#.#}%)",minDamage,maxDamage,minDamagePercentage,maxDamagePercentage);
             Console.SetCursorPosition(startX, startY + 2);
             Console.Write("Recoil: " + recoilPercent + "% Priority level: " + priorityLevel);
         }

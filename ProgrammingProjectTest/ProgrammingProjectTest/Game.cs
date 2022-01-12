@@ -312,14 +312,52 @@ namespace ProgrammingProjectTest
             teamMenu.Draw();
             enemyMenu.Draw();
 
-            while(1 == 1)
+            teamMenu.SetPointer(0,0);
+            Highlight(enemyMenu.Display[enemyMenu.PointerX,enemyMenu.PointerY],enemyMenu.CoOrds[enemyMenu.PointerX,enemyMenu.PointerY,0],enemyMenu.CoOrds[enemyMenu.PointerX,enemyMenu.PointerY,1]);
+
+            while(teamMenu.OptionSelected != 400)
             {
                 teamMenu.GetInput();
-                PlayerUnits[0].MatchupInspectPrint(0,0,enemyTeam[0]);
-                enemyTeam[0].MatchupInspectPrint(60, 0, PlayerUnits[0]);
+                //menu.pointerX+menu.pointerY*3 turns position in grid into pos in 1D array
+                if(teamMenu.PointerX != 3)
+                {
+                    PlayerUnits[teamMenu.PointerX+teamMenu.PointerY*3].MatchupInspectPrint(0,0,enemyTeam[enemyMenu.PointerX+enemyMenu.PointerY*3]);
+                    enemyTeam[enemyMenu.PointerX+enemyMenu.PointerY*3].MatchupInspectPrint(60,0,PlayerUnits[teamMenu.PointerX+teamMenu.PointerY*3]);
+
+                    if( teamMenu.OptionSelected != -1)
+                    {
+                        Highlight(teamMenu.Display[teamMenu.PointerX,teamMenu.PointerY],teamMenu.CoOrds[teamMenu.PointerX,teamMenu.PointerY,0],teamMenu.CoOrds[teamMenu.PointerX,teamMenu.PointerY,1]);
+                        enemyMenu.Highlight();
+
+                        while (enemyMenu.OptionSelected != 400)
+                        {
+
+                            enemyMenu.GetInput();
+                            if(enemyMenu.PointerX != 3)
+                            {
+                                PlayerUnits[teamMenu.PointerX+teamMenu.PointerY*3].MatchupInspectPrint(0,0,enemyTeam[enemyMenu.PointerX+enemyMenu.PointerY*3]);
+                                enemyTeam[enemyMenu.PointerX+enemyMenu.PointerY*3].MatchupInspectPrint(60,0,PlayerUnits[teamMenu.PointerX+teamMenu.PointerY*3]);
+
+                            }
+                        }
+
+                        teamMenu.Highlight();
+                        enemyMenu.Deselect();
+                        enemyMenu.SetPointerNoHighlight(0,0);
+                        Highlight(enemyMenu.Display[enemyMenu.PointerX,enemyMenu.PointerY],enemyMenu.CoOrds[enemyMenu.PointerX,enemyMenu.PointerY,0],enemyMenu.CoOrds[enemyMenu.PointerX,enemyMenu.PointerY,1]);
+                        teamMenu.OptionSelected = -1;
+                        enemyMenu.OptionSelected = -1;
+
+                    }
+                }
+                
+                
+                
             }
 
         }
+
+
 
         public void ClearScreenArea(int startX,int startY,int sizeX,int sizeY)
         {
