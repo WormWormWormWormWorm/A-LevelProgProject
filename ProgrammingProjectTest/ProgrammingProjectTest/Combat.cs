@@ -8,19 +8,16 @@ namespace ProgrammingProjectTest
 {
     class Combat
     {
+        private Unit[] playerTeam;
+        private Unit[] enemyTeam;
 
         public Combat(Unit[] playerTeam, Unit[] enemyTeam)
         {
-            //gets player team
-            //gets enemy team
-            //display
-
-            //options) 1-change team, 2- inspect enemy unit, 3-inspect matchup, 4-start fight
-
-            //1
-            ////pulls all friendly units from player class 
+            this.playerTeam = playerTeam;
+            this.enemyTeam = enemyTeam;
             
             
+
         }
 
     }

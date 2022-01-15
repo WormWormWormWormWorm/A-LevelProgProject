@@ -117,6 +117,11 @@ namespace ProgrammingProjectTest
                         break;
 
                     case 300: InspectMatchup();
+                        Console.Clear();
+                        PrintTeam(1, 2, "Player", PlayerUnits);
+                        PrintTeam(61, 2, "Enemy", enemyTeam);
+                        menu.Draw();
+                        menu.Highlight();
                         break;
                 }
                 menu.OptionSelected = -1;
@@ -313,6 +318,10 @@ namespace ProgrammingProjectTest
             enemyMenu.Draw();
 
             teamMenu.SetPointer(0,0);
+
+            PlayerUnits[teamMenu.PointerX + teamMenu.PointerY * 3].MatchupInspectPrint(0, 0, enemyTeam[enemyMenu.PointerX + enemyMenu.PointerY * 3]);
+            enemyTeam[enemyMenu.PointerX + enemyMenu.PointerY * 3].MatchupInspectPrint(60, 0, PlayerUnits[teamMenu.PointerX + teamMenu.PointerY * 3]);
+
             Highlight(enemyMenu.Display[enemyMenu.PointerX,enemyMenu.PointerY],enemyMenu.CoOrds[enemyMenu.PointerX,enemyMenu.PointerY,0],enemyMenu.CoOrds[enemyMenu.PointerX,enemyMenu.PointerY,1]);
 
             while(teamMenu.OptionSelected != 400)
@@ -321,6 +330,7 @@ namespace ProgrammingProjectTest
                 //menu.pointerX+menu.pointerY*3 turns position in grid into pos in 1D array
                 if(teamMenu.PointerX != 3)
                 {
+                    ClearScreenArea(0, 0, 100, 23);
                     PlayerUnits[teamMenu.PointerX+teamMenu.PointerY*3].MatchupInspectPrint(0,0,enemyTeam[enemyMenu.PointerX+enemyMenu.PointerY*3]);
                     enemyTeam[enemyMenu.PointerX+enemyMenu.PointerY*3].MatchupInspectPrint(60,0,PlayerUnits[teamMenu.PointerX+teamMenu.PointerY*3]);
 
@@ -335,6 +345,7 @@ namespace ProgrammingProjectTest
                             enemyMenu.GetInput();
                             if(enemyMenu.PointerX != 3)
                             {
+                                ClearScreenArea(0, 0, 100, 23);
                                 PlayerUnits[teamMenu.PointerX+teamMenu.PointerY*3].MatchupInspectPrint(0,0,enemyTeam[enemyMenu.PointerX+enemyMenu.PointerY*3]);
                                 enemyTeam[enemyMenu.PointerX+enemyMenu.PointerY*3].MatchupInspectPrint(60,0,PlayerUnits[teamMenu.PointerX+teamMenu.PointerY*3]);
 
