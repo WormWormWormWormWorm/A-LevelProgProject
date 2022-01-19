@@ -20,6 +20,8 @@ namespace ProgrammingProjectTest
 
         public abstract void Use(Unit Target,Unit User);
 
+        public abstract int GetAIWeight(Unit target,Unit user,ref int damage)
+
         public abstract string ShortPrint();
 
         public abstract void LongPrint(int startX,int startY);
@@ -154,6 +156,35 @@ namespace ProgrammingProjectTest
             throw new NotImplementedException();
         }
 
+        public override int GetAIWeight(Unit target, Unit user, ref int damage)
+        {
+            int moveWeight = 2;
+
+            damage = RollDamage(user,target);//gets value for damage dealt
+
+            if(damage >= target.CurrentHp)
+            {
+                moveWeight = 5;
+            }
+            else if(damage == 0)//target is immune so given low weight
+            {
+                moveWeight = -3;
+            }
+
+            return moveWeight;
+        }
+
+        public int RollDamage(Unit user,Unit target)
+        {
+            int damage;
+            Random rndNum = new Random();
+
+            double randomMultiplier = rndNum.Next(84,100)/100;
+            damage = DamageCalculation(user,target,randomMultiplier);
+
+            return damage;
+        }
+
         public override string ShortPrint()
         {
             return (moveName + GetSpaceBlock(14 - moveName.Length) + "| power " + GetSpaceBlock(4 - Convert.ToString(basePower).Length) + basePower +  " | ");
@@ -280,6 +311,22 @@ namespace ProgrammingProjectTest
         public override void Use(Unit Target,Unit User)
         {
             throw new NotImplementedException();
+        }
+
+        public override int GetAIWeight(Unit target, Unit user, ref int damage)// damage ref is used to make abstract method work with all subclasses
+        {
+            int moveWeight = 0;
+
+            if(target.Type1.Immune = moveType.Name || target.Type2.Immune = moveType.Name)//if target is immune to the move give negative weight
+            {
+                moveWeight = -3
+            }
+            else if (target.Stats[4] >= user.Stats[4] && status[2] == '4' )//if target is faster than unit and status effect changes speed give high weight
+            {
+                moveWeight = 3
+            }
+
+            return moveWeight
         }
 
         public override string ShortPrint()

@@ -118,6 +118,14 @@ namespace ProgrammingProjectTest
             }
         }
 
+        public string Immune
+        {
+            get
+            {
+                return immune;
+            }
+        }
+
         public UnitType(string useless)
         {
             //There is a single static array of UnitTypes initialised at the start of the program, all other instances of UnitType will reference back to one of these

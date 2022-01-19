@@ -250,4 +250,47 @@ namespace ProgrammingProjectTest
             return swapUnitMenu;
         }
     }
+
+    class EnemyDescisionMaker
+    {
+        Unit[] enemyTeam;
+        
+
+        public EnemyDescisionMaker(Unit[] enemyTeam)
+        {
+            this.enemyTeam = enemyTeam;
+        }
+
+        public int GetAction(int ref EnemyAction,Unit target)
+        {
+            int bestMoveIndex;
+            int bestMoveDamage;
+            int comparisonMoveDamage;
+            int[] moveWeights = new int[4]
+
+            bestMoveIndex = 0;
+            bestMoveDamage = 0;
+            comparisonMoveDamage = 0;
+            
+            moveWeights[0] = enemyTeam[0].Moves[0].GetAIWeight(target,enemyTeam[0],bestMoveDamage);
+
+            for(int i = 1;i < 4; i++)
+            {
+                moveWeights[i] = enemyTeam[0].Moves[i].GetAIWeight(target,enemyTeam[0],comparisonMoveDamage);
+
+                if(moveWeights[i] == moveWeights[bestMoveIndex] && moveWeights[i] > 0)
+                {
+                    if(bestMoveDamage > comparisonMoveDamage)
+                    {
+                        moveWeights[i] = -1;
+                    }
+                    else if(bestMoveDamage < comparisonMoveDamage)
+                    {
+                        moveWeights[bestMoveIndex] = -1;
+                        bestMoveIndex = i;
+                    }
+                }
+            }
+        }
+    }
 }
