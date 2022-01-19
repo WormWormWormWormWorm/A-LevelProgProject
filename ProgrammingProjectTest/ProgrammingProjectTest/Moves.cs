@@ -24,18 +24,9 @@ namespace ProgrammingProjectTest
 
         public abstract void LongPrint(int startX,int startY);
 
+        public abstract void CombatPrint(int startX,int startY,Unit user,Unit target);
+
         public abstract void MatchupPrint(int startX,int startY,Unit user,Unit target); 
-
-        public void PrepareStream(Stream stream, string TemplateID)
-        {
-            int byteCount;
-            int cutoff;
-
-            cutoff = TemplateID.LastIndexOf('#');
-            byteCount = Convert.ToInt32(TemplateID.Substring(cutoff + 1));
-
-            stream.Seek(byteCount, SeekOrigin.Begin);
-        }
 
         public void GetType(string typeName)
         {
@@ -93,32 +84,6 @@ namespace ProgrammingProjectTest
             this.damageCategory = damageCategory;
             this.recoilPercent = recoilPercent;
             this.priorityLevel = priorityLevel;
-        }
-
-        public DamageMoves(string moveID)
-        {
-            //100's of instances of stream and streamreader left behind if not disposed
-            using(Stream stream = File.Open("AttackMoves.txt", FileMode.Open))
-            {
-                PrepareStream(stream, moveID);
-
-                using(StreamReader sr = new StreamReader(stream))
-                {
-                    PullDetails(sr);
-                }
-            }
-        }
-
-        public void PullDetails(StreamReader sr)
-        {
-            sr.ReadLine();
-            moveName = sr.ReadLine();
-            basePower = Convert.ToInt32(sr.ReadLine());
-            GetType(sr.ReadLine());
-            damageCategory = sr.ReadLine();
-            moveAccuracy = Convert.ToInt32(sr.ReadLine());
-            recoilPercent = Convert.ToInt32(sr.ReadLine());
-            priorityLevel = Convert.ToInt32(sr.ReadLine());
         }
 
         public int DamageCalculation(Unit user,Unit target,double randomMultiplier)
@@ -216,6 +181,21 @@ namespace ProgrammingProjectTest
             return ("Name " + moveName + " type " + moveType.Name + " Accuracy " + moveAccuracy + " bp " + basePower + " category " + damageCategory + " recPerc " + recoilPercent + " priority " + priorityLevel);
         }
 
+        public override void CombatPrint(int startX, int startY, Unit user,Unit target)
+        {
+            double minDamage = DamageCalculation(user, target, 0.85);
+            double maxDamage = DamageCalculation(user, target, 1);
+
+            Console.SetCursorPosition(startX, startY);
+            Console.Write(moveName + " ");
+            Console.ForegroundColor = moveType.DisplayColor;
+            Console.Write(moveType.Name);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(" ,recoil {0}%", recoilPercent);
+            Console.SetCursorPosition(startX, startY + 1);
+            Console.WriteLine("deals({0} to {1}) ,hits {2}%",minDamage,maxDamage,moveAccuracy);
+        }
+
         public override void MatchupPrint(int startX,int startY,Unit user,Unit target)
         {
             int maxDamage = DamageCalculation(user, target, 1);
@@ -262,21 +242,6 @@ namespace ProgrammingProjectTest
             this.triggerPercentage = triggerPercentage;
         }
 
-        public TriggerMoves(string moveID)
-        {
-            using (Stream stream = File.Open("AttackMoves.txt", FileMode.Open))
-            {
-                PrepareStream(stream, moveID);
-
-                using (StreamReader sr = new StreamReader(stream))
-                {
-                    PullDetails(sr);
-                    Effect = sr.ReadLine();
-                    triggerPercentage = Convert.ToInt32(sr.ReadLine());
-                }
-            }
-        }
-
         public override void Use(Unit Target, Unit User)
         {
             base.Use(Target, User);
@@ -286,7 +251,7 @@ namespace ProgrammingProjectTest
         {
             base.LongPrint(startX, startY);
             Console.SetCursorPosition(startX, startY + 3);
-            Console.WriteLine("Effect: " + Effect + " " + triggerPercentage + "%");
+            Console.Write("Effect: " + Effect + " " + triggerPercentage + "%");
         }
 
         public override string ToString()
@@ -301,23 +266,6 @@ namespace ProgrammingProjectTest
     class StatusMoves : Moves
     {
         protected string status;
-
-        public StatusMoves(string moveID)
-        {
-            using (Stream stream = File.Open("AttackMoves.txt", FileMode.Open))
-            {
-                PrepareStream(stream, moveID);
-
-                using (StreamReader sr = new StreamReader(stream))
-                {
-                    sr.ReadLine();
-                    moveName = sr.ReadLine();
-                    GetType(sr.ReadLine());
-                    moveAccuracy = Convert.ToInt32(sr.ReadLine());
-                    status = sr.ReadLine();
-                }
-            }
-        }
 
         public StatusMoves(string moveID,string moveName,UnitType moveType,int moveAccuracy,string status,int priorityLevel)
         {
@@ -356,6 +304,17 @@ namespace ProgrammingProjectTest
         public override void MatchupPrint(int startX,int startY,Unit user,Unit target)
         {
             LongPrint(startX, startY);
+        }
+
+        public override void CombatPrint(int startX, int startY,Unit user,Unit target)
+        {
+            Console.SetCursorPosition(startX, startY);
+            Console.Write(moveName + " ");
+            Console.ForegroundColor = moveType.DisplayColor;
+            Console.Write(moveType.Name);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.SetCursorPosition(startX, startY + 1);
+            Console.WriteLine("Status: {0} ,hit: {1}", status, moveAccuracy);
         }
 
         public override string ToString()

@@ -93,7 +93,7 @@ namespace ProgrammingProjectTest
         private string status;
 
         private int hp;
-        private int CurrentHP;
+        private int currentHP;
 
         private Moves[] moves = new Moves[4];
 
@@ -204,6 +204,7 @@ namespace ProgrammingProjectTest
 
             }
             hp = ((2 * baseStats[5] + IVS[5]) / 2) + 60;
+            currentHP = hp;
         }
 
         public void ChangeMove(int slot,Moves move)
@@ -414,6 +415,22 @@ namespace ProgrammingProjectTest
             get
             {
                 return hp;
+            }
+        }
+        
+        public int CurrentHp
+        {
+            get
+            {
+                return currentHP;
+            }
+        }
+
+        public Moves[] Moves
+        {
+            get
+            {
+                return moves;
             }
         }
 

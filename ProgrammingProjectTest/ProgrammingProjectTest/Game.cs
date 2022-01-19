@@ -108,7 +108,7 @@ namespace ProgrammingProjectTest
                         menu.Highlight();
                         break;
 
-                    case 200: Inspect(true) ;
+                    case 200: Inspect(false) ;
                         Console.Clear();
                         PrintTeam(1, 2, "Player", PlayerUnits);
                         PrintTeam(61, 2, "Enemy", enemyTeam);
@@ -122,6 +122,9 @@ namespace ProgrammingProjectTest
                         PrintTeam(61, 2, "Enemy", enemyTeam);
                         menu.Draw();
                         menu.Highlight();
+                        break;
+                    case 500:
+                        Combat combat = new Combat(PlayerUnits,enemyTeam,this);
                         break;
                 }
                 menu.OptionSelected = -1;
@@ -155,25 +158,43 @@ namespace ProgrammingProjectTest
 
         public void Inspect(bool inFight)
         {
-            Menu menu;
+            int enemyTeamStart;
+            int yCoOrdUsed;
+            int backYCoOrd;
+            Menu menu = new Menu();
             Console.Clear();
+
+            if (inFight)
+            {
+                enemyTeamStart = 1;
+                yCoOrdUsed = 7;
+                backYCoOrd = 4;
+                menu = CreateFightInspectMenu();
+            }
+            else
+            {
+                enemyTeamStart = 5;
+                yCoOrdUsed = 15;
+                backYCoOrd = 8;
+                menu = CreatefullInspectMenu();
+            }
 
             Console.SetCursorPosition(15, 1);
             Console.Write("Player Units:");
-            Console.SetCursorPosition(15, 15);
-            Console.Write("Enemy Units:");
 
-            menu = CreatefullInspectMenu();
+            Console.SetCursorPosition(15, yCoOrdUsed);
+            Console.Write("Enemy Units:");
+ 
             menu.Draw();
             menu.SetPointer(0, 0);
 
-            while(menu.OptionSelected != 108)
+            while(menu.OptionSelected != 100 + backYCoOrd) //goes until enter is pressed on location of BACK option
             {
-                if(menu.PointerY != 8)
+                if(menu.PointerY != backYCoOrd) 
                 {
-                    if(menu.PointerY > 5)
+                    if(menu.PointerY > enemyTeamStart)
                     {
-                        enemyTeam[menu.PointerX + (menu.PointerY-6)*3].InspectPrint(70,3);
+                        enemyTeam[menu.PointerX + (menu.PointerY-2)*3].InspectPrint(70,3);
                     }
                     else
                     {
@@ -427,6 +448,27 @@ namespace ProgrammingProjectTest
             display[0,8] = "BACK";
             display[1, 8] = "-";
             display[2, 8] = "-";
+            menu = new Menu(display, coOrds);
+
+            return menu;
+        }
+
+        public Menu CreateFightInspectMenu()
+        {
+            Menu menu;
+
+            string[,] display = new string[3, 5];
+            int[,,] coOrds = new int[3, 5, 2];
+            int Y;
+            Y = 3;
+            MenuCoOrds3Wide(coOrds, ref Y, 15, 0, 6);
+            Y += 2;
+            MenuCoOrds3Wide(coOrds, ref Y, 15, 6, 15);
+            FillDisplayFromUnitArray(PlayerUnits, 0, 6, display, 0);
+            FillDisplayFromUnitArray(enemyTeam, 0, 6, display, 6);
+            display[0, 4] = "BACK";
+            display[1, 4] = "-";
+            display[2, 4] = "-";
             menu = new Menu(display, coOrds);
 
             return menu;
