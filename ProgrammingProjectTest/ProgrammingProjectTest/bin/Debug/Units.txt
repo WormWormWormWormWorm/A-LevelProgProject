@@ -161,7 +161,7 @@ Electric
 105
 60
 105
-Lightning Rod
+Intimidate
 004
 000
 035
