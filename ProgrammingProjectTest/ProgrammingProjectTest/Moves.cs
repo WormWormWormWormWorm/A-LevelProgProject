@@ -216,19 +216,15 @@ namespace ProgrammingProjectTest
                 damage *= 2;
             }
 
-            if(damage > target.CurrentHp)
-            {
-                damage = target.CurrentHp;
-            }
-            else if(target.Hp < target.CurrentHp - damage)
-            {
-                damage = target.CurrentHp - target.Hp;
-            }
             target.TakeDamage(damage,moveName);
             if (recoilPercent != 0)
             {
                 recoilMultiplier = recoilPercent;
                 recoilMultiplier /= 100;
+                if(damage > target.CurrentHp)
+                {
+                    damage = target.CurrentHp;
+                }
                 recoilDamage = Convert.ToInt32(recoilMultiplier * damage);
                 user.TakeDamage(recoilDamage,"recoil");
             }

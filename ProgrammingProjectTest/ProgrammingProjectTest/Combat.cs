@@ -45,6 +45,14 @@ namespace ProgrammingProjectTest
 
             setUpUI();
 
+            if(CheckIntimidate(playerTeam[0],enemyTeam[0]) || CheckIntimidate(enemyTeam[0], playerTeam[0]))
+            {
+                Proceed();
+            }
+
+            fightMenu.Draw();
+            fightMenu.Highlight();
+
             while (enemyUnitsRemaining != 0 && playerUnitsRemaining != 0)
             {
                 enemyBestMoveIndex = descisionMaker.GetAction(playerTeam[0]);
@@ -59,14 +67,20 @@ namespace ProgrammingProjectTest
                         case 100:
                             game.Inspect(true);
                             setUpUI();//clears Inspect UI and re-draws fight menu UI
+                            fightMenu.Draw();
+                            fightMenu.Highlight();
                             break;
                         case 200:
                             game.InspectMatchup();
                             setUpUI();//clears InspectMatchup UI and re-draws fight menu UI
+                            fightMenu.Draw();
+                            fightMenu.Highlight();
                             break;
                         case 300:
                             playerAction = SwapUnit(false);//allows player to swap unit in play ending their turn
                             setUpUI();//clears SwapUnit UI and draws updated fight menu UI
+                            fightMenu.Draw();
+                            fightMenu.Highlight();
                             break;
                         case 400:
                             playerAction = ChooseMove();//allows player to choose a move ending their turn
@@ -142,6 +156,12 @@ namespace ProgrammingProjectTest
                 }
                 else
                 {
+                    if (CheckIntimidate(playerTeam[0], enemyTeam[0]))
+                    {
+                        Proceed();
+                    }
+                    
+
                     enemyTeam[0].NextMoveRandomMultiplier = 0;
                     enemyTeam[0].Moves[enemyBestMoveIndex].Use(playerTeam[0], enemyTeam[0]);
                     Proceed();
@@ -164,6 +184,9 @@ namespace ProgrammingProjectTest
                     {
                         EnemySwitch(playerTeam[0]);
                         Console.WriteLine("Enemy has switched in " + enemyTeam[0].Name);
+                        
+                        CheckIntimidate(enemyTeam[0],playerTeam[0]);
+
                         endOfTurnProceedNessecary = true;
                     }
                 }
@@ -171,6 +194,8 @@ namespace ProgrammingProjectTest
                 {
                     Proceed();
                 }
+
+
                 if (playerTeam[0].IsAlive == false)
                 {
                     playerUnitsRemaining -= 1;
@@ -178,11 +203,22 @@ namespace ProgrammingProjectTest
                     {
                         SwapUnit(true);
                     }
+                    setUpUI();
+                    if (CheckIntimidate(playerTeam[0], enemyTeam[0]))
+                    {
+                        Proceed();
+                    }  
+                    
+                }
+                else
+                {
+                    setUpUI();
                 }
                 
-                
+             
 
-                setUpUI();
+                fightMenu.Draw();
+                fightMenu.Highlight();
                 playerAction = 0;
 
             }
@@ -266,12 +302,6 @@ namespace ProgrammingProjectTest
                 team[0] = team[chosenUnitIndex];
                 team[chosenUnitIndex] = team[unitsRemainingInTeam];
                 team[unitsRemainingInTeam] = null;
-            }
-
-            if(team[0].Ability == "Intimidate")
-            {
-                Status intimidate = new Status("01Atk Drop");
-                opponent.Status = intimidate;
             }
 
         }
@@ -379,8 +409,18 @@ namespace ProgrammingProjectTest
             CombatPrint(60, enemyTeam[0], playerTeam[0]);
             Console.SetCursorPosition(0, 20);
             Console.Write("========================================================================================================================");
-            fightMenu.Draw();
-            fightMenu.Highlight();
+            
+        }
+
+        public bool CheckIntimidate(Unit user,Unit target)
+        {
+            if(user.Ability == "Intimidate")
+            {
+                Console.Write("Due to " +  user.Name + "'s Intimidate, ");
+                target.Status = new Status("10Atk Drop");
+                return true;
+            }
+            return false;
         }
 
         public void Proceed()

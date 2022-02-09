@@ -33,3 +33,10 @@ C:\Users\Gamer\Source\Repos\A-LevelProgProject\ProgrammingProjectTest\Programmin
 C:\Users\Gamer\Source\Repos\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\obj\Debug\ProgrammingProjectTest.csproj.CoreCompileInputs.cache
 C:\Users\Gamer\Source\Repos\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\obj\Debug\ProgrammingProjectTest.exe
 C:\Users\Gamer\Source\Repos\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\obj\Debug\ProgrammingProjectTest.pdb
+C:\Users\019661\Source\Repos\WormWormWormWormWorm\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\obj\Debug\ProgrammingProjectTest.csproj.CoreCompileInputs.cache
+C:\Users\019661\Source\Repos\WormWormWormWormWorm\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\obj\Debug\ProgrammingProjectTest.exe
+C:\Users\019661\Source\Repos\WormWormWormWormWorm\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\obj\Debug\ProgrammingProjectTest.pdb
+C:\Users\019661\Source\Repos\WormWormWormWormWorm\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\bin\Debug\ProgrammingProjectTest.exe.config
+C:\Users\019661\Source\Repos\WormWormWormWormWorm\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\bin\Debug\ProgrammingProjectTest.exe
+C:\Users\019661\Source\Repos\WormWormWormWormWorm\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\bin\Debug\ProgrammingProjectTest.pdb
+C:\Users\019661\Source\Repos\WormWormWormWormWorm\A-LevelProgProject\ProgrammingProjectTest\ProgrammingProjectTest\obj\Debug\ProgrammingProjectTest.csproj.AssemblyReference.cache

@@ -236,6 +236,10 @@ namespace ProgrammingProjectTest
 
             if(damage > 0)
             {
+                if(damage > currentHP)
+                {
+                    damage = currentHP;
+                }
 
                 message = source + " dealt " + damage + " damage to " + name;
 
@@ -250,6 +254,10 @@ namespace ProgrammingProjectTest
             }
             else if(damage < 0)
             {
+                if(currentHP - damage < hp)
+                {
+                    damage = currentHP - hp;
+                }
 
                 message = source + " has healed " + name + " for " + -damage + " HP";
 
@@ -590,12 +598,16 @@ namespace ProgrammingProjectTest
                             Modifiers[statIndex] = -4;
                         }
                     }
-                    else if (value.FullName == "Surprise" && turnsOnField == 0 && value.OverrideLevel > status.OverrideLevel)
+                    else if (value.FullName == "Surprise" && value.OverrideLevel > status.OverrideLevel)
                     {
+                        if(turnsOnField == 0)
+                        {
 
-                        status = status.GetStatus(5);//gets flinch status, surprise exists to be flinch with stricter trigger conditions
-                        statusTurnsRemaining = status.TurnDuration;
-                        Console.WriteLine(name + " has been inflicted with Flinch");
+                            status = status.GetStatus(5);//gets flinch status, surprise exists to be flinch with stricter trigger conditions
+                            statusTurnsRemaining = status.TurnDuration;
+                            Console.WriteLine(name + " has been inflicted with Flinch");
+                        }
+                        
                     }
                     else
                     {
@@ -614,11 +626,6 @@ namespace ProgrammingProjectTest
         public void ReduceStatusTurnsRemaining()
         {
             statusTurnsRemaining -= 1;
-
-            if(statusTurnsRemaining == 0)
-            {
-                status = null;
-            }
         }
 
         public void ClearStatus()
