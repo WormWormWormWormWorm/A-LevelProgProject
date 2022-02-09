@@ -52,6 +52,7 @@
     <Compile Include="Moves.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="UnitTemplateList.cs" />
     <Compile Include="UnitType.cs" />

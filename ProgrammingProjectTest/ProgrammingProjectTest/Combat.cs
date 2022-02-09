@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProgrammingProjectTest
 {
@@ -10,8 +6,12 @@ namespace ProgrammingProjectTest
     {
         private Unit[] playerTeam;
         private Unit[] enemyTeam;
+        private int playerUnitsRemaining;
+        private int enemyUnitsRemaining;
         private Game game;
         private Menu fightMenu;
+
+        public bool endOfTurnProceedNessecary;
 
         public Combat(Unit[] playerTeam, Unit[] enemyTeam, Game game)
         {
@@ -19,16 +19,37 @@ namespace ProgrammingProjectTest
             this.enemyTeam = enemyTeam;
             this.game = game;
 
-            bool enemyTeamAlive = true;
-            bool playerTeamAlive = true;
+            for(int i = 0;i < 6; i++)
+            {
+                if(playerTeam[i] != null)
+                {
+                    playerUnitsRemaining++;
+                }
+
+                if(enemyTeam[i] != null)
+                {
+                    enemyUnitsRemaining++;
+                }
+                
+            }
+
             int playerAction = 0;
+            int enemyBestMoveIndex;
+
+            EnemyDescisionMaker descisionMaker = new EnemyDescisionMaker(enemyTeam);
+
+            bool playerGoesFirst;
+            Random random = new Random();
 
             fightMenu = FightMenu();
 
             setUpUI();
 
-            while (enemyTeamAlive && playerTeamAlive)
+            while (enemyUnitsRemaining != 0 && playerUnitsRemaining != 0)
             {
+                enemyBestMoveIndex = descisionMaker.GetAction(playerTeam[0]);
+                endOfTurnProceedNessecary = false;
+
                 while(playerAction == 0) //loops until user chooses a move or to swap unit
                 {
                     fightMenu.GetInput(); //gets input
@@ -44,7 +65,7 @@ namespace ProgrammingProjectTest
                             setUpUI();//clears InspectMatchup UI and re-draws fight menu UI
                             break;
                         case 300:
-                            playerAction = SwapUnit();//allows player to swap unit in play ending their turn
+                            playerAction = SwapUnit(false);//allows player to swap unit in play ending their turn
                             setUpUI();//clears SwapUnit UI and draws updated fight menu UI
                             break;
                         case 400:
@@ -56,20 +77,125 @@ namespace ProgrammingProjectTest
                     fightMenu.OptionSelected = -1;
                 }
 
-                Console.SetCursorPosition(0, 26);
-                Console.Write(playerAction);
+                game.ClearScreenArea(0, 21, 80, 9);
+                Console.SetCursorPosition(0, 21);
+
+                if(playerAction != 5)
+                {
+                    //figures out which side moves first, move with higher priority level goes first, if tied, unit with higher speed goes first, if tied again, pick randomly
+
+                    if(enemyTeam[0].Moves[enemyBestMoveIndex].PriorityLevel == playerTeam[0].Moves[playerAction - 1].PriorityLevel)//tie is by far most common so checked first
+                    {
+                        if(enemyTeam[0].CurrentStat(4) < playerTeam[0].CurrentStat(4))
+                        {
+                            playerGoesFirst = true;
+                        }
+                        else if(enemyTeam[0].CurrentStat(4) > playerTeam[0].CurrentStat(4))
+                        {
+                            playerGoesFirst = false;
+                        }
+                        else
+                        {
+                            if(random.Next(0,2) == 2)
+                            {
+                                playerGoesFirst = true;
+                            }
+                            else
+                            {
+                                playerGoesFirst = false;
+                            }
+                        }
+                    }
+                    else if(enemyTeam[0].Moves[enemyBestMoveIndex].PriorityLevel < playerTeam[0].Moves[playerAction - 1].PriorityLevel)
+                    {
+                        playerGoesFirst = true;
+                    }
+                    else
+                    {
+                        playerGoesFirst = false;
+                    }
+
+                    if (playerGoesFirst)
+                    {
+                        playerTeam[0].Moves[playerAction - 1].Use(enemyTeam[0], playerTeam[0]);
+
+                        Proceed();
+
+                        if (enemyTeam[0].IsAlive)
+                        {
+                            enemyTeam[0].Moves[enemyBestMoveIndex].Use(playerTeam[0], enemyTeam[0]);
+                            Proceed();
+                        }
+                    }
+                    else
+                    {
+                        enemyTeam[0].Moves[enemyBestMoveIndex].Use(playerTeam[0], enemyTeam[0]);
+
+                        Proceed();
+
+                        if (playerTeam[0].IsAlive)
+                        {
+                            playerTeam[0].Moves[playerAction - 1].Use(enemyTeam[0], playerTeam[0]);
+                            Proceed();
+                        }
+                    }
+                }
+                else
+                {
+                    enemyTeam[0].NextMoveRandomMultiplier = 0;
+                    enemyTeam[0].Moves[enemyBestMoveIndex].Use(playerTeam[0], enemyTeam[0]);
+                    Proceed();
+                }
+
+                if (playerTeam[0].IsAlive)
+                {
+                   EndOfTurnProceedNessecary = playerTeam[0].EndOfTurnUpdate(enemyTeam[0]);
+                }
+                if (enemyTeam[0].IsAlive)
+                {
+                    EndOfTurnProceedNessecary = enemyTeam[0].EndOfTurnUpdate(playerTeam[0]);
+                }
+                
+
+                if (enemyTeam[0].IsAlive == false)
+                {
+                    enemyUnitsRemaining -= 1;
+                    if (enemyUnitsRemaining > 0)
+                    {
+                        EnemySwitch(playerTeam[0]);
+                        Console.WriteLine("Enemy has switched in " + enemyTeam[0].Name);
+                        endOfTurnProceedNessecary = true;
+                    }
+                }
+                if(endOfTurnProceedNessecary == true)
+                {
+                    Proceed();
+                }
+                if (playerTeam[0].IsAlive == false)
+                {
+                    playerUnitsRemaining -= 1;
+                    if(playerUnitsRemaining > 0)
+                    {
+                        SwapUnit(true);
+                    }
+                }
+                
+                
+
+                setUpUI();
                 playerAction = 0;
+
             }
             
         }
 
-        public int SwapUnit()
+        public int SwapUnit(bool currentUnitDead)
         {
             int slotSelected;
             int playerAction = 0;
-            Unit placeholder;
+            int slotSelectedOffset = 0;
 
-            Menu swapUnitMenu = CreateSwapUnitMenu();
+            Menu swapUnitMenu = CreateSwapUnitMenu(currentUnitDead);
             //sets up UI
             Console.Clear();
             Console.SetCursorPosition(5, 1);
@@ -78,32 +204,39 @@ namespace ProgrammingProjectTest
             Console.ForegroundColor = ConsoleColor.Gray;
 
             swapUnitMenu.Draw();
-            swapUnitMenu.SetPointer(1, 0);
+            if (currentUnitDead)
+            {
+                swapUnitMenu.SetPointer(0, 0);
+                slotSelectedOffset = 1;
+            }
+            else
+            {
+                swapUnitMenu.SetPointer(1, 0);
+            }
 
-            slotSelected = swapUnitMenu.PointerX + swapUnitMenu.PointerY * 3;
+            slotSelected = (swapUnitMenu.PointerX + swapUnitMenu.PointerY * 3) + slotSelectedOffset;
+            
             CombatPrint(62, playerTeam[slotSelected], enemyTeam[0]);
             //
             while (swapUnitMenu.OptionSelected == -1)//loops until option is selected
             {
-                slotSelected = swapUnitMenu.PointerX + swapUnitMenu.PointerY * 3;
+                slotSelected = (swapUnitMenu.PointerX + swapUnitMenu.PointerY * 3) + slotSelectedOffset;
                 swapUnitMenu.GetInput();
                 
-                if(swapUnitMenu.OptionSelected != 100)
+                if(swapUnitMenu.OptionSelected != 100 || currentUnitDead)
                 {
                     if (swapUnitMenu.OptionSelected != -1)
                     {
                         //swaps unit in first position(unit currently in the field) with the unit chosen by the player
-                        placeholder = playerTeam[0];
-                        playerTeam[0] = playerTeam[slotSelected];
-                        playerTeam[slotSelected] = placeholder;
+                        SwapUnitIn(slotSelected, playerTeam, playerUnitsRemaining, enemyTeam[0]);
 
                         playerAction = 5;
                     }
                     else
                     {
-                        //updates ui for new pointer position in menu
+                        //updates combatPrint UI for new pointer position in menu
                         game.ClearScreenArea(62, 0, 40, 20);
-                        slotSelected = swapUnitMenu.PointerX + swapUnitMenu.PointerY * 3;
+                        slotSelected = (swapUnitMenu.PointerX + swapUnitMenu.PointerY * 3) + slotSelectedOffset;
                         CombatPrint(62, playerTeam[slotSelected], enemyTeam[0]);
                     }
                 }
@@ -111,6 +244,36 @@ namespace ProgrammingProjectTest
             }
 
             return playerAction;
+        }
+
+        public void SwapUnitIn(int chosenUnitIndex,Unit[] team,int unitsRemainingInTeam,Unit opponent)
+        {
+            if (team[0].IsAlive)
+            {
+                if (team[0].Status.RemovedAtEndOfTurn)
+                {
+                    team[0].ClearStatus();
+                }
+                team[0].ClearModifiers();
+                team[0].TurnsOnField = 0;
+
+                Unit placeholder = team[0];
+                team[0] = playerTeam[chosenUnitIndex];
+                team[chosenUnitIndex] = placeholder;
+            }
+            else
+            {
+                team[0] = team[chosenUnitIndex];
+                team[chosenUnitIndex] = team[unitsRemainingInTeam];
+                team[unitsRemainingInTeam] = null;
+            }
+
+            if(team[0].Ability == "Intimidate")
+            {
+                Status intimidate = new Status("01Atk Drop");
+                opponent.Status = intimidate;
+            }
+
         }
 
         public int ChooseMove()
@@ -191,7 +354,7 @@ namespace ProgrammingProjectTest
             Console.Write(unitUsed.Type2.Name);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.SetCursorPosition(xStart, 1);
-            Console.Write("status!");//fix
+            unitUsed.Status.PrintStatus();
             Console.SetCursorPosition(xStart, 3);
             Console.Write("HP: " + unitUsed.CurrentHp);
             Console.SetCursorPosition(xStart, 4);
@@ -199,14 +362,12 @@ namespace ProgrammingProjectTest
             Console.Write("=====================");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.SetCursorPosition(xStart, 5);
-            Console.Write("Speed: " + unitUsed.Stats[4]);
-            Console.SetCursorPosition(xStart, 7);
-            Console.Write("Moves:");
+            Console.Write("Speed: " + unitUsed.CurrentStat(4));
             for(int i = 0;i < 4; i++)
             {
-                unitUsed.Moves[i].CombatPrint(xStart,9+i*3,unitUsed,target);
+                unitUsed.Moves[i].CombatPrint(xStart,7+i*3,unitUsed,target);
             }
-            Console.SetCursorPosition(xStart, 21);
+            Console.SetCursorPosition(xStart, 19);
             Console.Write("Ability: {0}",unitUsed.Ability);
         }
 
@@ -216,10 +377,27 @@ namespace ProgrammingProjectTest
             Console.Clear();
             CombatPrint(0, playerTeam[0], enemyTeam[0]);
             CombatPrint(60, enemyTeam[0], playerTeam[0]);
-            Console.SetCursorPosition(0, 22);
+            Console.SetCursorPosition(0, 20);
             Console.Write("========================================================================================================================");
             fightMenu.Draw();
             fightMenu.Highlight();
+        }
+
+        public void Proceed()
+        {
+            //stops until enter is pressed so user can read damage Dealt
+
+            Console.SetCursorPosition(0, 29);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("Continue");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            while(Console.ReadKey(true).Key != ConsoleKey.Enter) { }
+
+            game.ClearScreenArea(0, 21, 80, 9);
+            Console.SetCursorPosition(0, 21);
         }
 
         public void HealthBar()
@@ -227,28 +405,75 @@ namespace ProgrammingProjectTest
             //create if you have time
         }
 
-        public Menu CreateSwapUnitMenu()
+        public Menu CreateSwapUnitMenu(bool currentUnitDead)
         {
             //sets up menu for SwapUnit
             Menu swapUnitMenu;
             int Y;
+            int iOffset;
             string[,] display = new string[3, 2];
             int[,,] coOrds = new int[3, 2, 2];
 
-            Y = 3;
+            if (currentUnitDead)
+            {
+                iOffset = -1;
+            }
+            else
+            {
+                display[0, 0] = "Back";
+                iOffset = 0;
+            }
 
-            display[1, 0] = playerTeam[1].Name;
-            display[2, 0] = playerTeam[2].Name;
-            display[0, 1] = playerTeam[3].Name;
-            display[1, 1] = playerTeam[4].Name;
-            display[2, 1] = playerTeam[5].Name;
-            display[0, 0] = "BACK";
+            Y = 3;
+            
+            for(int i = 1;i < 6; i++)
+            {
+                if(playerTeam[i] != null && playerTeam[i].IsAlive)
+                {
+                    display[(i+iOffset) % 3, (i+iOffset) / 3] = playerTeam[i].Name;
+                }
+            }
+            
+
             game.MenuCoOrds3Wide(coOrds,ref Y, 14, 0, 6);
 
             swapUnitMenu = new Menu(display, coOrds);
 
             return swapUnitMenu;
         }
+
+        public void EnemySwitch(Unit opponent)
+        {
+            int bestSwitchIndex = 1;
+            int bestSwitchWeight = enemyTeam[1].CalculateSwitchWeight(opponent);
+
+            int comparisonSwitchWeight;
+
+            for (int i = 1; i > 6; i++)
+            {
+                comparisonSwitchWeight = enemyTeam[i].CalculateSwitchWeight(opponent);
+
+                if (comparisonSwitchWeight > bestSwitchWeight)
+                {
+                    bestSwitchIndex = i;
+                    bestSwitchWeight = comparisonSwitchWeight;
+                }
+            }
+
+            SwapUnitIn(bestSwitchIndex,enemyTeam,enemyUnitsRemaining,playerTeam[0]);
+        }
+
+        public bool EndOfTurnProceedNessecary
+        {
+            set
+            {
+                if(value == true)
+                {
+                    endOfTurnProceedNessecary = true;
+                }
+            }
+        }
+
     }
 
     class EnemyDescisionMaker
@@ -261,36 +486,180 @@ namespace ProgrammingProjectTest
             this.enemyTeam = enemyTeam;
         }
 
-        public int GetAction(int ref EnemyAction,Unit target)
+        public int GetAction(Unit target)
         {
             int bestMoveIndex;
             int bestMoveDamage;
             int comparisonMoveDamage;
-            int[] moveWeights = new int[4]
+
+            int statusBucketIndex = -1;
+
+            int tieOdds = 1;
+            int tieBounds = 2;
+
+            int bucketOdds = 1;
+            int bucketBounds = 2;
+
+            double[] moveRandomMultipliers = new double[4];
+            int[] moveWeights = new int[4];
+
+            Random random;
 
             bestMoveIndex = 0;
             bestMoveDamage = 0;
             comparisonMoveDamage = 0;
-            
-            moveWeights[0] = enemyTeam[0].Moves[0].GetAIWeight(target,enemyTeam[0],bestMoveDamage);
 
-            for(int i = 1;i < 4; i++)
+            for(int i = 0;i < 4; i++)
             {
-                moveWeights[i] = enemyTeam[0].Moves[i].GetAIWeight(target,enemyTeam[0],comparisonMoveDamage);
+                moveRandomMultipliers[i] = enemyTeam[0].Moves[i].NewRandomMultiplier();
+            }
+            
+            moveWeights[0] = enemyTeam[0].Moves[0].GetAIWeight(target,enemyTeam[0],ref bestMoveDamage,moveRandomMultipliers[0]);
 
-                if(moveWeights[i] == moveWeights[bestMoveIndex] && moveWeights[i] > 0)
+            for(int i =  1;i < 4; i++)
+            {
+                moveWeights[i] = enemyTeam[0].Moves[i].GetAIWeight(target, enemyTeam[0], ref comparisonMoveDamage,moveRandomMultipliers[i]);
+
+                if(moveWeights[bestMoveIndex] > moveWeights[i])
                 {
-                    if(bestMoveDamage > comparisonMoveDamage)
+                    if(moveWeights[i] == 1)
                     {
-                        moveWeights[i] = -1;
+                        statusBucketIndex = statusBucketCheck(statusBucketIndex, ref tieOdds, ref tieBounds, i);
                     }
-                    else if(bestMoveDamage < comparisonMoveDamage)
+                }
+                else if(moveWeights[bestMoveIndex] < moveWeights[i])
+                {
+                    if(moveWeights[bestMoveIndex] == 1)
                     {
-                        moveWeights[bestMoveIndex] = -1;
+                        statusBucketIndex = statusBucketCheck(statusBucketIndex, ref bucketOdds, ref bucketBounds, bestMoveIndex);
+                    }
+
+                    bestMoveIndex = i;
+                    bestMoveDamage = comparisonMoveDamage;
+                    bucketOdds = 1;
+                    bucketBounds = 2;
+                }
+                else if(moveWeights[bestMoveIndex] == moveWeights[i] && moveWeights[i] == 2)
+                {
+                    //if best move is highest damage nothing needs to change so no check
+
+                    if(bestMoveDamage < comparisonMoveDamage)
+                    {
                         bestMoveIndex = i;
+                        bestMoveDamage = comparisonMoveDamage;
+                        bucketOdds = 1;
+                        bucketBounds = 2;
+                    }
+                    else if(bestMoveDamage == comparisonMoveDamage)
+                    {
+                        if (enemyTeam[0].Moves[bestMoveIndex].PriorityLevel == enemyTeam[0].Moves[i].PriorityLevel)
+                        {
+                            bestMoveIndex = TiedMoveCheck(bestMoveIndex, ref tieBounds, ref tieBounds, i);
+                        }
+                        else if (enemyTeam[0].Moves[bestMoveIndex].PriorityLevel < enemyTeam[0].Moves[i].PriorityLevel)
+                        {
+                            bestMoveIndex = i;
+                            bucketOdds = 1;
+                            bucketBounds = 2;
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    if (enemyTeam[0].Moves[bestMoveIndex].PriorityLevel == enemyTeam[0].Moves[i].PriorityLevel)
+                    {
+                        bestMoveIndex = TiedMoveCheck(bestMoveIndex, ref tieBounds, ref tieBounds, i);
+                    }
+                    else if (enemyTeam[0].Moves[bestMoveIndex].PriorityLevel < enemyTeam[0].Moves[i].PriorityLevel)
+                    {
+                        bestMoveIndex = i;
+                        bucketOdds = 1;
+                        bucketBounds = 2;
                     }
                 }
             }
+
+            if(moveWeights[bestMoveIndex] == 2 && statusBucketIndex != -1)
+            {
+                random = new Random();
+                if(random.Next(0,10) > 7)
+                {
+                    bestMoveIndex = statusBucketIndex;
+                }
+            }
+
+            enemyTeam[0].NextMoveRandomMultiplier = moveRandomMultipliers[bestMoveIndex];
+
+            return bestMoveIndex;
         }
+
+        public int TiedMoveCheck(int bestMoveIndex, ref int tieOdds, ref int tieBounds, int replacementIndex)
+        {
+            Random random = new Random();
+
+            //this sets the bestMoveIndex to that of the move with the highest priority level;
+            //on a tie one of the moves is picked at random
+
+            //the odds are increased when a move wins a random selection to account for the fact that moves that have been through random selection multiple times would not have an equal chance of being the final move than moves checked once
+            //the odds are set back to 50/50 when a new move is set as the best move
+
+            if(enemyTeam[0].Moves[bestMoveIndex].PriorityLevel == enemyTeam[0].Moves[replacementIndex].PriorityLevel)//by far most likely occurance so checked first
+            {
+                if(random.Next(0,tieBounds) > tieOdds)
+                {
+                    tieOdds = 1;
+                    tieBounds = 2;
+
+                    return replacementIndex;
+                }
+                else
+                {
+                    tieOdds++;
+                    tieBounds++;
+
+                    return bestMoveIndex;
+                }
+            }
+            else if(enemyTeam[0].Moves[bestMoveIndex].PriorityLevel < enemyTeam[0].Moves[replacementIndex].PriorityLevel)
+            {
+                tieOdds = 1;
+                tieBounds = 2;
+
+                return replacementIndex;
+            }
+            return bestMoveIndex;
+        }
+
+        public int statusBucketCheck(int statusBucketIndex,ref int tieOdds,ref int tieBounds,int replacementIndex )
+        {
+            Random random;
+
+            if (statusBucketIndex == -1)//if index is minus one no status moves have been put in the bucket yet
+            {
+                return replacementIndex;
+            }
+
+            random = new Random();
+
+            //if bucket has a move in already it is chosen randomly whether it is replaced or not
+
+            //the odds are increased when a move wins a random selection to account for the fact that moves that have been through random selection multiple times would not have an equal chance of being the final move than moves checked once
+            //the odds are set back to 50/50 when a new move is put in the bucket
+
+            if (random.Next(0, tieBounds) > tieOdds)
+            {
+                tieOdds++;
+                tieBounds++;
+                return statusBucketIndex;
+            }
+            else
+            {
+                tieOdds = 1;
+                tieBounds = 2;
+                return replacementIndex;
+            }
+        }
+ 
     }
 }

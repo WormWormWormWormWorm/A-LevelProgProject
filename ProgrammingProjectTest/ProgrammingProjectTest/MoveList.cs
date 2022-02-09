@@ -22,7 +22,9 @@ namespace ProgrammingProjectTest
             string damageCategory;
             int recoilPercent;
             int priorityLevel;
-            string effect;
+            string statusName;
+            Status status;
+            bool statusTargetsSelf;
             int triggerPercentage;
 
             allMoves = new List<Moves>();
@@ -46,9 +48,19 @@ namespace ProgrammingProjectTest
                                 accuracy = Convert.ToInt32(sr.ReadLine());
                                 recoilPercent = Convert.ToInt32(sr.ReadLine());
                                 priorityLevel = Convert.ToInt32(sr.ReadLine());
-                                effect = sr.ReadLine();
+                                statusName = sr.ReadLine();
+                                if(statusName[0] == '!')
+                                {
+                                    statusTargetsSelf = true;
+                                    statusName = statusName.Substring(1);
+                                }
+                                else
+                                {
+                                    statusTargetsSelf = false;
+                                }
+                                status = DetermineStatus(statusName);
                                 triggerPercentage = Convert.ToInt32(sr.ReadLine());
-                                move = new TriggerMoves(ID, name, type, accuracy, basePower, damageCategory, recoilPercent, priorityLevel, effect, triggerPercentage);
+                                move = new TriggerMoves(ID, name, type, accuracy, basePower, damageCategory, recoilPercent, priorityLevel, status, statusTargetsSelf, triggerPercentage);
                                 AllMoves.Add(move);
                                 break;
 
@@ -66,9 +78,19 @@ namespace ProgrammingProjectTest
                             case '2':
                                 type = type.UnitTypes[type.DetermineType(sr.ReadLine())];
                                 accuracy = Convert.ToInt32(sr.ReadLine());
-                                effect = sr.ReadLine();
+                                statusName = sr.ReadLine();
+                                if (statusName[0] == '!')
+                                {
+                                    statusTargetsSelf = true;
+                                    statusName = statusName.Substring(1);
+                                }
+                                else
+                                {
+                                    statusTargetsSelf = false;
+                                }
+                                status = DetermineStatus(statusName);
                                 priorityLevel = Convert.ToInt32(sr.ReadLine());
-                                move = new StatusMoves(ID, name, type, accuracy, effect, priorityLevel);
+                                move = new StatusMoves(ID, name, type, accuracy, status,statusTargetsSelf, priorityLevel);
                                 AllMoves.Add(move);
                                 break;
                         }
@@ -83,6 +105,24 @@ namespace ProgrammingProjectTest
             {
                 return allMoves;
             }
+        }
+
+        public Status DetermineStatus(string statusName)
+        {
+            Status status = new Status();
+
+            int index = status.DetermineStatusIndex(statusName);
+
+            if(index == -1)
+            {
+                status = new Status(statusName);
+            }
+            else
+            {
+                status = status.GetStatus(index);
+            }
+
+            return status;
         }
     }
 }

@@ -51,7 +51,7 @@ namespace ProgrammingProjectTest
                     {
                         ForcedIV = Convert.ToInt32(sr.ReadLine());
                         currentUnitID = Convert.ToInt32(sr.ReadLine());
-                        enemyTeam[i] = new Unit(unitTemplateList.Templates[currentUnitID - 1], moveList, ForcedIV);
+                        enemyTeam[i] = new Unit(unitTemplateList.Templates[currentUnitID], moveList, ForcedIV);
                         for(int f = 0;f < 4; f++)
                         {
                             currentMoveID = sr.ReadLine();

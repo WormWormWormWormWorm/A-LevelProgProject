@@ -36,8 +36,8 @@ namespace ProgrammingProjectTest
 
                         sr.ReadLine();
                         name = sr.ReadLine();
-                        type1 = type1.UnitTypes[type1.DetermineType(sr.ReadLine())];//type1 is being used to access the
-                        type2 = type1.UnitTypes[type1.DetermineType(sr.ReadLine())];//static values and methods of unitType
+                        type1 = type1.UnitTypes[type1.DetermineType(sr.ReadLine())];//type1 is being used to access the static values and methods of unitType
+                        type2 = type1.UnitTypes[type1.DetermineType(sr.ReadLine())];
                         baseStats[5] = Convert.ToInt32(sr.ReadLine());
                         for(int i = 0; i < 5; i++)
                         {

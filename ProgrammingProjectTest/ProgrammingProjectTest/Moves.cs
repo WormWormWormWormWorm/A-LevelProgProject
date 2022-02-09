@@ -9,8 +9,6 @@ namespace ProgrammingProjectTest
 {
     abstract class Moves
     {
-        public static StreamReader sr;
-
         protected string moveID;
         protected string moveName;
         protected UnitType moveType;
@@ -18,9 +16,13 @@ namespace ProgrammingProjectTest
         protected int priorityLevel;
         protected int moveAccuracy;
 
+        protected static Random random = new Random();
+
         public abstract void Use(Unit Target,Unit User);
 
-        public abstract int GetAIWeight(Unit target,Unit user,ref int damage)
+        public abstract int GetAIWeight(Unit target, Unit user, ref int damage, double randomMultiplier);
+
+        public abstract double NewRandomMultiplier();
 
         public abstract string ShortPrint();
 
@@ -63,6 +65,14 @@ namespace ProgrammingProjectTest
             }
         }
 
+        public int PriorityLevel
+        {
+            get
+            {
+                return priorityLevel;
+            }
+        }
+
     }
 
     class DamageMoves : Moves
@@ -102,13 +112,13 @@ namespace ProgrammingProjectTest
             //detemines damage category then uses attack/def for physical and special attac/def for special
             if(damageCategory == "Physical")
             {
-                defenseUsed = target.Stats[1];
-                attackUsed = user.Stats[0];
+                defenseUsed = target.CurrentStat(1);
+                attackUsed = user.CurrentStat(0);
             }
             else if(damageCategory == "Special")
             {
-                defenseUsed = target.Stats[2];
-                attackUsed = user.Stats[3];
+                defenseUsed = target.CurrentStat(3);
+                attackUsed = user.CurrentStat(2);
             }
 
             //checks both of the targets unitTypes and returns effectiveness
@@ -116,6 +126,16 @@ namespace ProgrammingProjectTest
             if(typeMultiplier != 0)
             {
                 typeMultiplier = moveType.EffectivenessCheck(typeMultiplier, target.Type2);
+            }
+
+            //this segment checks for abilities of the target that alter damage
+            if(target.Ability == "Thick Fat" && (moveType.Name == "Fire" || moveType.Name == "Ice"))
+            {
+                typeMultiplier /= 2;
+            }
+            else if(target.Ability == "Multiscale")
+            {
+
             }
 
             //checks if attack unitType matches the user unitType, then gives roughly a 1.5 
@@ -141,7 +161,6 @@ namespace ProgrammingProjectTest
         public double DamagePercent(int dmg,Unit target)
         {
             double damagePercentage;
-            double remainder;
             double damage = dmg;
             double health = target.Hp;
 
@@ -151,38 +170,107 @@ namespace ProgrammingProjectTest
             return damagePercentage;
         }
 
-        public override void Use(Unit Target,Unit User)
+        public override void Use(Unit target,Unit user)
         {
-            throw new NotImplementedException();
+            if (user.CanUnitMove())
+            {
+                if (random.Next(0, 100) <= moveAccuracy)
+                {
+                    Attack(user, target);
+                }
+                
+            }
+            else
+            {
+                Console.SetCursorPosition(0, 25);
+                Console.Write(user.Name + " cannot move due to " + user.Status.FullName);
+            }
+
+            if (user.Status.TurnDuration != -1)
+            {
+                user.ReduceStatusTurnsRemaining();
+            }
+
+
         }
 
-        public override int GetAIWeight(Unit target, Unit user, ref int damage)
+        public void Attack(Unit user,Unit target)
         {
+            int damage;
+            double recoilMultiplier;
+            int recoilDamage;
+
+
+            if (user.NextMoveRandomMultiplier == 0)
+            {
+                damage = DamageCalculation(user, target, NewRandomMultiplier());
+            }
+            else
+            {
+                damage = DamageCalculation(user, target, user.NextMoveRandomMultiplier);
+                user.NextMoveRandomMultiplier = 0;
+            }
+
+            if (random.Next(0, 16) == 1)
+            {
+                damage *= 2;
+            }
+
+            if(damage > target.CurrentHp)
+            {
+                damage = target.CurrentHp;
+            }
+            else if(target.Hp < target.CurrentHp - damage)
+            {
+                damage = target.CurrentHp - target.Hp;
+            }
+            target.TakeDamage(damage,moveName);
+            if (recoilPercent != 0)
+            {
+                recoilMultiplier = recoilPercent;
+                recoilMultiplier /= 100;
+                recoilDamage = Convert.ToInt32(recoilMultiplier * damage);
+                user.TakeDamage(recoilDamage,"recoil");
+            }
+            
+        }
+
+        public override int GetAIWeight(Unit target, Unit user, ref int damage, double randomMultiplier)
+        {
+
             int moveWeight = 2;
 
-            damage = RollDamage(user,target);//gets value for damage dealt
+            damage = DamageCalculation(user, target, randomMultiplier);//gets value for damage dealt
 
-            if(damage >= target.CurrentHp)
+            if (damage >= target.CurrentHp)
             {
-                moveWeight = 5;
-            }
-            else if(damage == 0)//target is immune so given low weight
-            {
-                moveWeight = -3;
+                moveWeight += 3;
+                damage = target.CurrentHp;
             }
 
+            if (moveName == "Fake Out" && user.TurnsOnField == 0)
+            {
+                moveWeight += 2;
+            }
+            
             return moveWeight;
         }
 
         public int RollDamage(Unit user,Unit target)
         {
             int damage;
-            Random rndNum = new Random();
-
-            double randomMultiplier = rndNum.Next(84,100)/100;
-            damage = DamageCalculation(user,target,randomMultiplier);
+          
+            damage = DamageCalculation(user,target,NewRandomMultiplier());
 
             return damage;
+        }
+
+        public override double NewRandomMultiplier()
+        {
+            double multiplier = random.Next(84, 100);
+            multiplier /= 100;
+
+            return multiplier;
         }
 
         public override string ShortPrint()
@@ -251,7 +339,8 @@ namespace ProgrammingProjectTest
 
     class TriggerMoves : DamageMoves
     {
-        private string Effect;
+        private Status status;
+        private bool statusTargetsSelf;
         private int triggerPercentage;
 
         public TriggerMoves()
@@ -259,7 +348,7 @@ namespace ProgrammingProjectTest
 
         }
 
-        public TriggerMoves(string moveID, string moveName, UnitType moveType, int moveAccuracy, int basePower, string damageCategory, int recoilPercent, int priorityLevel,string effect,int triggerPercentage)
+        public TriggerMoves(string moveID, string moveName, UnitType moveType, int moveAccuracy, int basePower, string damageCategory, int recoilPercent, int priorityLevel,Status status,bool statusTargetsSelf,int triggerPercentage)
         {
             this.moveID = moveID;
             this.moveName = moveName;
@@ -269,25 +358,59 @@ namespace ProgrammingProjectTest
             this.damageCategory = damageCategory;
             this.recoilPercent = recoilPercent;
             this.priorityLevel = priorityLevel;
-            this.Effect = effect;
+            this.status = status;
+            this.statusTargetsSelf = statusTargetsSelf;
             this.triggerPercentage = triggerPercentage;
         }
 
-        public override void Use(Unit Target, Unit User)
+        public override void Use(Unit target, Unit user)
         {
-            base.Use(Target, User);
+
+            if (user.CanUnitMove())
+            {
+                if (random.Next(0, 100) <= moveAccuracy)
+                {
+                    Attack(user, target);
+
+                    if (target.IsAlive)
+                    {
+                        if (random.Next(0, 100) <= triggerPercentage)
+                        {
+                            if (!statusTargetsSelf)
+                            {
+                                target.Status = status;
+                            }
+                            else
+                            {
+                                user.Status = status;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine(user.Name + " cannot move due to " + user.Status.FullName);
+            }
+
+            if (user.Status.TurnDuration != -1)
+            {
+                user.ReduceStatusTurnsRemaining();
+            }
         }
 
         public override void LongPrint(int startX, int startY)
         {
             base.LongPrint(startX, startY);
             Console.SetCursorPosition(startX, startY + 3);
-            Console.Write("Effect: " + Effect + " " + triggerPercentage + "%");
+            Console.Write("Effect: ");
+            status.PrintStatus(statusTargetsSelf);
+            Console.Write(" {0} %", triggerPercentage);
         }
 
         public override string ToString()
         {
-            return (base.ToString() + " effect " + Effect + " trigPerc " + triggerPercentage) ;
+            return (base.ToString() + " effect " + status + " trigPerc " + triggerPercentage) ;
         }
 
         
@@ -296,42 +419,78 @@ namespace ProgrammingProjectTest
 
     class StatusMoves : Moves
     {
-        protected string status;
+        private Status status;
+        private bool statusTargetsSelf;
 
-        public StatusMoves(string moveID,string moveName,UnitType moveType,int moveAccuracy,string status,int priorityLevel)
+        public StatusMoves(string moveID,string moveName,UnitType moveType,int moveAccuracy,Status status,bool statusTargetsSelf,int priorityLevel)
         {
             this.moveID = moveID;
             this.moveName = moveName;
             this.moveType = moveType;
             this.moveAccuracy = moveAccuracy;
             this.status = status;
+            this.statusTargetsSelf = statusTargetsSelf;
             this.priorityLevel = priorityLevel;
         }
 
-        public override void Use(Unit Target,Unit User)
+        public override void Use(Unit Target,Unit user)
         {
-            throw new NotImplementedException();
+            if(user.CanUnitMove())
+            {
+                if (random.Next(0, 100) <= moveAccuracy)
+                {
+                    if (!statusTargetsSelf)
+                    {
+                        Target.Status = status;
+                    }
+                    else
+                    {
+                        user.Status = status;
+                    }
+                }
+            }
+            else
+            {
+                Console.SetCursorPosition(0, 25);
+                Console.Write(user.Name + " cannot move due to " + user.Status.FullName);
+            }
+
+            if (user.Status.TurnDuration != -1)
+            {
+                user.ReduceStatusTurnsRemaining();
+            }
         }
 
-        public override int GetAIWeight(Unit target, Unit user, ref int damage)// damage ref is used to make abstract method work with all subclasses
+        public override int GetAIWeight(Unit target, Unit user, ref int damage,double randomMultiplier)// damage ref is used to make abstract method work with all subclasses
         {
-            int moveWeight = 0;
+            int moveWeight;
 
-            if(target.Type1.Immune = moveType.Name || target.Type2.Immune = moveType.Name)//if target is immune to the move give negative weight
+            damage = -1;
+
+            if(target.Type1.Immune == moveType.Name || target.Type2.Immune == moveType.Name)//if target is immune to the move give negative weight
             {
-                moveWeight = -3
+                moveWeight = -3;
             }
-            else if (target.Stats[4] >= user.Stats[4] && status[2] == '4' )//if target is faster than unit and status effect changes speed give high weight
+            else if (target.Stats[4] >= user.Stats[4] && status.FullName[2] == '4' )//if target is faster than unit and status effect changes speed give high weight
             {
-                moveWeight = 3
+                moveWeight = 3;
+            }
+            else
+            {
+                moveWeight = 1;
             }
 
-            return moveWeight
+            return moveWeight;
+        }
+
+        public override double NewRandomMultiplier()
+        {
+            return 0;
         }
 
         public override string ShortPrint()
         {
-            return (moveName + GetSpaceBlock(14 - moveName.Length) + "| " + status + GetSpaceBlock(10 - status.Length) + " | ");
+            return (moveName + GetSpaceBlock(14 - moveName.Length) + "| " + status.DisplayName + GetSpaceBlock(10 - status.DisplayName.Length) + " | ");
         }
 
         public override void LongPrint(int startX, int startY)
@@ -343,7 +502,7 @@ namespace ProgrammingProjectTest
             Console.Write(moveType.Name);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.SetCursorPosition(startX, startY+1);
-            Console.Write(status);
+            status.PrintStatus(statusTargetsSelf);
             Console.SetCursorPosition(startX, startY + 2);
             Console.Write("hit: " + moveAccuracy + "%");
         }
@@ -361,7 +520,9 @@ namespace ProgrammingProjectTest
             Console.Write(moveType.Name);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.SetCursorPosition(startX, startY + 1);
-            Console.WriteLine("Status: {0} ,hit: {1}", status, moveAccuracy);
+            Console.Write("Status: ");
+            status.PrintStatus(statusTargetsSelf);
+            Console.Write(" hit: " + moveAccuracy + "%");
         }
 
         public override string ToString()

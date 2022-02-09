@@ -58,11 +58,11 @@ namespace ProgrammingProjectTest
             return indexPos;
         }
 
-        public double EffectivenessCheck(double currentMultiplier, UnitType damageType)
+        public double EffectivenessCheck(double currentMultiplier, UnitType targetType)
         {
             int loopSkip = 0;
 
-            if(immune == damageType.Name)
+            if(immune == targetType.Name)
             {
                 currentMultiplier = 0;
             }
@@ -70,7 +70,7 @@ namespace ProgrammingProjectTest
             {
                 for (int i = 0; i < effectiveAgainst.Length;i++)
                 {
-                    if(effectiveAgainst[i] == damageType.Name)
+                    if(effectiveAgainst[i] == targetType.Name)
                     {
                         currentMultiplier *= 2;
                         i = effectiveAgainst.Length;
@@ -79,7 +79,7 @@ namespace ProgrammingProjectTest
                 }
                 for(int j = loopSkip; j < ineffectiveAgainst.Length; j++)
                 {
-                    if (ineffectiveAgainst[j] == damageType.Name)
+                    if (ineffectiveAgainst[j] == targetType.Name)
                     {
                         currentMultiplier /= 2;
                         j = ineffectiveAgainst.Length;

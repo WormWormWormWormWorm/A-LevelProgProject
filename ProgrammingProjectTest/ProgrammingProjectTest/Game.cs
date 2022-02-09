@@ -89,6 +89,15 @@ namespace ProgrammingProjectTest
             PlayerUnits[4] = new Unit(unitTemplateList.Templates[5], moveList);
             PlayerUnits[5] = new Unit(unitTemplateList.Templates[6], moveList);
             PlayerUnits[6] = new Unit(unitTemplateList.Templates[6], moveList);
+            PlayerUnits[7] = new Unit(unitTemplateList.Templates[55], moveList);
+            PlayerUnits[8] = new Unit(unitTemplateList.Templates[49], moveList);
+            PlayerUnits[9] = new Unit(unitTemplateList.Templates[60], moveList);
+            PlayerUnits[10] = new Unit(unitTemplateList.Templates[66], moveList);
+            PlayerUnits[11] = new Unit(unitTemplateList.Templates[71], moveList);
+            PlayerUnits[12] = new Unit(unitTemplateList.Templates[69], moveList);
+            PlayerUnits[13] = new Unit(unitTemplateList.Templates[65], moveList);
+            //PlayerUnits[6].IsAlive = false;
+
             PrintTeam(1, 2, "Player", PlayerUnits);
             PrintTeam(61, 2, "Enemy", enemyTeam);
 
@@ -194,7 +203,7 @@ namespace ProgrammingProjectTest
                 {
                     if(menu.PointerY > enemyTeamStart)
                     {
-                        enemyTeam[menu.PointerX + (menu.PointerY-2)*3].InspectPrint(70,3);
+                        enemyTeam[menu.PointerX + (menu.PointerY-(enemyTeamStart+1))*3].InspectPrint(70,3);
                     }
                     else
                     {
@@ -282,6 +291,11 @@ namespace ProgrammingProjectTest
                         }
 
                         menu.GetInput();
+
+                        if(menu.OptionSelected != -1 && !PlayerUnits[menu.PointerX + (menu.PointerY) * 3].IsAlive)
+                        {
+                            menu.OptionSelected = -1;
+                        }
 
                         //re-highlights unit to swap when cursor is move off of it
                         if(menu.OptionSelected == -1 && fixHighlight)

@@ -123,7 +123,7 @@ Special
 100
 0
 0
-Stun!
+!Stun
 100
 2#013
 Sleep Powder
@@ -173,7 +173,7 @@ Physical
 100
 0
 0
-Stun!
+!Stun
 100
 0#019
 Head Crash
@@ -567,7 +567,7 @@ Special
 100
 0
 0
-Stun!
+!Stun
 100
 0#064
 Air Slash
@@ -621,7 +621,7 @@ Physical
 100
 33
 0
-Stun!
+!Stun
 100
 0#070
 Sacred Sword
@@ -631,7 +631,7 @@ Physical
 100
 0
 0
-30Atk Up!
+!30Atk Up
 10
 0#071
 Discharge
@@ -661,7 +661,7 @@ Special
 100
 0
 0
-Stun!
+!Stun
 100
 0#074
 Avalanche
@@ -765,7 +765,7 @@ Physical
 100
 0
 0
-Sacrifice!
+!Sacrifice
 100
 1#085
 Tornado
@@ -871,7 +871,7 @@ Physical
 100
 0
 0
-30Atk Up!
+!30Atk Up
 10
 0#097
 Rock Wrecker
@@ -907,5 +907,5 @@ Physical
 100
 0
 0
-Outrage!
+!Outrage
 100
