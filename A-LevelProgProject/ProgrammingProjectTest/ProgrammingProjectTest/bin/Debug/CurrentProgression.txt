@@ -1,0 +1,118 @@
+FORMATTING DETAILS
+//////
+Current Fight
+Units in encounter pool
+/
+percentage chance of encounter
+Unit ID
+/ FOR EACH UNIT IN POOL
+num of units in enemy team
+/
+Forced IV Value
+Default Move 1 Replacement ID ,# if none
+Default Move 2 Replacement ID
+Default Move 3 Replacement ID
+Default Move 4 Replacement ID
+Default ability replacement
+/ FOR EACH UNIT IN TEAM
+///////
+Fire Start
+6
+20
+04
+10
+05
+20
+06
+20
+07
+20
+08
+10
+09
+2
+0
+28
+#
+#
+#
+#
+#
+0
+11
+#
+#
+#
+068
+#
+Grass Start
+6
+20
+10
+15
+11
+15
+12
+20
+13
+20
+14
+10
+15
+6
+0
+0
+#
+#
+#
+#
+#
+0
+2
+#
+#
+#
+#
+#
+0
+40
+#
+#
+#
+#
+#
+0
+44
+#
+#
+#
+#
+#
+0
+70
+#
+#
+#
+#
+#
+0
+73
+#
+#
+#
+#
+#
+Water Start
+6
+20
+16
+20
+17
+15
+18
+10
+19
+15
+20
+20
+21
