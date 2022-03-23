@@ -1,0 +1,911 @@
+ID
+subclass
+name
+base power
+type
+category
+Accuracy percent
+recoil percent
+priority
+special effect
+special trigger percent
+0#000
+Fire Fang
+75
+Fire
+Physical
+100
+0
+0
+Burn
+10
+0#001
+Flare Blitz
+120
+Fire
+Physical
+100
+33
+0
+Burn
+10
+1#002
+Brick Break
+80
+Fighting
+Physical
+100
+0
+0
+1#003
+Superpower
+120
+Fighting
+Physical
+100
+33
+0
+0#004
+Thunder Punch
+75
+Electric
+Physical
+100
+0
+0
+Paralyzed
+30
+1#005
+Aqua Tail
+90
+Water
+Physical
+100
+0
+0
+0#006
+Crunch
+80
+Dark
+Physical
+100
+0
+0
+11Def Drop
+10
+1#007
+Aqua Jet
+40
+Water
+Physical
+100
+0
+1
+1#008
+Tsunami
+120
+Water
+Physical
+100
+33
+0
+0#009
+Sludge Bomb
+90
+Poison
+Special
+100
+0
+0
+Poison
+30
+1#010
+Giga Drain
+75
+Grass
+Special
+100
+-50
+0
+1#011
+Earth Power
+90
+Ground
+Special
+100
+0
+0
+0#012
+Solar Beam
+120
+Grass
+Special
+100
+0
+0
+!Stun
+100
+2#013
+Sleep Powder
+Grass
+75
+Sleep
+0
+1#014
+Energy Ball
+90
+Grass
+Special
+100
+0
+0
+0#015
+Rock Slide
+75
+Rock
+Physical
+100
+0
+0
+Flinch
+30
+1#016
+Leaf Blade
+80
+Grass
+Physical
+100
+0
+0
+1#017
+X-Scissor
+80
+Bug
+Physical
+100
+0
+0
+0#018
+Solar Blade
+120
+Grass
+Physical
+100
+0
+0
+!Stun
+100
+0#019
+Head Crash
+90
+Normal
+Physical
+100
+100
+0
+Flinch
+100
+0#020
+Apple Acid
+60
+Grass
+Special
+100
+0
+0
+13SpD Drop
+100
+1#021
+Dragon Pulse
+80
+Dragon
+Special
+100
+0
+0
+0#022
+Body Slam
+85
+Normal
+Physical
+100
+0
+0
+Paralyzed
+30
+2#023
+Leech Seed
+Grass
+100
+Drain
+0
+0#024
+Thunderbolt
+95
+Electric
+Special
+100
+0
+0
+Paralyzed
+30
+1#025
+Mach Punch
+40
+Fighting
+Physical
+100
+0
+1
+1#026
+Sky Uppercut
+95
+Fighting
+Physical
+100
+10
+0
+1#027
+Seed Bomb
+80
+Grass
+Physical
+100
+0
+0
+2#028
+Thunder Wave
+Electric
+100
+Paralyzed
+0
+1#029
+Explosion
+500
+Normal
+Physical
+100
+1000
+0
+0#030
+Electro Web
+60
+Electric
+Special
+100
+0
+0
+14Spe Drop
+100
+2#031
+Mirror Coat
+Steel
+100
+Mirror Coat
+3
+1#032
+Bug Buzz
+80
+Bug
+Special
+100
+0
+0
+1#033
+Thunder
+130
+Electric
+Special
+70
+0
+0
+1#034
+Sucker Punch
+70
+Dark
+Physical
+100
+0
+2
+0#035
+Wild Charge
+120
+Electric
+Physical
+100
+33
+0
+Paralyzed
+30
+0#036
+Thunder Fang
+75
+Electric
+Physical
+100
+0
+0
+Paralyzed
+30
+1#037
+Psychic Fangs
+80
+Psychic
+Physical
+100
+0
+0
+0#038
+Scald
+80
+Water
+Special
+100
+0
+0
+Burn
+30
+0#039
+Fake Out
+40
+Normal
+Physical
+100
+0
+2
+Surprise
+100
+1#040
+Hydro Pump
+130
+Water
+Special
+80
+0
+0
+1#041
+Flash Cannon
+80
+Steel
+Special
+100
+0
+0
+0#042
+Waterfall
+80
+Water
+Physical
+100
+0
+0
+Flinch
+10
+1#043
+Drain Punch
+80
+Fighting
+Physical
+100
+0
+0
+1#044
+Surf
+90
+Water
+Special
+100
+0
+0
+0#045
+Ice Beam
+90
+Ice
+Special
+100
+0
+0
+Freeze
+10
+0#046
+Icy Wind
+60
+Ice
+Special
+100
+0
+0
+14Spe Drop
+100
+0#047
+Blizzard
+120
+Ice
+Special
+70
+0
+0
+Freeze
+50
+1#048
+Ice Shard
+40
+Ice
+Physical
+100
+0
+1
+1#049
+Earthquake
+100
+Ground
+Physical
+100
+0
+0
+0#050
+Poison Jab
+80
+Poison
+Physical
+100
+0
+0
+Poison
+30
+0#051
+Bulldoze
+60
+Ground
+Physical
+100
+0
+0
+14Spe Drop
+100
+1#052
+Megahorn
+125
+Bug
+Physical
+85
+0
+0
+1#053
+Magnitude
+80
+Ground
+Physical
+100
+0
+0
+1#054
+Head Smash
+150
+Rock
+Physical
+100
+33
+0
+0#055
+Rock Tomb
+60
+Rock
+Physical
+100
+0
+0
+14Spe Drop
+100
+1#056
+Stone Edge
+120
+Rock
+Physical
+80
+0
+0
+0#057
+Lava Plume
+80
+Fire
+Special
+100
+0
+0
+Burn
+40
+0#058
+Heat Wave
+120
+Fire
+Special
+100
+33
+0
+Burn
+10
+2#059
+Yawn
+Normal
+70
+Sleep
+0
+0#060
+Flamethrower
+90
+Fire
+Special
+100
+0
+0
+Burn
+10
+1#061
+Ice Fang
+75
+Ice
+Physical
+100
+0
+0
+0#062
+Gunk Shot
+120
+Poison
+Special
+100
+33
+0
+Poison
+10
+0#063
+Hyper Beam
+120
+Normal
+Special
+100
+0
+0
+!Stun
+100
+0#064
+Air Slash
+70
+Flying
+Physical
+100
+0
+0
+Flinch
+30
+1#065
+Hurricane
+130
+Flying
+Physical
+70
+0
+0
+0#066
+Psychic
+90
+Psychic
+Special
+100
+0
+0
+Flinch
+10
+1#067
+Brave Bird
+120
+Flying
+Physical
+100
+33
+0
+1#068
+Quick Attack
+50
+Normal
+Physical
+100
+0
+1
+0#069
+Giga Impact
+150
+Normal
+Physical
+100
+33
+0
+!Stun
+100
+0#070
+Sacred Sword
+100
+Fighting
+Physical
+100
+0
+0
+!30Atk Up
+10
+0#071
+Discharge
+80
+Electric
+Special
+100
+0
+0
+Paralyzed
+30
+0#072
+Bubblebeam
+75
+Water
+Special
+100
+0
+0
+14Spe Drop
+10
+0#073
+Meteor Beam
+120
+Rock
+Special
+100
+0
+0
+!Stun
+100
+0#074
+Avalanche
+120
+Ice
+Physical
+100
+33
+0
+Freeze
+10
+1#075
+Psycho Cut
+80
+Psychic
+Physical
+100
+0
+0
+0#076
+Rolling Kick
+70
+Fighting
+Physical
+100
+0
+0
+Flinch
+30
+0#077
+Dark Pulse
+80
+Dark
+Special
+100
+0
+0
+Flinch
+10
+0#078
+Fire Blast
+125
+Fire
+Special
+75
+0
+0
+Burn
+10
+1#079
+Leaf Storm
+130
+Grass
+Physical
+80
+0
+0
+0#080
+Steamroller
+70
+Bug
+Physical
+100
+0
+0
+Flinch
+30
+0#081
+Cross Poison
+70
+Poison
+Physical
+100
+0
+0
+Poison
+30
+0#082
+Iron Head
+80
+Steel
+Physical
+100
+0
+0
+Flinch
+30
+1#083
+Power Gem
+80
+Rock
+Special
+100
+0
+0
+0#084
+Final Gambit
+140
+Fighting
+Physical
+100
+0
+0
+!Sacrifice
+100
+1#085
+Tornado
+90
+Flying
+Special
+100
+0
+0
+1#086
+Extreme Speed
+80
+Normal
+Physical
+100
+0
+1
+1#087
+Bullet Punch
+50
+Steel
+Physical
+100
+0
+1
+0#088
+Dragon Claw
+80
+Dragon
+Physical
+100
+0
+0
+11Def Drop
+10
+0#089
+Gamble
+80
+Fighting
+Physical
+50
+0
+1
+Flinch
+100
+1#090
+Double Edge
+120
+Normal
+Physical
+100
+33
+0
+1#091
+Silver Wind
+120
+Bug
+Special
+100
+33
+0
+1#092
+Water Spout
+120
+Water
+Special
+100
+0
+0
+0#093
+Hyper Voice
+90
+Normal
+Special
+100
+0
+0
+13SpD Drop
+10
+0#094
+Tempest
+130
+Electric
+Special
+100
+10
+0
+Paralyzed
+20
+1#095
+Return
+100
+Normal
+Physical
+100
+0
+0
+0#096
+Meteor Mash
+100
+Steel
+Physical
+100
+0
+0
+!30Atk Up
+10
+0#097
+Rock Wrecker
+120
+Rock
+Physical
+100
+0
+0
+11Def Drop
+50
+1#098
+Draco Meteor
+120
+Dragon
+Special
+100
+33
+0
+1#099
+Aura Sphere
+130
+Fighting
+Special
+95
+0
+0
+0#100
+Outrage
+120
+Dragon
+Physical
+100
+0
+0
+!Outrage
+100
