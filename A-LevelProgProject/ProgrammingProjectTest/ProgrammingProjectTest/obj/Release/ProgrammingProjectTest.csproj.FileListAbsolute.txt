@@ -1,7 +1,0 @@
-C:\Users\Gamer\source\repos\ProgrammingProjectTest\ProgrammingProjectTest\bin\Release\ProgrammingProjectTest.exe.config
-C:\Users\Gamer\source\repos\ProgrammingProjectTest\ProgrammingProjectTest\bin\Release\ProgrammingProjectTest.exe
-C:\Users\Gamer\source\repos\ProgrammingProjectTest\ProgrammingProjectTest\bin\Release\ProgrammingProjectTest.pdb
-C:\Users\Gamer\source\repos\ProgrammingProjectTest\ProgrammingProjectTest\obj\Release\ProgrammingProjectTest.csprojAssemblyReference.cache
-C:\Users\Gamer\source\repos\ProgrammingProjectTest\ProgrammingProjectTest\obj\Release\ProgrammingProjectTest.csproj.CoreCompileInputs.cache
-C:\Users\Gamer\source\repos\ProgrammingProjectTest\ProgrammingProjectTest\obj\Release\ProgrammingProjectTest.exe
-C:\Users\Gamer\source\repos\ProgrammingProjectTest\ProgrammingProjectTest\obj\Release\ProgrammingProjectTest.pdb
